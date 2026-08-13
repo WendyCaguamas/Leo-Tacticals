@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -245,74 +244,3 @@
 </body>
 
 </html>
-```
-
-Y en tu `style.css` hay que hacer **dos pequeños cambios** para que las imágenes se vean correctamente. Añade esto:
-
-```css
-/* =========================================
-   LOGO DE LA BARRA
-========================================= */
-
-.logo img {
-    width: 260px;
-    height: 60px;
-    object-fit: contain;
-    display: block;
-}
-
-
-/* =========================================
-   LOGO CENTRAL
-========================================= */
-
-.hero-logo {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    display: block;
-
-    margin: 0 auto 20px;
-}
-```
-
-Y cambia el fondo de `.hero` en tu CSS por:
-
-```css
-.hero {
-    width: 100%;
-    height: 520px;
-
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.35),
-            rgba(0, 0, 0, 0.75)
-        ),
-        url("img/fondo.png");
-
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-```
-
-Tu carpeta quedaría así:
-
-```text
-LeoTacticals/
-│
-├── index.html
-├── style.css
-│
-└── img/
-    ├── banner.png
-    ├── fondo.png
-    └── logo.png
-```
-
-Así **`banner.png` es exclusivamente la identidad de la barra**, mientras que **`logo.png` es el logo grande que protagoniza la portada**.
