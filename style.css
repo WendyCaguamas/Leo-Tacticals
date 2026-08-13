@@ -161,17 +161,16 @@ nav a:hover {
     height: 320px;
 
     object-fit: contain;
-
     display: block;
 
     margin: -20px auto 10px;
 
     filter:
-        drop-shadow(0 0 5px #ffb300)
-        drop-shadow(0 0 15px #ffb300)
-        drop-shadow(0 0 30px rgba(255, 179, 0, 0.8));
+        drop-shadow(0 0 3px #ffb300)
+        drop-shadow(0 0 8px rgba(255, 179, 0, 0.55))
+        drop-shadow(0 0 15px rgba(255, 179, 0, 0.25));
 
-    animation: neonPulse 3s ease-in-out infinite;
+    animation: neonPulse 5s ease-in-out infinite;
 }
 
 
@@ -179,19 +178,20 @@ nav a:hover {
 
     0%, 100% {
         filter:
-            drop-shadow(0 0 5px #ffb300)
-            drop-shadow(0 0 12px #ffb300)
-            drop-shadow(0 0 25px rgba(255, 179, 0, 0.6));
+            drop-shadow(0 0 3px #ffb300)
+            drop-shadow(0 0 7px rgba(255, 179, 0, 0.45))
+            drop-shadow(0 0 13px rgba(255, 179, 0, 0.20));
     }
 
     50% {
         filter:
-            drop-shadow(0 0 8px #ffb300)
-            drop-shadow(0 0 22px #ffb300)
-            drop-shadow(0 0 45px rgba(255, 179, 0, 0.9));
+            drop-shadow(0 0 4px #ffb300)
+            drop-shadow(0 0 10px rgba(255, 179, 0, 0.55))
+            drop-shadow(0 0 18px rgba(255, 179, 0, 0.30));
     }
 
 }
+
 /* =========================================
    TEXTO DEL HERO
 ========================================= */
