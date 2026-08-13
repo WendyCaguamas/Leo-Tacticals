@@ -1,0 +1,378 @@
+/* =========================================
+   LEO TACTICALS — PALETA
+========================================= */
+
+:root {
+    --negro: #0b0b0b;
+    --negro-secundario: #151515;
+    --negro-tarjeta: #1c1c1c;
+
+    --naranja: #ffb300;
+    --naranja-claro: #ffc44d;
+
+    --blanco: #ffffff;
+    --gris: #cfcfcf;
+    --gris-oscuro: #777777;
+
+    --borde: #2a2a2a;
+}
+
+
+/* =========================================
+   CONFIGURACIÓN GENERAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--negro);
+    color: var(--blanco);
+}
+
+
+/* =========================================
+   BARRA DE NAVEGACIÓN
+========================================= */
+
+header {
+    width: 100%;
+    height: 70px;
+
+    background: var(--negro-secundario);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    border-bottom: 1px solid var(--borde);
+}
+
+
+/* Logo */
+
+.logo {
+    color: var(--naranja);
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+/* Navegación */
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    color: var(--blanco);
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--naranja);
+}
+
+
+/* =========================================
+   HERO / IMAGEN PRINCIPAL
+========================================= */
+
+.hero {
+    width: 100%;
+    height: 520px;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("https://images.unsplash.com/photo-1595590424283-b8f17842773f?auto=format&fit=crop&w=1800&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* Título principal */
+
+.hero-content h1 {
+    color: var(--naranja);
+
+    font-size: 55px;
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+
+/* Texto debajo del título */
+
+.hero-content p {
+    color: var(--blanco);
+
+    font-size: 18px;
+    font-weight: normal;
+
+    margin-bottom: 25px;
+}
+
+
+/* Botón */
+
+.hero-button {
+    display: inline-block;
+
+    padding: 13px 28px;
+
+    background: var(--naranja);
+    color: var(--negro);
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border-radius: 3px;
+
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    background: var(--naranja-claro);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   CATÁLOGO
+========================================= */
+
+.catalogo {
+    padding: 70px 7%;
+
+    max-width: 1400px;
+    margin: auto;
+}
+
+
+/* Encabezado de sección */
+
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+
+/* Título */
+
+.titulo-seccion h2 {
+    color: var(--naranja);
+
+    font-size: 32px;
+    font-weight: 900;
+
+    margin-bottom: 10px;
+}
+
+
+/* Subtítulo */
+
+.titulo-seccion p {
+    color: var(--blanco);
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   PRODUCTOS
+========================================= */
+
+.productos {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+
+/* Tarjeta */
+
+.producto {
+    background: var(--negro-tarjeta);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--borde);
+
+    transition: 0.3s;
+}
+
+.producto:hover {
+    transform: translateY(-7px);
+
+    border-color: var(--naranja);
+}
+
+
+/* Imagen */
+
+.producto img {
+    width: 100%;
+    height: 270px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Información */
+
+.producto-info {
+    padding: 22px;
+}
+
+
+/* Nombre del producto */
+
+.producto-info h3 {
+    color: var(--naranja);
+
+    font-size: 20px;
+    font-weight: 900;
+
+    margin-bottom: 10px;
+}
+
+
+/* Descripción */
+
+.producto-info p {
+    color: var(--blanco);
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+/* Precio */
+
+.precio {
+    color: var(--naranja-claro);
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   CONTACTO
+========================================= */
+
+.contacto {
+    background: var(--negro-secundario);
+
+    padding: 60px 20px;
+
+    text-align: center;
+}
+
+.contacto h2 {
+    color: var(--naranja);
+
+    font-size: 30px;
+    font-weight: 900;
+
+    margin-bottom: 12px;
+}
+
+.contacto p {
+    color: var(--blanco);
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #050505;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--gris);
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 0 20px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero {
+        height: 420px;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    .productos {
+        grid-template-columns: 1fr;
+    }
+}
