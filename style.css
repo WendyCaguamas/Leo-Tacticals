@@ -63,25 +63,42 @@ header {
 }
 
 
-/* Logo */
+/* =========================================
+   LOGO DE LA BARRA
+========================================= */
 
 .logo {
-    color: var(--naranja);
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    width: 260px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 260px;
+    height: 60px;
+
+    object-fit: contain;
+
+    display: block;
 }
 
 
-/* Navegación */
+/* =========================================
+   NAVEGACIÓN
+========================================= */
 
 nav {
     display: flex;
+    align-items: center;
+
     gap: 35px;
 }
 
 nav a {
     color: var(--blanco);
+
     text-decoration: none;
 
     font-size: 15px;
@@ -108,7 +125,7 @@ nav a:hover {
             rgba(0, 0, 0, 0.35),
             rgba(0, 0, 0, 0.75)
         ),
-        url("https://images.unsplash.com/photo-1595590424283-b8f17842773f?auto=format&fit=crop&w=1800&q=80");
+        url("img/fondo.png");
 
     background-size: cover;
     background-position: center;
@@ -121,21 +138,39 @@ nav a:hover {
 }
 
 
-/* Título principal */
+/* =========================================
+   CONTENIDO DEL HERO
+========================================= */
 
-.hero-content h1 {
-    color: var(--naranja);
+.hero-content {
+    display: flex;
 
-    font-size: 55px;
-    font-weight: 900;
+    flex-direction: column;
 
-    letter-spacing: 3px;
-
-    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
 
-/* Texto debajo del título */
+/* =========================================
+   LOGO CENTRAL
+========================================= */
+
+.hero-logo {
+    width: 180px;
+    height: 180px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto 20px;
+}
+
+
+/* =========================================
+   TEXTO DEL HERO
+========================================= */
 
 .hero-content p {
     color: var(--blanco);
@@ -147,7 +182,9 @@ nav a:hover {
 }
 
 
-/* Botón */
+/* =========================================
+   BOTÓN
+========================================= */
 
 .hero-button {
     display: inline-block;
@@ -181,19 +218,25 @@ nav a:hover {
     padding: 70px 7%;
 
     max-width: 1400px;
+
     margin: auto;
 }
 
 
-/* Encabezado de sección */
+/* =========================================
+   ENCABEZADO DE SECCIÓN
+========================================= */
 
 .titulo-seccion {
     text-align: center;
+
     margin-bottom: 45px;
 }
 
 
-/* Título */
+/* =========================================
+   TÍTULO
+========================================= */
 
 .titulo-seccion h2 {
     color: var(--naranja);
@@ -205,7 +248,9 @@ nav a:hover {
 }
 
 
-/* Subtítulo */
+/* =========================================
+   SUBTÍTULO
+========================================= */
 
 .titulo-seccion p {
     color: var(--blanco);
@@ -228,7 +273,9 @@ nav a:hover {
 }
 
 
-/* Tarjeta */
+/* =========================================
+   TARJETA DE PRODUCTO
+========================================= */
 
 .producto {
     background: var(--negro-tarjeta);
@@ -249,7 +296,9 @@ nav a:hover {
 }
 
 
-/* Imagen */
+/* =========================================
+   IMAGEN DEL PRODUCTO
+========================================= */
 
 .producto img {
     width: 100%;
@@ -261,14 +310,18 @@ nav a:hover {
 }
 
 
-/* Información */
+/* =========================================
+   INFORMACIÓN DEL PRODUCTO
+========================================= */
 
 .producto-info {
     padding: 22px;
 }
 
 
-/* Nombre del producto */
+/* =========================================
+   NOMBRE DEL PRODUCTO
+========================================= */
 
 .producto-info h3 {
     color: var(--naranja);
@@ -280,7 +333,9 @@ nav a:hover {
 }
 
 
-/* Descripción */
+/* =========================================
+   DESCRIPCIÓN
+========================================= */
 
 .producto-info p {
     color: var(--blanco);
@@ -291,7 +346,9 @@ nav a:hover {
 }
 
 
-/* Precio */
+/* =========================================
+   PRECIO
+========================================= */
 
 .precio {
     color: var(--naranja-claro);
@@ -313,6 +370,9 @@ nav a:hover {
     text-align: center;
 }
 
+
+/* Título de contacto */
+
 .contacto h2 {
     color: var(--naranja);
 
@@ -321,6 +381,9 @@ nav a:hover {
 
     margin-bottom: 12px;
 }
+
+
+/* Texto de contacto */
 
 .contacto p {
     color: var(--blanco);
@@ -347,13 +410,59 @@ footer {
 
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE — TABLETS
+========================================= */
+
+@media (max-width: 900px) {
+
+    header {
+        padding: 0 25px;
+    }
+
+    .logo {
+        width: 210px;
+    }
+
+    .logo img {
+        width: 210px;
+        height: 55px;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE — MÓVILES
 ========================================= */
 
 @media (max-width: 800px) {
 
     header {
-        padding: 0 20px;
+        height: auto;
+        min-height: 70px;
+
+        padding: 10px 20px;
+    }
+
+    .logo {
+        width: 170px;
+        height: 50px;
+    }
+
+    .logo img {
+        width: 170px;
+        height: 50px;
     }
 
     nav {
@@ -364,15 +473,99 @@ footer {
         font-size: 13px;
     }
 
+
+    /* Hero */
+
     .hero {
         height: 420px;
     }
 
-    .hero-content h1 {
-        font-size: 38px;
+    .hero-logo {
+        width: 150px;
+        height: 150px;
+
+        margin-bottom: 18px;
     }
+
+    .hero-content p {
+        font-size: 16px;
+
+        padding: 0 20px;
+    }
+
+
+    /* Productos */
 
     .productos {
         grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE — TELÉFONOS PEQUEÑOS
+========================================= */
+
+@media (max-width: 550px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 8px;
+
+        padding: 10px 15px;
+    }
+
+    .logo {
+        width: 200px;
+        height: 45px;
+
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 200px;
+        height: 45px;
+    }
+
+    nav {
+        gap: 18px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+
+    /* Hero */
+
+    .hero {
+        height: 400px;
+    }
+
+    .hero-logo {
+        width: 130px;
+        height: 130px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+
+        max-width: 320px;
+    }
+
+
+    /* Catálogo */
+
+    .catalogo {
+        padding: 50px 20px;
+    }
+
+    .titulo-seccion h2 {
+        font-size: 26px;
+    }
+
+    .titulo-seccion p {
+        font-size: 14px;
     }
 }
