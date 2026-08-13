@@ -157,17 +157,41 @@ nav a:hover {
 ========================================= */
 
 .hero-logo {
-    width: 180px;
-    height: 180px;
+    width: 320px;
+    height: 320px;
 
     object-fit: contain;
 
     display: block;
 
-    margin: 0 auto 20px;
+    margin: -20px auto 10px;
+
+    filter:
+        drop-shadow(0 0 5px #ffb300)
+        drop-shadow(0 0 15px #ffb300)
+        drop-shadow(0 0 30px rgba(255, 179, 0, 0.8));
+
+    animation: neonPulse 3s ease-in-out infinite;
 }
 
 
+@keyframes neonPulse {
+
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 5px #ffb300)
+            drop-shadow(0 0 12px #ffb300)
+            drop-shadow(0 0 25px rgba(255, 179, 0, 0.6));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 8px #ffb300)
+            drop-shadow(0 0 22px #ffb300)
+            drop-shadow(0 0 45px rgba(255, 179, 0, 0.9));
+    }
+
+}
 /* =========================================
    TEXTO DEL HERO
 ========================================= */
