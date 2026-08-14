@@ -589,4 +589,51 @@ footer {
     .titulo-seccion p {
         font-size: 14px;
     }
+
+   /* =========================================
+   REDES SOCIALES
+========================================= */
+
+.redes-sociales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+
+    margin-top: 30px;
+}
+
+
+.redes-sociales a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    transition: 0.25s ease;
+}
+
+
+.redes-sociales i {
+    font-size: 18px;
+}
+
+
+/* EFECTO AL PASAR EL RATÓN */
+
+.redes-sociales a:hover {
+    color: #ffb300;
+
+    transform: translateY(-2px);
+}
+
+
+.redes-sociales a:hover i {
+    filter: drop-shadow(0 0 5px rgba(255, 179, 0, 0.5));
+}
 }
