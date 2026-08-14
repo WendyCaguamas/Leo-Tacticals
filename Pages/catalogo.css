@@ -1,0 +1,294 @@
+/* =========================================
+   PÁGINA DEL CATÁLOGO
+========================================= */
+
+.catalogo-pagina {
+    width: 100%;
+
+    min-height: 600px;
+
+    background: var(--negro);
+
+    padding: 60px 6%;
+}
+
+
+/* =========================================
+   ESTRUCTURA DEL CATÁLOGO
+========================================= */
+
+.catalogo-layout {
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 240px 1fr;
+
+    gap: 50px;
+}
+
+
+/* =========================================
+   CATEGORÍAS
+========================================= */
+
+.categorias {
+    width: 100%;
+
+    border-right: 1px solid var(--borde);
+
+    padding-right: 30px;
+}
+
+
+.categorias h2 {
+    color: var(--naranja);
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   LISTA DE CATEGORÍAS
+========================================= */
+
+.categorias-lista {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+/* =========================================
+   BOTONES DE CATEGORÍA
+========================================= */
+
+.categoria {
+    display: block;
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    color: var(--blanco);
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    border-left: 3px solid transparent;
+
+    transition: 0.25s ease;
+}
+
+
+.categoria:hover {
+    color: var(--naranja);
+
+    background: var(--negro-secundario);
+
+    border-left-color: var(--naranja);
+}
+
+
+/* =========================================
+   CATEGORÍA ACTIVA
+========================================= */
+
+.categoria.activa {
+    color: var(--naranja);
+
+    background: var(--negro-secundario);
+
+    border-left-color: var(--naranja);
+}
+
+
+/* =========================================
+   ÁREA DE PRODUCTOS
+========================================= */
+
+.productos-catalogo {
+    min-height: 500px;
+}
+
+
+/* =========================================
+   TÍTULO DEL CATÁLOGO
+========================================= */
+
+.catalogo-titulo {
+    text-align: left;
+
+    margin-bottom: 40px;
+}
+
+
+.catalogo-titulo h1 {
+    color: var(--naranja);
+
+    font-size: 32px;
+
+    font-weight: 900;
+
+    margin-bottom: 10px;
+}
+
+
+.catalogo-titulo p {
+    color: var(--blanco);
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .catalogo-pagina {
+        padding: 50px 30px;
+    }
+
+    .catalogo-layout {
+        grid-template-columns: 200px 1fr;
+
+        gap: 30px;
+    }
+
+    .categorias {
+        padding-right: 20px;
+    }
+
+}
+
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 700px) {
+
+    .catalogo-pagina {
+        padding: 40px 20px;
+    }
+
+
+    .catalogo-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 35px;
+    }
+
+
+    /* CATEGORÍAS */
+
+    .categorias {
+        border-right: none;
+
+        border-bottom: 1px solid var(--borde);
+
+        padding-right: 0;
+
+        padding-bottom: 25px;
+    }
+
+
+    .categorias h2 {
+        text-align: center;
+
+        margin-bottom: 20px;
+    }
+
+
+    .categorias-lista {
+        gap: 5px;
+    }
+
+
+    .categoria {
+        text-align: center;
+
+        border-left: none;
+
+        border-bottom: 3px solid transparent;
+    }
+
+
+    .categoria:hover {
+        border-left-color: transparent;
+
+        border-bottom-color: var(--naranja);
+    }
+
+
+    .categoria.activa {
+        border-left-color: transparent;
+
+        border-bottom-color: var(--naranja);
+    }
+
+
+    /* PRODUCTOS */
+
+    .productos-catalogo {
+        min-height: 400px;
+    }
+
+
+    .catalogo-titulo {
+        text-align: center;
+    }
+
+
+    .catalogo-titulo h1 {
+        font-size: 28px;
+    }
+
+}
+
+
+/* =========================================
+   TELÉFONOS PEQUEÑOS
+========================================= */
+
+@media (max-width: 450px) {
+
+    .catalogo-pagina {
+        padding: 35px 15px;
+    }
+
+
+    .catalogo-titulo h1 {
+        font-size: 25px;
+    }
+
+
+    .catalogo-titulo p {
+        font-size: 14px;
+    }
+
+
+    .categorias h2 {
+        font-size: 20px;
+    }
+
+}
