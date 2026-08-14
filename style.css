@@ -800,48 +800,65 @@ footer {
         font-size: 14px;
     }
 
+/* =================================
+   CONTACTO
+================================= */
 
-    /* =====================================
-       CONTACTO
-    ===================================== */
+.contacto {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    width: 100%;
+    min-height: 600px;
+    background-color: #151515;
+}
 
-    .contacto-info {
-        padding: 45px 20px;
-    }
+/* LADO IZQUIERDO */
+
+.contacto-info {
+    padding: 70px 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.contacto-info h2 {
+    margin: 0 0 40px;
+}
+
+.contacto-info p {
+    margin-bottom: 60px;
+}
+
+.redes-sociales {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.redes-sociales a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+}
 
 
-    .contacto-info h2 {
-        font-size: 26px;
-    }
+/* LADO DERECHO */
 
+.contacto-mapa {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    overflow: hidden;
+}
 
-    .contacto-info p {
-        font-size: 14px;
+.contacto-mapa iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    border: 0;
+}
 
-        margin-top: 20px;
-
-        margin-bottom: 40px;
-    }
-
-
-    .redes-sociales {
-        max-width: 200px;
-
-        gap: 22px;
-    }
-
-
-    .redes-sociales a {
-        font-size: 15px;
-    }
-
-
-    .redes-sociales i {
-        font-size: 18px;
-    }
-
-
-    .contacto-mapa {
-        min-height: 300px;
-    }
 }
