@@ -125,16 +125,3 @@ function cambiarImagen(boton, direccion) {
 
 }
 
-
-console.log("CATALOGO.JS SE EJECUTÓ");
-
-contenedorProductos.innerHTML = `
-    <div style="
-        color: red;
-        font-size: 40px;
-        font-weight: bold;
-        padding: 30px;
-    ">
-        FUNCIONA
-    </div>
-`;
