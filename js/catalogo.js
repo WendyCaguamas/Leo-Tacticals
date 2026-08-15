@@ -125,3 +125,4 @@ function cambiarImagen(boton, direccion) {
 
 }
 
+mostrarProductos(productos);
