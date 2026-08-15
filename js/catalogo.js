@@ -1,6 +1,10 @@
 const contenedorProductos =
     document.getElementById("productos-container");
 
+console.log("CATALOGO JS FUNCIONANDO");
+console.log("CONTENEDOR:", contenedorProductos);
+console.log("PRODUCTOS:", productos);
+
 
 function mostrarProductos(listaProductos) {
 
