@@ -122,6 +122,8 @@
 
 .productos-catalogo {
     min-height: 500px;
+
+    width: 100%;
 }
 
 
@@ -157,6 +159,167 @@
 
 
 /* =========================================
+   GRID DE PRODUCTOS
+========================================= */
+
+.productos-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    width: 100%;
+}
+
+
+/* =========================================
+   TARJETA DE PRODUCTO
+========================================= */
+
+.producto-catalogo {
+    background: var(--negro-tarjeta);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+
+.producto-catalogo:hover {
+    border-color: var(--naranja);
+
+    transform: translateY(-5px);
+}
+
+
+/* =========================================
+   IMÁGENES DEL PRODUCTO
+========================================= */
+
+.producto-imagenes {
+    position: relative;
+
+    width: 100%;
+
+    height: 300px;
+
+    overflow: hidden;
+
+    background: #101010;
+}
+
+
+.imagen-producto {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================
+   FLECHAS DE IMAGEN
+========================================= */
+
+.flecha {
+    position: absolute;
+
+    right: 12px;
+
+    width: 35px;
+
+    height: 35px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    color: var(--blanco);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.25s;
+
+    z-index: 5;
+}
+
+
+.flecha-arriba {
+    top: 12px;
+}
+
+
+.flecha-abajo {
+    bottom: 12px;
+}
+
+
+.flecha:hover {
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    border-color: var(--naranja);
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL PRODUCTO
+========================================= */
+
+.producto-datos {
+    padding: 20px;
+}
+
+
+.producto-datos h2 {
+    color: var(--naranja);
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    margin-bottom: 10px;
+}
+
+
+.producto-datos p {
+    color: var(--blanco);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+.producto-precio {
+    color: var(--naranja-claro);
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
    TABLET
 ========================================= */
 
@@ -166,14 +329,21 @@
         padding: 50px 30px;
     }
 
+
     .catalogo-layout {
         grid-template-columns: 200px 1fr;
 
         gap: 30px;
     }
 
+
     .categorias {
         padding-right: 20px;
+    }
+
+
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
@@ -199,7 +369,9 @@
     }
 
 
-    /* CATEGORÍAS */
+    /* ==============================
+       CATEGORÍAS
+    ============================== */
 
     .categorias {
         border-right: none;
@@ -247,10 +419,22 @@
     }
 
 
-    /* PRODUCTOS */
+    /* ==============================
+       PRODUCTOS
+    ============================== */
 
     .productos-catalogo {
         min-height: 400px;
+    }
+
+
+    .productos-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .producto-imagenes {
+        height: 320px;
     }
 
 
@@ -291,190 +475,9 @@
         font-size: 20px;
     }
 
-   /* =========================================
-   GRID DE PRODUCTOS
-========================================= */
-
-.productos-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-
-/* =========================================
-   TARJETA
-========================================= */
-
-.producto-catalogo {
-    background: var(--negro-tarjeta);
-
-    border: 1px solid var(--borde);
-
-    border-radius: 5px;
-
-    overflow: hidden;
-
-    transition: 0.3s;
-}
-
-
-.producto-catalogo:hover {
-    border-color: var(--naranja);
-
-    transform: translateY(-5px);
-}
-
-
-/* =========================================
-   CONTENEDOR DE IMAGEN
-========================================= */
-
-.producto-imagenes {
-    position: relative;
-
-    width: 100%;
-
-    height: 300px;
-
-    overflow: hidden;
-
-    background: #101010;
-}
-
-
-.imagen-producto {
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-}
-
-
-/* =========================================
-   FLECHAS
-========================================= */
-
-.flecha {
-    position: absolute;
-
-    right: 12px;
-
-    width: 35px;
-
-    height: 35px;
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-
-    border-radius: 50%;
-
-    background: rgba(0, 0, 0, 0.65);
-
-    color: var(--blanco);
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transition: 0.25s;
-}
-
-
-.flecha-arriba {
-    top: 12px;
-}
-
-
-.flecha-abajo {
-    bottom: 12px;
-}
-
-
-.flecha:hover {
-    background: var(--naranja);
-
-    color: var(--negro);
-
-    border-color: var(--naranja);
-}
-
-
-/* =========================================
-   INFORMACIÓN
-========================================= */
-
-.producto-datos {
-    padding: 20px;
-}
-
-
-.producto-datos h2 {
-    color: var(--naranja);
-
-    font-size: 20px;
-
-    font-weight: 900;
-
-    margin-bottom: 10px;
-}
-
-
-.producto-datos p {
-    color: var(--blanco);
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    margin-bottom: 18px;
-}
-
-
-.producto-precio {
-    color: var(--naranja-claro);
-
-    font-size: 20px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 900px) {
-
-    .productos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-
-/* =========================================
-   MÓVIL
-========================================= */
-
-@media (max-width: 700px) {
-
-    .productos-grid {
-        grid-template-columns: 1fr;
-    }
-
 
     .producto-imagenes {
-        height: 320px;
+        height: 280px;
     }
 
-}
 }
