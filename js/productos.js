@@ -15,9 +15,7 @@ const productos = [
             "../img/001/001.jpeg",
             "../img/001/002.jpeg"
         ]
-    },
-
-    {
+    },{
         id: 2,
 
         nombre: "Mochila Táctica",
@@ -33,10 +31,40 @@ const productos = [
             "../img/002/002.jpg",
             "../img/002/003.jpg"
         ]
-    },
-
-    {
+    },{
         id: 3,
+
+        nombre: "Linterna Táctica",
+
+        categoria: "otros",
+
+        precio: 24.99,
+
+        detalles: "Linterna compacta de alta resistencia.",
+
+        imagenes: [
+            "../img/003/001.jpg"
+        ]
+    }
+
+],{
+        id: 4,
+
+        nombre: "Linterna Táctica",
+
+        categoria: "otros",
+
+        precio: 24.99,
+
+        detalles: "Linterna compacta de alta resistencia.",
+
+        imagenes: [
+            "../img/003/001.jpg"
+        ]
+    }
+
+],{
+        id: 5,
 
         nombre: "Linterna Táctica",
 
