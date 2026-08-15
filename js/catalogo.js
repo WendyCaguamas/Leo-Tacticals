@@ -1,11 +1,6 @@
 const contenedorProductos =
     document.getElementById("productos-container");
 
-console.log("CATALOGO JS FUNCIONANDO");
-console.log("CONTENEDOR:", contenedorProductos);
-console.log("PRODUCTOS:", productos);
-
-
 function mostrarProductos(listaProductos) {
 
     contenedorProductos.innerHTML = "";
@@ -131,4 +126,15 @@ function cambiarImagen(boton, direccion) {
 }
 
 
-mostrarProductos(productos);
+console.log("CATALOGO.JS SE EJECUTÓ");
+
+contenedorProductos.innerHTML = `
+    <div style="
+        color: red;
+        font-size: 40px;
+        font-weight: bold;
+        padding: 30px;
+    ">
+        FUNCIONA
+    </div>
+`;
