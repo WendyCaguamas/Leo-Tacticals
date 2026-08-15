@@ -12,8 +12,8 @@ const productos = [
         detalles: "Correa táctica resistente y ajustable.",
 
         imagenes: [
-            "../img/001/001.jpg",
-            "../img/001/002.jpg"
+            "../img/001/001.jpeg",
+            "../img/001/002.jpeg"
         ]
     }
 
