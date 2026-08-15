@@ -3,13 +3,13 @@ const productos = [
     {
         id: 1,
 
-        nombre: "Nombre del producto",
+        nombre: "Correa Táctica",
 
         categoria: "correas",
 
         precio: 19.99,
 
-        detalles: "Aquí colocaremos los detalles y características del producto.",
+        detalles: "Correa táctica resistente y ajustable.",
 
         imagenes: [
             "../Imagenes/Productos/001/imagen1.jpg",
