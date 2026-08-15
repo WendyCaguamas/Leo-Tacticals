@@ -232,10 +232,9 @@
 .flecha {
     position: absolute;
 
-    right: 12px;
+    top: 50%;
 
     width: 35px;
-
     height: 35px;
 
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -251,8 +250,9 @@
     display: flex;
 
     align-items: center;
-
     justify-content: center;
+
+    transform: translateY(-50%);
 
     transition: 0.25s;
 
@@ -260,13 +260,13 @@
 }
 
 
-.flecha-arriba {
-    top: 12px;
+.flecha-izquierda {
+    left: 12px;
 }
 
 
-.flecha-abajo {
-    bottom: 12px;
+.flecha-derecha {
+    right: 12px;
 }
 
 
@@ -277,7 +277,6 @@
 
     border-color: var(--naranja);
 }
-
 
 /* =========================================
    INFORMACIÓN DEL PRODUCTO
