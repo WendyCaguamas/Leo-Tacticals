@@ -24,20 +24,19 @@ function mostrarProductos(listaProductos) {
                 >
 
 
-                <button
-                    class="flecha flecha-arriba"
-                    onclick="cambiarImagen(this, -1)"
-                >
-                    <i class="fa-solid fa-chevron-up"></i>
-                </button>
+               <button
+    class="flecha flecha-izquierda"
+    onclick="cambiarImagen(this, -1)"
+>
+    <i class="fa-solid fa-chevron-left"></i>
+</button>
 
-
-                <button
-                    class="flecha flecha-abajo"
-                    onclick="cambiarImagen(this, 1)"
-                >
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
+<button
+    class="flecha flecha-derecha"
+    onclick="cambiarImagen(this, 1)"
+>
+    <i class="fa-solid fa-chevron-right"></i>
+</button>
 
 
                 <div
