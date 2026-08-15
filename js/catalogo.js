@@ -23,8 +23,7 @@ function mostrarProductos(listaProductos) {
                     class="imagen-producto"
                 >
 
-
-               <button
+<button
     class="flecha flecha-izquierda"
     onclick="cambiarImagen(this, -1)"
 >
@@ -37,6 +36,7 @@ function mostrarProductos(listaProductos) {
 >
     <i class="fa-solid fa-chevron-right"></i>
 </button>
+
 
 
                 <div
