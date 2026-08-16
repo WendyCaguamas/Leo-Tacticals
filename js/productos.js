@@ -3,15 +3,13 @@ const productos = [
     {
         id: 1,
 
-        nombre: "Cinturón Táctico de Servicio Liberación Rápida",
+        nombre: "Cinturón Liberación Rápida",
 
         categoria: "correas",
 
         precio: 29.99,
 
         colores: ["negro"],
-
-        detalles: "Diseñado específicamente para el soporte de equipo de servicio pesado.",
 
         imagenes: [
             "../img/001/001.jpeg",
@@ -22,13 +20,11 @@ const productos = [
     {
         id: 2,
 
-        nombre: "Cinturón Táctico",
+        nombre: "Cinturón Táctico 10 en 1",
 
         categoria: "equipamento",
 
         precio: 39.99,
-
-        detalles: "Cinturón Táctico para uso diario.",
 
         imagenes: [
             "../img/002/001.jpeg",
