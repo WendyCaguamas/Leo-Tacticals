@@ -15,6 +15,16 @@ function mostrarProductos(listaProductos) {
 
         tarjeta.innerHTML = `
 
+          ${producto.colores ? `
+    <div class="colores-producto">
+        ${producto.colores.map(color => `
+            <span
+                class="color-producto color-${color}"
+                title="${color}"
+            ></span>
+        `).join("")}
+    </div>
+` : ""}
             <div class="producto-imagenes">
 
                 <img
