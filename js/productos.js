@@ -118,13 +118,27 @@ const productos = [
 
         categoria: "otros",
 
-        precio: 10.00,
+        precio: 20.00,
 
         colores: ["verde"],
         imagenes: [
             "../img/008/001.jpg",
             "../img/008/002.jpeg"
         ]
+    },{
+        id: 9,
+
+        nombre: "Cinturón Táctico 5.11",
+
+        categoria: "otros",
+
+        precio: 10.00,
+
+        colores: ["verde"],
+        imagenes: [
+            "../img/008/001.jpg"
+        ]
     }
+
 
 ];
