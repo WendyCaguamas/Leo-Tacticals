@@ -84,7 +84,7 @@ const productos = [
     },{
         id: 6,
 
-        nombre: "Porta Bastón Retráctil",
+        nombre: "Porta Tolete Retráctil",
 
         categoria: "otros",
 
