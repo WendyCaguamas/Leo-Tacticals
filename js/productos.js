@@ -29,8 +29,8 @@ const productos = [
         detalles: "Mochila táctica resistente para uso diario.",
 
         imagenes: [
-            "../img/002/001.jpg",
-            "../img/002/002.jpg"
+            "../img/002/001.jpeg",
+            "../img/002/002.jpeg"
         ]
     },
 
