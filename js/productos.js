@@ -97,6 +97,22 @@ const productos = [
             "../img/006/002.jpeg",
             "../img/006/003.jpeg"
         ]
+    },{
+        id: 7,
+
+        nombre: "Correa",
+
+        categoria: "otros",
+
+        precio: 24.99,
+
+        detalles: "Disponible",
+
+        colores: ["verde", "azul"],
+        imagenes: [
+            "../img/007/001.jpeg",
+            "../img/007/002.jpeg"
+        ]
     }
 
 ];
