@@ -80,123 +80,138 @@ function cambiarImagen(boton, direccion) {
     const contenedor =
         boton.closest(".producto-imagenes");
 
-
-    const imagen =
+    const imagenActual =
         contenedor.querySelector(".imagen-producto");
-
 
     const datos =
         contenedor.querySelector(".imagenes-producto-data");
-
 
     const imagenes =
         JSON.parse(datos.dataset.imagenes);
 
 
-    let indice =
-        parseInt(imagen.dataset.indice || "0");
+    // Evitar hacer otra transición mientras
+    // la anterior todavía está funcionando.
 
-
-    // Evitar múltiples animaciones al mismo tiempo
-    if (imagen.dataset.animando === "true") {
+    if (contenedor.dataset.animando === "true") {
         return;
     }
 
-
-    imagen.dataset.animando = "true";
-
-
-    // Calcular siguiente imagen
-    indice += direccion;
+    contenedor.dataset.animando = "true";
 
 
-    if (indice < 0) {
-        indice = imagenes.length - 1;
+    // Índice actual
+
+    let indice =
+        parseInt(imagenActual.dataset.indice || "0");
+
+
+    // Calcular siguiente índice
+
+    let nuevoIndice =
+        indice + direccion;
+
+
+    if (nuevoIndice < 0) {
+        nuevoIndice = imagenes.length - 1;
     }
 
 
-    if (indice >= imagenes.length) {
-        indice = 0;
+    if (nuevoIndice >= imagenes.length) {
+        nuevoIndice = 0;
     }
 
 
-    /*
-       DIRECCIÓN DE LA ANIMACIÓN
+    // Crear la segunda imagen
 
-       Siguiente:
-       la imagen sale hacia la izquierda.
-
-       Anterior:
-       la imagen sale hacia la derecha.
-    */
-
-    const salida =
-        direccion === 1
-            ? "-100%"
-            : "100%";
+    const imagenNueva =
+        document.createElement("img");
 
 
-    const entrada =
-        direccion === 1
-            ? "100%"
-            : "-100%";
+    imagenNueva.src =
+        imagenes[nuevoIndice];
+
+    imagenNueva.alt =
+        imagenActual.alt;
+
+    imagenNueva.classList.add("imagen-producto");
 
 
-    // Animar imagen actual hacia afuera
-    imagen.style.transform =
-        `translateX(${salida})`;
+    // Posición inicial de la nueva imagen
+
+    if (direccion === 1) {
+
+        // Siguiente → entra desde la derecha
+
+        imagenNueva.style.transform =
+            "translateX(100%)";
+
+    } else {
+
+        // Anterior → entra desde la izquierda
+
+        imagenNueva.style.transform =
+            "translateX(-100%)";
+
+    }
 
 
-    setTimeout(() => {
+    // La nueva imagen se coloca encima
 
-        // Cambiar imagen
-        imagen.src =
-            imagenes[indice];
+    contenedor.appendChild(imagenNueva);
 
 
-        imagen.dataset.indice =
-            indice;
+    // Forzar al navegador a reconocer
+    // la posición inicial
+
+    imagenNueva.offsetWidth;
 
 
-        /*
-           Colocamos instantáneamente
-           la nueva imagen al otro lado.
-        */
+    // Mover ambas imágenes
 
-        imagen.style.transition =
-            "none";
+    requestAnimationFrame(() => {
 
-        imagen.style.transform =
-            `translateX(${entrada})`;
+        if (direccion === 1) {
 
+            // Imagen actual sale a la izquierda
 
-        /*
-           Forzamos al navegador a reconocer
-           la nueva posición antes de animarla.
-        */
+            imagenActual.style.transform =
+                "translateX(-100%)";
 
-        imagen.offsetHeight;
+        } else {
 
+            // Imagen actual sale a la derecha
 
-        // Activar nuevamente la transición
-        imagen.style.transition =
-            "transform 0.35s ease";
+            imagenActual.style.transform =
+                "translateX(100%)";
+        }
 
 
-        // Llevar la nueva imagen al centro
-        imagen.style.transform =
+        // Imagen nueva entra al centro
+
+        imagenNueva.style.transform =
             "translateX(0)";
 
+    });
 
-    }, 350);
 
+    // Cuando termina la animación
 
     setTimeout(() => {
 
-        imagen.dataset.animando =
+        imagenNueva.dataset.indice =
+            nuevoIndice;
+
+
+        // Eliminar la imagen anterior
+
+        imagenActual.remove();
+
+
+        contenedor.dataset.animando =
             "false";
 
-    }, 700);
+    }, 350);
 
 }
 
