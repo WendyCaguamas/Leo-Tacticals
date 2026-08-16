@@ -108,7 +108,7 @@ const productos = [
 
         detalles: "Disponible",
 
-        colores: ["verde", "azul"],
+        colores: ["negro", "verde"],
         imagenes: [
             "../img/007/001.jpeg",
             "../img/007/002.jpeg"
