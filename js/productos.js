@@ -7,7 +7,7 @@ const productos = [
 
         categoria: "correas",
 
-        precio: 20.00,
+        precio: 30.00,
 
         colores: ["negro"],
 
@@ -20,7 +20,7 @@ const productos = [
     {
         id: 2,
 
-        nombre: "Cinturón Táctico 10 en 1",
+        nombre: "Cinturón Táctico Utilitario 10 en 1",
 
         categoria: "equipamento",
 
