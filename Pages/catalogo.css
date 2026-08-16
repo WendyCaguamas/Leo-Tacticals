@@ -4,7 +4,6 @@
 
 .catalogo-pagina {
     width: 100%;
-
     min-height: 600px;
 
     background: var(--negro);
@@ -19,7 +18,6 @@
 
 .catalogo-layout {
     width: 100%;
-
     max-width: 1400px;
 
     margin: 0 auto;
@@ -213,6 +211,7 @@
     background: #101010;
 }
 
+
 .imagen-producto {
     position: absolute;
 
@@ -232,6 +231,62 @@
 
     will-change: transform;
 }
+
+
+/* =========================================
+   COLORES DISPONIBLES
+========================================= */
+
+.colores-producto {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    display: flex;
+
+    gap: 6px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+.color-producto {
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+    display: block;
+
+    padding: 0;
+    margin: 0;
+
+    transition: none;
+}
+
+
+/*
+   IMPORTANTE:
+   El hover de la tarjeta NO modifica
+   el color de los círculos.
+*/
+
+.producto-catalogo:hover .color-producto {
+    border-color: rgba(255, 255, 255, 0.7);
+
+    transform: none;
+}
+
 
 /* =========================================
    FLECHAS DE IMAGEN
@@ -285,6 +340,7 @@
 
     border-color: var(--naranja);
 }
+
 
 /* =========================================
    INFORMACIÓN DEL PRODUCTO
@@ -487,32 +543,26 @@
         height: 280px;
     }
 
-   .colores-producto {
-    position: absolute;
 
-    top: 12px;
-    left: 12px;
+    /* ==============================
+       CÍRCULOS DE COLOR
+    ============================== */
 
-    display: flex;
-    gap: 6px;
+    .colores-producto {
+        top: 10px;
 
-    z-index: 6;
-}
+        left: 10px;
+
+        gap: 5px;
+    }
 
 
-.color-producto {
-    width: 20px;
-    height: 20px;
+    .color-producto {
+        width: 18px;
+        height: 18px;
 
-    border-radius: 50%;
-
-    border: 1px solid var(--blanco);
-
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-
-    display: block;
-}
+        min-width: 18px;
+        min-height: 18px;
+    }
 
 }
-
-
