@@ -1,6 +1,14 @@
+/* =========================================
+   CONTENEDOR DE PRODUCTOS
+========================================= */
+
 const contenedorProductos =
     document.getElementById("productos-container");
 
+
+/* =========================================
+   MOSTRAR PRODUCTOS
+========================================= */
 
 function mostrarProductos(listaProductos) {
 
@@ -24,6 +32,7 @@ function mostrarProductos(listaProductos) {
                     src="${producto.imagenes[0]}"
                     alt="${producto.nombre}"
                     class="imagen-producto"
+                    data-indice="0"
                 >
 
 
@@ -34,8 +43,9 @@ function mostrarProductos(listaProductos) {
                         ${producto.colores.map(color => `
 
                             <span
-                                class="color-producto color-${color}"
+                                class="color-producto"
                                 title="${color}"
+                                style="background-color: ${color};"
                             ></span>
 
                         `).join("")}
@@ -98,6 +108,10 @@ function mostrarProductos(listaProductos) {
 }
 
 
+/* =========================================
+   CAMBIAR IMAGEN
+========================================= */
+
 function cambiarImagen(boton, direccion) {
 
     const contenedor =
@@ -116,8 +130,9 @@ function cambiarImagen(boton, direccion) {
         JSON.parse(datos.dataset.imagenes);
 
 
-    // Evitar otra transición mientras
-    // la anterior todavía está funcionando.
+    /* ==============================
+       EVITAR ANIMACIONES SIMULTÁNEAS
+    ============================== */
 
     if (contenedor.dataset.animando === "true") {
         return;
@@ -127,13 +142,17 @@ function cambiarImagen(boton, direccion) {
     contenedor.dataset.animando = "true";
 
 
-    // Índice actual
+    /* ==============================
+       ÍNDICE ACTUAL
+    ============================== */
 
     let indice =
         parseInt(imagenActual.dataset.indice || "0");
 
 
-    // Calcular siguiente índice
+    /* ==============================
+       CALCULAR NUEVO ÍNDICE
+    ============================== */
 
     let nuevoIndice =
         indice + direccion;
@@ -154,7 +173,9 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    // Crear nueva imagen
+    /* ==============================
+       CREAR NUEVA IMAGEN
+    ============================== */
 
     const imagenNueva =
         document.createElement("img");
@@ -171,7 +192,9 @@ function cambiarImagen(boton, direccion) {
     imagenNueva.classList.add("imagen-producto");
 
 
-    // Posición inicial
+    /* ==============================
+       POSICIÓN INICIAL
+    ============================== */
 
     if (direccion === 1) {
 
@@ -186,18 +209,23 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    // Colocar nueva imagen
+    /* ==============================
+       COLOCAR NUEVA IMAGEN
+    ============================== */
 
     contenedor.appendChild(imagenNueva);
 
 
-    // Forzar al navegador a reconocer
-    // la posición inicial
+    /* ==============================
+       FORZAR RENDERIZADO
+    ============================== */
 
     imagenNueva.offsetWidth;
 
 
-    // Ejecutar animación
+    /* ==============================
+       EJECUTAR ANIMACIÓN
+    ============================== */
 
     requestAnimationFrame(() => {
 
@@ -220,7 +248,9 @@ function cambiarImagen(boton, direccion) {
     });
 
 
-    // Finalizar animación
+    /* ==============================
+       FINALIZAR ANIMACIÓN
+    ============================== */
 
     setTimeout(() => {
 
@@ -239,6 +269,8 @@ function cambiarImagen(boton, direccion) {
 }
 
 
-// Mostrar productos
+/* =========================================
+   MOSTRAR PRODUCTOS AL CARGAR
+========================================= */
 
 mostrarProductos(productos);
