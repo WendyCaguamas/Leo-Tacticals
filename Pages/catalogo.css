@@ -487,9 +487,7 @@
         height: 280px;
     }
 
-}
-
-.colores-producto {
+   .colores-producto {
     position: absolute;
 
     top: 12px;
@@ -514,4 +512,7 @@
 
     display: block;
 }
+
+}
+
 
