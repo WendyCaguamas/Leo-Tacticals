@@ -37,13 +37,11 @@ const productos = [
     {
         id: 3,
 
-        nombre: "Joakin es un tonto",
+        nombre: "Gas Pimienta SABRE Red",
 
         categoria: "otros",
 
-        precio: 24.99,
-
-        detalles: "Gas Pimienta de defensa personal.",
+        precio: 30.00,
 
         imagenes: [
             "../img/003/001.jpeg",
@@ -54,7 +52,7 @@ const productos = [
     {
         id: 4,
 
-        nombre: "Taser Electrico Paralizador",
+        nombre: "Taser con Linterna 928 Type",
 
         categoria: "otros",
 
