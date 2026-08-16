@@ -249,6 +249,10 @@
 
     z-index: 10;
 
+    /*
+       Los círculos no interfieren con
+       las flechas ni con el hover.
+    */
     pointer-events: none;
 }
 
@@ -262,27 +266,29 @@
 
     border-radius: 50%;
 
-    border: 1px solid rgba(255, 255, 255, 0.7);
-
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-
     display: block;
 
     padding: 0;
     margin: 0;
 
+    box-sizing: border-box;
+
+    /*
+       El color de fondo será asignado
+       por JavaScript mediante backgroundColor.
+    */
+
+    border: 2px solid var(--blanco);
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.6);
+
+    /*
+       Evita animaciones o transformaciones
+       sobre los círculos.
+    */
+
     transition: none;
-}
-
-
-/*
-   IMPORTANTE:
-   El hover de la tarjeta NO modifica
-   el color de los círculos.
-*/
-
-.producto-catalogo:hover .color-producto {
-    border-color: rgba(255, 255, 255, 0.7);
 
     transform: none;
 }
