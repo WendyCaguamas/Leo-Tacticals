@@ -3,7 +3,7 @@ const productos = [
     {
         id: 1,
 
-        nombre: "Cinturón Liberación Rápida",
+        nombre: "Cinturón Táctico Liberación Rápida",
 
         categoria: "correas",
 
@@ -24,7 +24,9 @@ const productos = [
 
         categoria: "equipamento",
 
-        precio: 39.99,
+        precio: 29.99,
+
+        colores: ["negro"],
 
         imagenes: [
             "../img/002/001.jpeg",
@@ -35,7 +37,7 @@ const productos = [
     {
         id: 3,
 
-        nombre: "Gas Pimienta",
+        nombre: "Joakin es un tonto",
 
         categoria: "otros",
 
