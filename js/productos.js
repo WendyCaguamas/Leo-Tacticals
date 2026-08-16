@@ -3,13 +3,15 @@ const productos = [
     {
         id: 1,
 
-        nombre: "Correa Táctica",
+        nombre: "Cinturón Táctico de Servicio Liberación Rápida",
 
         categoria: "correas",
 
-        precio: 19.99,
+        precio: 29.99,
 
-        detalles: "Correa táctica resistente y ajustable.",
+        colores: ["negro"],
+
+        detalles: "Diseñado específicamente para el soporte de equipo de servicio pesado.",
 
         imagenes: [
             "../img/001/001.jpeg",
