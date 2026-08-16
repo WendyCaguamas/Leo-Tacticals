@@ -30,8 +30,7 @@ const productos = [
 
         imagenes: [
             "../img/002/001.jpg",
-            "../img/002/002.jpg",
-            "../img/002/003.jpg"
+            "../img/002/002.jpg"
         ]
     },
 
