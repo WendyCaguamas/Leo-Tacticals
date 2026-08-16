@@ -66,9 +66,7 @@ const productos = [
             "../img/004/001.jpeg",
             "../img/004/002.jpeg"
         ]
-    },
-
-    {
+    },{
         id: 5,
 
         nombre: "Bastón Retráctil ",
@@ -82,6 +80,21 @@ const productos = [
         imagenes: [
             "../img/005/001.jpeg",
             "../img/005/002.jpeg"
+        ]
+    },{
+        id: 6,
+
+        nombre: "Porta Bastón Retráctil",
+
+        categoria: "otros",
+
+        precio: 24.99,
+
+        detalles: "Portador de Bastón de defensa para correa",
+
+        imagenes: [
+            "../img/006/001.jpeg",
+            "../img/006/002.jpeg"
         ]
     }
 
