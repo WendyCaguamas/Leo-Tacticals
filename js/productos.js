@@ -147,7 +147,7 @@ const productos = [
 
         precio: 10.00,
 
-        colores: ["verde-oliva"],
+        colores: ["verde_oliva"],
         imagenes: [
             "../img/010/001.jpg"
         ]
