@@ -1,6 +1,7 @@
 const contenedorProductos =
     document.getElementById("productos-container");
 
+
 function mostrarProductos(listaProductos) {
 
     contenedorProductos.innerHTML = "";
@@ -8,88 +9,56 @@ function mostrarProductos(listaProductos) {
 
     listaProductos.forEach(producto => {
 
-        const tarjeta = document.createElement("article");
+        const tarjeta =
+            document.createElement("article");
+
 
         tarjeta.classList.add("producto-catalogo");
 
-tarjeta.innerHTML = `
 
-    <div class="producto-imagenes">
+        tarjeta.innerHTML = `
 
-        <img
-            src="${producto.imagenes[0]}"
-            alt="${producto.nombre}"
-            class="imagen-producto"
-        >
+            <div class="producto-imagenes">
 
-        ${producto.colores ? `
-            <div class="colores-producto">
-
-                ${producto.colores.map(color => `
-                    <span
-                        class="color-producto color-${color}"
-                        title="${color}"
-                    ></span>
-                `).join("")}
-
-            </div>
-        ` : ""}
-
-        <button
-            class="flecha flecha-izquierda"
-            onclick="cambiarImagen(this, -1)"
-        >
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-        <button
-            class="flecha flecha-derecha"
-            onclick="cambiarImagen(this, 1)"
-        >
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
-
-        <div
-            class="imagenes-producto-data"
-            data-imagenes='${JSON.stringify(producto.imagenes)}'
-        >
-        </div>
-
-    </div>
+                <img
+                    src="${producto.imagenes[0]}"
+                    alt="${producto.nombre}"
+                    class="imagen-producto"
+                >
 
 
-    <div class="producto-datos">
+                ${producto.colores ? `
 
-        <h2>
-            ${producto.nombre}
-        </h2>
+                    <div class="colores-producto">
 
-        <p>
-            ${producto.detalles}
-        </p>
+                        ${producto.colores.map(color => `
 
-        <div class="producto-precio">
-            $${producto.precio.toFixed(2)}
-        </div>
+                            <span
+                                class="color-producto color-${color}"
+                                title="${color}"
+                            ></span>
 
-    </div>
+                        `).join("")}
 
-`;
+                    </div>
 
-<button
-    class="flecha flecha-izquierda"
-    onclick="cambiarImagen(this, -1)"
->
-    <i class="fa-solid fa-chevron-left"></i>
-</button>
+                ` : ""}
 
-<button
-    class="flecha flecha-derecha"
-    onclick="cambiarImagen(this, 1)"
->
-    <i class="fa-solid fa-chevron-right"></i>
-</button>
 
+                <button
+                    class="flecha flecha-izquierda"
+                    onclick="cambiarImagen(this, -1)"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+
+                <button
+                    class="flecha flecha-derecha"
+                    onclick="cambiarImagen(this, 1)"
+                >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
 
 
                 <div
@@ -128,27 +97,32 @@ tarjeta.innerHTML = `
 
 }
 
+
 function cambiarImagen(boton, direccion) {
 
     const contenedor =
         boton.closest(".producto-imagenes");
 
+
     const imagenActual =
         contenedor.querySelector(".imagen-producto");
 
+
     const datos =
         contenedor.querySelector(".imagenes-producto-data");
+
 
     const imagenes =
         JSON.parse(datos.dataset.imagenes);
 
 
-    // Evitar hacer otra transición mientras
+    // Evitar otra transición mientras
     // la anterior todavía está funcionando.
 
     if (contenedor.dataset.animando === "true") {
         return;
     }
+
 
     contenedor.dataset.animando = "true";
 
@@ -166,16 +140,21 @@ function cambiarImagen(boton, direccion) {
 
 
     if (nuevoIndice < 0) {
-        nuevoIndice = imagenes.length - 1;
+
+        nuevoIndice =
+            imagenes.length - 1;
+
     }
 
 
     if (nuevoIndice >= imagenes.length) {
+
         nuevoIndice = 0;
+
     }
 
 
-    // Crear la segunda imagen
+    // Crear nueva imagen
 
     const imagenNueva =
         document.createElement("img");
@@ -184,24 +163,22 @@ function cambiarImagen(boton, direccion) {
     imagenNueva.src =
         imagenes[nuevoIndice];
 
+
     imagenNueva.alt =
         imagenActual.alt;
+
 
     imagenNueva.classList.add("imagen-producto");
 
 
-    // Posición inicial de la nueva imagen
+    // Posición inicial
 
     if (direccion === 1) {
-
-        // Siguiente → entra desde la derecha
 
         imagenNueva.style.transform =
             "translateX(100%)";
 
     } else {
-
-        // Anterior → entra desde la izquierda
 
         imagenNueva.style.transform =
             "translateX(-100%)";
@@ -209,7 +186,7 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    // La nueva imagen se coloca encima
+    // Colocar nueva imagen
 
     contenedor.appendChild(imagenNueva);
 
@@ -220,27 +197,22 @@ function cambiarImagen(boton, direccion) {
     imagenNueva.offsetWidth;
 
 
-    // Mover ambas imágenes
+    // Ejecutar animación
 
     requestAnimationFrame(() => {
 
         if (direccion === 1) {
-
-            // Imagen actual sale a la izquierda
 
             imagenActual.style.transform =
                 "translateX(-100%)";
 
         } else {
 
-            // Imagen actual sale a la derecha
-
             imagenActual.style.transform =
                 "translateX(100%)";
+
         }
 
-
-        // Imagen nueva entra al centro
 
         imagenNueva.style.transform =
             "translateX(0)";
@@ -248,15 +220,13 @@ function cambiarImagen(boton, direccion) {
     });
 
 
-    // Cuando termina la animación
+    // Finalizar animación
 
     setTimeout(() => {
 
         imagenNueva.dataset.indice =
             nuevoIndice;
 
-
-        // Eliminar la imagen anterior
 
         imagenActual.remove();
 
@@ -267,5 +237,8 @@ function cambiarImagen(boton, direccion) {
     }, 350);
 
 }
+
+
+// Mostrar productos
 
 mostrarProductos(productos);
