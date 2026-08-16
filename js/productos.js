@@ -136,7 +136,7 @@ const productos = [
 
         colores: ["verde"],
         imagenes: [
-            "../img/009/001.jpg"
+            "../img/009/001.jpeg"
         ]
     },{
         id: 10,
@@ -149,7 +149,21 @@ const productos = [
 
         colores: ["verde_oliva"],
         imagenes: [
-            "../img/010/001.jpg"
+            "../img/010/001.jpeg"
+        ]
+    },{
+        id: 11,
+
+        nombre: "Guantes Tácticos Cobra Medio Dedo",
+
+        categoria: "otros",
+
+        precio: 10.00,
+
+        colores: ["verde", "negro"],
+        imagenes: [
+            "../img/011/001.jpeg",
+            "../img/011/002.jpeg",
         ]
     }
 
