@@ -75,7 +75,6 @@ function mostrarProductos(listaProductos) {
 
 }
 
-
 function cambiarImagen(boton, direccion) {
 
     const contenedor =
@@ -98,29 +97,106 @@ function cambiarImagen(boton, direccion) {
         parseInt(imagen.dataset.indice || "0");
 
 
+    // Evitar múltiples animaciones al mismo tiempo
+    if (imagen.dataset.animando === "true") {
+        return;
+    }
+
+
+    imagen.dataset.animando = "true";
+
+
+    // Calcular siguiente imagen
     indice += direccion;
 
 
     if (indice < 0) {
-
         indice = imagenes.length - 1;
-
     }
 
 
     if (indice >= imagenes.length) {
-
         indice = 0;
-
     }
 
 
-    imagen.src =
-        imagenes[indice];
+    /*
+       DIRECCIÓN DE LA ANIMACIÓN
+
+       Siguiente:
+       la imagen sale hacia la izquierda.
+
+       Anterior:
+       la imagen sale hacia la derecha.
+    */
+
+    const salida =
+        direccion === 1
+            ? "-100%"
+            : "100%";
 
 
-    imagen.dataset.indice =
-        indice;
+    const entrada =
+        direccion === 1
+            ? "100%"
+            : "-100%";
+
+
+    // Animar imagen actual hacia afuera
+    imagen.style.transform =
+        `translateX(${salida})`;
+
+
+    setTimeout(() => {
+
+        // Cambiar imagen
+        imagen.src =
+            imagenes[indice];
+
+
+        imagen.dataset.indice =
+            indice;
+
+
+        /*
+           Colocamos instantáneamente
+           la nueva imagen al otro lado.
+        */
+
+        imagen.style.transition =
+            "none";
+
+        imagen.style.transform =
+            `translateX(${entrada})`;
+
+
+        /*
+           Forzamos al navegador a reconocer
+           la nueva posición antes de animarla.
+        */
+
+        imagen.offsetHeight;
+
+
+        // Activar nuevamente la transición
+        imagen.style.transition =
+            "transform 0.35s ease";
+
+
+        // Llevar la nueva imagen al centro
+        imagen.style.transform =
+            "translateX(0)";
+
+
+    }, 350);
+
+
+    setTimeout(() => {
+
+        imagen.dataset.animando =
+            "false";
+
+    }, 700);
 
 }
 
