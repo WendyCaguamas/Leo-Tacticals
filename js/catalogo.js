@@ -42,13 +42,8 @@ ${producto.colores ? `
         ${producto.colores.map(color => {
 
             const coloresCSS = {
-                rojo: "#e53935",
-                azul: "#2196f3",
                 verde: "#43a047",
-                amarillo: "#fdd835",
-                naranja: "#ff9800",
-                morado: "#9c27b0",
-                rosa: "#e91e63",
+                verde_oliva: "#636b2f",
                 blanco: "#ffffff",
                 negro: "#111111",
                 gris: "#757575",
