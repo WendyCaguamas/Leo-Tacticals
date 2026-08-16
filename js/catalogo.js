@@ -12,26 +12,69 @@ function mostrarProductos(listaProductos) {
 
         tarjeta.classList.add("producto-catalogo");
 
+tarjeta.innerHTML = `
 
-        tarjeta.innerHTML = `
+    <div class="producto-imagenes">
 
-          ${producto.colores ? `
-    <div class="colores-producto">
-        ${producto.colores.map(color => `
-            <span
-                class="color-producto color-${color}"
-                title="${color}"
-            ></span>
-        `).join("")}
+        <img
+            src="${producto.imagenes[0]}"
+            alt="${producto.nombre}"
+            class="imagen-producto"
+        >
+
+        ${producto.colores ? `
+            <div class="colores-producto">
+
+                ${producto.colores.map(color => `
+                    <span
+                        class="color-producto color-${color}"
+                        title="${color}"
+                    ></span>
+                `).join("")}
+
+            </div>
+        ` : ""}
+
+        <button
+            class="flecha flecha-izquierda"
+            onclick="cambiarImagen(this, -1)"
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button
+            class="flecha flecha-derecha"
+            onclick="cambiarImagen(this, 1)"
+        >
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div
+            class="imagenes-producto-data"
+            data-imagenes='${JSON.stringify(producto.imagenes)}'
+        >
+        </div>
+
     </div>
-` : ""}
-            <div class="producto-imagenes">
 
-                <img
-                    src="${producto.imagenes[0]}"
-                    alt="${producto.nombre}"
-                    class="imagen-producto"
-                >
+
+    <div class="producto-datos">
+
+        <h2>
+            ${producto.nombre}
+        </h2>
+
+        <p>
+            ${producto.detalles}
+        </p>
+
+        <div class="producto-precio">
+            $${producto.precio.toFixed(2)}
+        </div>
+
+    </div>
+
+`;
 
 <button
     class="flecha flecha-izquierda"
