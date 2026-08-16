@@ -122,7 +122,7 @@ const productos = [
 
         colores: ["verde"],
         imagenes: [
-            "../img/008/001.jpeg",
+            "../img/008/001.jpg",
             "../img/008/002.jpeg"
         ]
     }
