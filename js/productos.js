@@ -128,7 +128,7 @@ const productos = [
     },{
         id: 9,
 
-        nombre: "Cinturón Táctico 5.11",
+        nombre: "Cinturón 5.11 Hebilla Metálica",
 
         categoria: "otros",
 
@@ -136,7 +136,20 @@ const productos = [
 
         colores: ["verde"],
         imagenes: [
-            "../img/008/001.jpg"
+            "../img/009/001.jpg"
+        ]
+    },{
+        id: 10,
+
+        nombre: "Cinturón Militar 5.11",
+
+        categoria: "otros",
+
+        precio: 10.00,
+
+        colores: ["verde-oliva"],
+        imagenes: [
+            "../img/010/001.jpg"
         ]
     }
 
