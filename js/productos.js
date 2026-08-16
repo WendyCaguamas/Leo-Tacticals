@@ -71,16 +71,17 @@ const productos = [
     {
         id: 5,
 
-        nombre: "Linterna Táctica",
+        nombre: "Bastón Retráctil ",
 
         categoria: "otros",
 
         precio: 24.99,
 
-        detalles: "Linterna compacta de alta resistencia.",
+        detalles: "Bastón de defensa personal",
 
         imagenes: [
-            "../img/003/001.jpg"
+            "../img/005/001.jpeg",
+            "../img/005/002.jpeg"
         ]
     }
 
