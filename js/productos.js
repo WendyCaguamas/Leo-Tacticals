@@ -46,7 +46,8 @@ const productos = [
         detalles: "Linterna compacta de alta resistencia.",
 
         imagenes: [
-            "../img/003/001.jpg"
+            "../img/003/001.jpeg",
+            "../img/003/002.jpeg"
         ]
     },
 
