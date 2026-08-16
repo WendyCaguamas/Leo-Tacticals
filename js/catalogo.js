@@ -35,24 +35,39 @@ function mostrarProductos(listaProductos) {
                     data-indice="0"
                 >
 
+${producto.colores ? `
 
-                ${producto.colores ? `
+    <div class="colores-producto">
 
-                    <div class="colores-producto">
+        ${producto.colores.map(color => {
 
-                        ${producto.colores.map(color => `
+            const coloresCSS = {
+                rojo: "#e53935",
+                azul: "#2196f3",
+                verde: "#43a047",
+                amarillo: "#fdd835",
+                naranja: "#ff9800",
+                morado: "#9c27b0",
+                rosa: "#e91e63",
+                blanco: "#ffffff",
+                negro: "#111111",
+                gris: "#757575",
+                marron: "#795548"
+            };
 
-                            <span
-                                class="color-producto"
-                                title="${color}"
-                                style="background-color: ${color};"
-                            ></span>
+            return `
+                <span
+                    class="color-producto"
+                    title="${color}"
+                    style="background-color: ${coloresCSS[color] || color};"
+                ></span>
+            `;
 
-                        `).join("")}
+        }).join("")}
 
-                    </div>
+    </div>
 
-                ` : ""}
+` : ""}
 
 
                 <button
