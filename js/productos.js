@@ -7,7 +7,7 @@ const productos = [
 
         categoria: "correas",
 
-        precio: 29.99,
+        precio: 20.00,
 
         colores: ["negro"],
 
@@ -24,7 +24,7 @@ const productos = [
 
         categoria: "equipamento",
 
-        precio: 29.99,
+        precio: 30.00,
 
         colores: ["negro"],
 
@@ -56,9 +56,9 @@ const productos = [
 
         categoria: "otros",
 
-        precio: 24.99,
+        precio: 20.00,
 
-        detalles: "Taser de descarga electrica de defensa personal",
+        //detalles: "Taser de defensa personal",
 
         imagenes: [
             "../img/004/001.jpeg",
@@ -67,13 +67,13 @@ const productos = [
     },{
         id: 5,
 
-        nombre: "Bastón Retráctil ",
+        nombre: "Tolete Retráctil de Policarbonato",
 
         categoria: "otros",
 
-        precio: 24.99,
+        precio: 15.00,
 
-        detalles: "Bastón de defensa personal",
+        //detalles: "Bastón de defensa personal",
 
         imagenes: [
             "../img/005/001.jpeg",
@@ -86,9 +86,9 @@ const productos = [
 
         categoria: "otros",
 
-        precio: 24.99,
+        precio: 15.00,
 
-        detalles: "Portador de Bastón de defensa para correa",
+        //detalles: "Portador de Bastón de defensa para correa",
 
         imagenes: [
             "../img/006/001.jpeg",
@@ -98,18 +98,32 @@ const productos = [
     },{
         id: 7,
 
-        nombre: "Correa",
+        nombre: "Cinturón Táctico 5.11 Nylon",
 
         categoria: "otros",
 
-        precio: 24.99,
+        precio: 10.00,
 
-        detalles: "Disponible",
+        //detalles: "Disponible",
 
         colores: ["verde", "negro"],
         imagenes: [
             "../img/007/001.jpeg",
             "../img/007/002.jpeg"
+        ]
+    },{
+        id: 8,
+
+        nombre: "Cinturón Hebilla Liberación Rápida",
+
+        categoria: "otros",
+
+        precio: 10.00,
+
+        colores: ["verde"],
+        imagenes: [
+            "../img/008/001.jpeg",
+            "../img/008/002.jpeg"
         ]
     }
 
