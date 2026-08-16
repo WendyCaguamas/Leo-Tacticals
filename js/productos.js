@@ -20,13 +20,13 @@ const productos = [
     {
         id: 2,
 
-        nombre: "Mochila Táctica",
+        nombre: "Cinturón Táctico",
 
         categoria: "equipamento",
 
         precio: 39.99,
 
-        detalles: "Mochila táctica resistente para uso diario.",
+        detalles: "Cinturón Táctico para uso diario.",
 
         imagenes: [
             "../img/002/001.jpeg",
@@ -37,13 +37,13 @@ const productos = [
     {
         id: 3,
 
-        nombre: "Linterna Táctica",
+        nombre: "Gas Pimienta",
 
         categoria: "otros",
 
         precio: 24.99,
 
-        detalles: "Linterna compacta de alta resistencia.",
+        detalles: "Gas Pimienta de defensa personal.",
 
         imagenes: [
             "../img/003/001.jpeg",
@@ -54,16 +54,18 @@ const productos = [
     {
         id: 4,
 
-        nombre: "Linterna Táctica",
+        nombre: "Taser Electrico Paralizador",
 
         categoria: "otros",
 
         precio: 24.99,
 
-        detalles: "Linterna compacta de alta resistencia.",
+        detalles: "Taser de descarga electrica de defensa personal",
 
         imagenes: [
-            "../img/003/001.jpg"
+            "../img/004/001.jpeg",
+            "../img/004/002.jpeg",
+            "../img/004/003.jpeg"
         ]
     },
 
