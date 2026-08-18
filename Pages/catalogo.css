@@ -249,10 +249,6 @@
 
     z-index: 10;
 
-    /*
-       Los círculos no interfieren con
-       las flechas ni con el hover.
-    */
     pointer-events: none;
 }
 
@@ -273,24 +269,58 @@
 
     box-sizing: border-box;
 
-    /*
-       El color de fondo será asignado
-       por JavaScript mediante backgroundColor.
-    */
-
     border: 2px solid var(--blanco);
 
     box-shadow:
         0 2px 5px rgba(0, 0, 0, 0.6);
 
-    /*
-       Evita animaciones o transformaciones
-       sobre los círculos.
-    */
-
     transition: none;
 
     transform: none;
+}
+
+
+/* =========================================
+   COLORES
+========================================= */
+
+.color-verde {
+    background: #2e8b57;
+}
+
+
+.color-azul {
+    background: #2563eb;
+}
+
+
+.color-negro {
+    background: #111111;
+}
+
+
+.color-rojo {
+    background: #c62828;
+}
+
+
+.color-blanco {
+    background: #ffffff;
+}
+
+
+.color-amarillo {
+    background: #facc15;
+}
+
+
+.color-naranja {
+    background: #f97316;
+}
+
+
+.color-morado {
+    background: #7e22ce;
 }
 
 
@@ -389,191 +419,6 @@
 
 
 /* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 900px) {
-
-    .catalogo-pagina {
-        padding: 50px 30px;
-    }
-
-
-    .catalogo-layout {
-        grid-template-columns: 200px 1fr;
-
-        gap: 30px;
-    }
-
-
-    .categorias {
-        padding-right: 20px;
-    }
-
-
-    .productos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-
-/* =========================================
-   MÓVIL
-========================================= */
-
-@media (max-width: 700px) {
-
-    .catalogo-pagina {
-        padding: 40px 20px;
-    }
-
-
-    .catalogo-layout {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 35px;
-    }
-
-
-    /* ==============================
-       CATEGORÍAS
-    ============================== */
-
-    .categorias {
-        border-right: none;
-
-        border-bottom: 1px solid var(--borde);
-
-        padding-right: 0;
-
-        padding-bottom: 25px;
-    }
-
-
-    .categorias h2 {
-        text-align: center;
-
-        margin-bottom: 20px;
-    }
-
-
-    .categorias-lista {
-        gap: 5px;
-    }
-
-
-    .categoria {
-        text-align: center;
-
-        border-left: none;
-
-        border-bottom: 3px solid transparent;
-    }
-
-
-    .categoria:hover {
-        border-left-color: transparent;
-
-        border-bottom-color: var(--naranja);
-    }
-
-
-    .categoria.activa {
-        border-left-color: transparent;
-
-        border-bottom-color: var(--naranja);
-    }
-
-
-    /* ==============================
-       PRODUCTOS
-    ============================== */
-
-    .productos-catalogo {
-        min-height: 400px;
-    }
-
-
-    .productos-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .producto-imagenes {
-        height: 320px;
-    }
-
-
-    .catalogo-titulo {
-        text-align: center;
-    }
-
-
-    .catalogo-titulo h1 {
-        font-size: 28px;
-    }
-
-}
-
-
-/* =========================================
-   TELÉFONOS PEQUEÑOS
-========================================= */
-
-@media (max-width: 450px) {
-
-    .catalogo-pagina {
-        padding: 35px 15px;
-    }
-
-
-    .catalogo-titulo h1 {
-        font-size: 25px;
-    }
-
-
-    .catalogo-titulo p {
-        font-size: 14px;
-    }
-
-
-    .categorias h2 {
-        font-size: 20px;
-    }
-
-
-    .producto-imagenes {
-        height: 280px;
-    }
-
-
-    /* ==============================
-       CÍRCULOS DE COLOR
-    ============================== */
-
-    .colores-producto {
-        top: 10px;
-
-        left: 10px;
-
-        gap: 5px;
-    }
-
-
-    .color-producto {
-        width: 18px;
-        height: 18px;
-
-        min-width: 18px;
-        min-height: 18px;
-    }
-
-}
-
-/* =========================================
    PANEL DE PRODUCTO
 ========================================= */
 
@@ -599,10 +444,752 @@
 }
 
 
-/* PANEL ABIERTO */
+/* =========================================
+   PANEL ABIERTO
+========================================= */
 
 .producto-panel.abierto {
 
     transform: translateY(0);
+
+}
+
+
+/* =========================================
+   BOTÓN ATRÁS
+========================================= */
+
+.producto-panel-atras {
+
+    position: sticky;
+
+    top: 20px;
+
+    margin: 20px 6%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 18px;
+
+    background: var(--negro-secundario);
+
+    color: var(--blanco);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    transition: 0.25s ease;
+}
+
+
+.producto-panel-atras:hover {
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    border-color: var(--naranja);
+
+}
+
+
+/* =========================================
+   CONTENIDO DEL PANEL
+========================================= */
+
+.producto-panel-contenido {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 20px auto 80px;
+
+    padding: 0 6%;
+}
+
+
+/* =========================================
+   DETALLE DEL PRODUCTO
+========================================= */
+
+.producto-detalle {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   IMAGEN GRANDE
+========================================= */
+
+.producto-detalle-imagenes {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #101010;
+
+    border-radius: 5px;
+}
+
+
+.producto-detalle-imagen {
+
+    width: 100%;
+
+    height: 600px;
+
+    object-fit: cover;
+
+    display: block;
+
+    background: var(--negro-tarjeta);
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL PRODUCTO
+========================================= */
+
+.producto-detalle-info {
+
+    padding-top: 20px;
+}
+
+
+.producto-detalle-info h1 {
+
+    color: var(--naranja);
+
+    font-size: 42px;
+
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    margin-bottom: 25px;
+}
+
+
+.producto-detalle-info p {
+
+    color: var(--blanco);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+.producto-detalle-precio {
+
+    color: var(--naranja-claro);
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+   COLORES DEL PRODUCTO EN EL PANEL
+========================================= */
+
+.producto-detalle-colores {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+}
+
+
+.producto-detalle-colores .color-producto {
+
+    width: 24px;
+    height: 24px;
+
+    min-width: 24px;
+    min-height: 24px;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    border: 1px solid var(--blanco);
+}
+
+
+/* =========================================
+   CANTIDAD
+========================================= */
+
+.producto-cantidad {
+
+    display: flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+
+.producto-cantidad button {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    background: var(--negro-secundario);
+
+    color: var(--blanco);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.producto-cantidad button:hover {
+
+    background: var(--naranja);
+
+    color: var(--negro);
+}
+
+
+.producto-cantidad span {
+
+    width: 55px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--negro-tarjeta);
+
+    color: var(--blanco);
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   BOTONES DE COMPRA
+========================================= */
+
+.producto-acciones {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.producto-boton {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 5px;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+/* AGREGAR AL CARRITO */
+
+.boton-carrito {
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    border: 1px solid var(--naranja);
+}
+
+
+.boton-carrito:hover {
+
+    background: var(--naranja-claro);
+
+    border-color: var(--naranja-claro);
+}
+
+
+/* COMPRAR AHORA */
+
+.boton-comprar {
+
+    background: transparent;
+
+    color: var(--blanco);
+
+    border: 1px solid var(--naranja);
+}
+
+
+.boton-comprar:hover {
+
+    background: var(--naranja);
+
+    color: var(--negro);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .catalogo-pagina {
+
+        padding: 50px 30px;
+
+    }
+
+
+    .catalogo-layout {
+
+        grid-template-columns: 200px 1fr;
+
+        gap: 30px;
+
+    }
+
+
+    .categorias {
+
+        padding-right: 20px;
+
+    }
+
+
+    .productos-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+
+    /* PANEL */
+
+    .producto-detalle {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+    }
+
+
+    .producto-detalle-imagen {
+
+        height: 500px;
+
+    }
+
+
+    .producto-detalle-info {
+
+        padding-top: 0;
+
+    }
+
+}
+
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 700px) {
+
+    .catalogo-pagina {
+
+        padding: 40px 20px;
+
+    }
+
+
+    .catalogo-layout {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 35px;
+
+    }
+
+
+    /* ==============================
+       CATEGORÍAS
+    ============================== */
+
+    .categorias {
+
+        border-right: none;
+
+        border-bottom: 1px solid var(--borde);
+
+        padding-right: 0;
+
+        padding-bottom: 25px;
+
+    }
+
+
+    .categorias h2 {
+
+        text-align: center;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .categorias-lista {
+
+        gap: 5px;
+
+    }
+
+
+    .categoria {
+
+        text-align: center;
+
+        border-left: none;
+
+        border-bottom: 3px solid transparent;
+
+    }
+
+
+    .categoria:hover {
+
+        border-left-color: transparent;
+
+        border-bottom-color: var(--naranja);
+
+    }
+
+
+    .categoria.activa {
+
+        border-left-color: transparent;
+
+        border-bottom-color: var(--naranja);
+
+    }
+
+
+    /* ==============================
+       PRODUCTOS
+    ============================== */
+
+    .productos-catalogo {
+
+        min-height: 400px;
+
+    }
+
+
+    .productos-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .producto-imagenes {
+
+        height: 320px;
+
+        aspect-ratio: auto;
+
+    }
+
+
+    .catalogo-titulo {
+
+        text-align: center;
+
+    }
+
+
+    .catalogo-titulo h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    /* ==============================
+       PANEL
+    ============================== */
+
+    .producto-panel-atras {
+
+        margin: 15px 20px;
+
+        top: 15px;
+
+    }
+
+
+    .producto-panel-contenido {
+
+        padding: 0 20px;
+
+        margin-bottom: 50px;
+
+    }
+
+
+    .producto-detalle {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+
+    .producto-detalle-imagen {
+
+        height: 350px;
+
+    }
+
+
+    .producto-detalle-info h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .producto-detalle-info p {
+
+        font-size: 15px;
+
+    }
+
+
+    .producto-detalle-precio {
+
+        font-size: 26px;
+
+    }
+
+}
+
+
+/* =========================================
+   TELÉFONOS PEQUEÑOS
+========================================= */
+
+@media (max-width: 450px) {
+
+    .catalogo-pagina {
+
+        padding: 35px 15px;
+
+    }
+
+
+    .catalogo-titulo h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .catalogo-titulo p {
+
+        font-size: 14px;
+
+    }
+
+
+    .categorias h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .producto-imagenes {
+
+        height: 280px;
+
+    }
+
+
+    /* ==============================
+       CÍRCULOS DE COLOR
+    ============================== */
+
+    .colores-producto {
+
+        top: 10px;
+
+        left: 10px;
+
+        gap: 5px;
+
+    }
+
+
+    .color-producto {
+
+        width: 18px;
+
+        height: 18px;
+
+        min-width: 18px;
+
+        min-height: 18px;
+
+    }
+
+
+    /* ==============================
+       PANEL
+    ============================== */
+
+    .producto-panel-atras {
+
+        margin: 12px 15px;
+
+        padding: 9px 14px;
+
+        font-size: 14px;
+
+    }
+
+
+    .producto-panel-contenido {
+
+        padding: 0 15px;
+
+    }
+
+
+    .producto-detalle-imagen {
+
+        height: 280px;
+
+    }
+
+
+    .producto-detalle-info h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .producto-detalle-info p {
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .producto-detalle-precio {
+
+        font-size: 24px;
+
+    }
+
+
+    .producto-cantidad button {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .producto-cantidad span {
+
+        width: 50px;
+
+        height: 40px;
+
+    }
+
+
+    .producto-boton {
+
+        padding: 13px;
+
+        font-size: 14px;
+
+    }
 
 }
