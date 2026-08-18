@@ -36,12 +36,21 @@
 
     <!-- =================================
          CSS DEL CATÁLOGO
-         Reutilizamos el mismo diseño
     ================================== -->
 
     <link
         rel="stylesheet"
         href="catalogo.css"
+    >
+
+
+    <!-- =================================
+         CSS DEL CARRITO
+    ================================== -->
+
+    <link
+        rel="stylesheet"
+        href="carrito.css"
     >
 
 
@@ -66,7 +75,10 @@
 
     <header>
 
-        <!-- Logo -->
+
+        <!-- =================================
+             LOGO
+        ================================== -->
 
         <div class="logo">
 
@@ -82,28 +94,45 @@
         </div>
 
 
-        <!-- Navegación -->
+        <!-- =================================
+             NAVEGACIÓN
+        ================================== -->
 
-       <nav>
+        <nav>
 
-    <a href="../index.html">
-        <i class="fa-solid fa-house"></i>
-        <span>Inicio</span>
-    </a>
+            <a href="../index.html">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Inicio
+                </span>
+
+            </a>
 
 
-    <a href="catalogo.html">
-        <i class="fa-solid fa-box"></i>
-        <span>Catálogo</span>
-    </a>
+            <a href="catalogo.html">
+
+                <i class="fa-solid fa-box"></i>
+
+                <span>
+                    Catálogo
+                </span>
+
+            </a>
 
 
-    <a href="carrito.html">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span>Carrito</span>
-    </a>
+            <a href="carrito.html">
 
-</nav>
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>
+                    Carrito
+                </span>
+
+            </a>
+
+        </nav>
 
     </header>
 
@@ -117,30 +146,36 @@
 
 
         <!-- =================================
-             CARRITO
+             PÁGINA DEL CARRITO
         ================================== -->
 
-        <section class="catalogo-pagina">
+        <section class="carrito-pagina">
 
 
-            <div class="productos-catalogo">
+            <!-- =================================
+                 CONTENEDOR PRINCIPAL
+            ================================== -->
+
+            <div class="carrito-contenedor">
 
 
                 <!-- =================================
                      TÍTULO
                 ================================== -->
 
-                <div class="catalogo-titulo">
+                <div class="carrito-titulo">
 
                     <h1>
                         CARRITO
                     </h1>
+
 
                     <p>
                         Revisa los productos que deseas comprar.
                     </p>
 
                 </div>
+
 
 
                 <!-- =================================
@@ -153,19 +188,26 @@
                 >
 
                     <!--
+
                         carrito.js generará
                         los productos aquí.
+
                     -->
 
                 </div>
 
 
+
                 <!-- =================================
-                     RESUMEN
+                     RESUMEN DEL CARRITO
                 ================================== -->
 
                 <div class="carrito-resumen">
 
+
+                    <!-- =================================
+                         TOTAL
+                    ================================== -->
 
                     <div class="carrito-total">
 
@@ -173,15 +215,19 @@
                             TOTAL
                         </span>
 
+
                         <strong id="carrito-total">
+
                             $0.00
+
                         </strong>
 
                     </div>
 
 
+
                     <!-- =================================
-                         BOTÓN DE PEDIDO
+                         BOTÓN WHATSAPP
                     ================================== -->
 
                     <button
@@ -190,6 +236,7 @@
                     >
 
                         <i class="fa-brands fa-whatsapp"></i>
+
 
                         Enviar pedido por WhatsApp
 
