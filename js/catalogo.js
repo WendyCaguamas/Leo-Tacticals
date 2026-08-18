@@ -199,10 +199,6 @@ botonesCategorias.forEach(boton => {
         evento.preventDefault();
 
 
-        /* ==============================
-           OBTENER CATEGORÍA
-        ============================== */
-
         const categoria =
             boton.dataset.categoria;
 
@@ -222,7 +218,7 @@ botonesCategorias.forEach(boton => {
 
 
         /* ==============================
-           FILTRAR PRODUCTOS
+           MOSTRAR PRODUCTOS
         ============================== */
 
         if (categoria === "todos") {
@@ -290,7 +286,7 @@ function cambiarImagen(boton, direccion) {
 
 
     /* ==============================
-       CALCULAR NUEVO ÍNDICE
+       NUEVO ÍNDICE
     ============================== */
 
     let nuevoIndice =
@@ -349,7 +345,7 @@ function cambiarImagen(boton, direccion) {
 
 
     /* ==============================
-       COLOCAR NUEVA IMAGEN
+       AÑADIR IMAGEN
     ============================== */
 
     contenedor.appendChild(imagenNueva);
@@ -363,7 +359,7 @@ function cambiarImagen(boton, direccion) {
 
 
     /* ==============================
-       EJECUTAR ANIMACIÓN
+       ANIMACIÓN
     ============================== */
 
     requestAnimationFrame(() => {
@@ -388,7 +384,7 @@ function cambiarImagen(boton, direccion) {
 
 
     /* ==============================
-       FINALIZAR ANIMACIÓN
+       FINALIZAR
     ============================== */
 
     setTimeout(() => {
@@ -407,15 +403,12 @@ function cambiarImagen(boton, direccion) {
 
 }
 
+
 /* =========================================
    ABRIR PANEL DEL PRODUCTO
 ========================================= */
 
 function abrirProducto(id) {
-
-    /* ==============================
-       BUSCAR PRODUCTO
-    ============================== */
 
     const producto =
         productos.find(producto => producto.id === id);
@@ -426,10 +419,6 @@ function abrirProducto(id) {
     }
 
 
-    /* ==============================
-       OBTENER PANEL
-    ============================== */
-
     const panel =
         document.getElementById("producto-panel");
 
@@ -438,14 +427,17 @@ function abrirProducto(id) {
         document.getElementById("producto-panel-contenido");
 
 
-    /* ==============================
-       CREAR SELECTOR DE COLORES
-    ============================== */
+    /* =====================================
+       SELECTOR DE COLORES
+    ===================================== */
 
     let selectorColores = "";
 
 
-    if (producto.colores && producto.colores.length > 0) {
+    if (
+        producto.colores &&
+        producto.colores.length > 0
+    ) {
 
         const coloresCSS = {
 
@@ -463,7 +455,13 @@ function abrirProducto(id) {
 
             gris: "#757575",
 
-            marron: "#795548"
+            marron: "#795548",
+
+            amarillo: "#facc15",
+
+            naranja: "#f97316",
+
+            morado: "#7e22ce"
 
         };
 
@@ -484,81 +482,77 @@ function abrirProducto(id) {
                     id="selector-colores"
                 >
 
-                    ${
-                        producto.colores.map((color, indice) => {
+                    ${producto.colores.map(color => {
 
-                            return `
+                        return `
 
-                                <div
-                                    class="opcion-color"
-                                    data-color="${color}"
-                                    data-cantidad="0"
-                                >
+                            <div
+                                class="opcion-color"
+                                data-color="${color}"
+                                data-cantidad="0"
+                            >
 
-                                    <div class="opcion-color-nombre">
+                                <div class="opcion-color-nombre">
 
-                                        <span
-                                            class="color-producto"
-                                            style="
-                                                background-color:
-                                                ${coloresCSS[color] || color};
-                                            "
-                                        ></span>
-
-
-                                        <span class="nombre-color">
-
-                                            ${color.replace("_", " ")}
-
-                                        </span>
-
-                                    </div>
+                                    <span
+                                        class="color-producto"
+                                        style="
+                                            background-color:
+                                            ${coloresCSS[color] || color};
+                                        "
+                                    ></span>
 
 
-                                    <div class="cantidad-color">
+                                    <span class="nombre-color">
 
-                                        <button
-                                            type="button"
-                                            onclick="cambiarCantidadColor('${color}', -1)"
-                                        >
-                                            −
-                                        </button>
+                                        ${color.replace("_", " ")}
 
-
-                                        <span
-                                            id="cantidad-color-${color}"
-                                        >
-                                            0
-                                        </span>
-
-
-                                        <button
-                                            type="button"
-                                            onclick="cambiarCantidadColor('${color}', 1)"
-                                        >
-                                            +
-                                        </button>
-
-                                    </div>
+                                    </span>
 
                                 </div>
 
-                            `;
 
-                        }).join("")
+                                <div class="cantidad-color">
 
-                    }
+                                    <button
+                                        type="button"
+                                        class="boton-color-menos"
+                                        onclick="cambiarCantidadColor('${color}', -1)"
+                                    >
+
+                                        −
+
+                                    </button>
+
+
+                                    <span
+                                        id="cantidad-color-${color}"
+                                    >
+
+                                        0
+
+                                    </span>
+
+
+                                    <button
+                                        type="button"
+                                        class="boton-color-mas"
+                                        onclick="cambiarCantidadColor('${color}', 1)"
+                                    >
+
+                                        +
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }).join("")}
 
                 </div>
-
-
-                <p class="producto-seleccion-ayuda">
-
-                    Asigna las unidades entre los colores disponibles.
-
-                    La suma no puede superar la cantidad total.
-
-                </p>
 
             </div>
 
@@ -567,14 +561,14 @@ function abrirProducto(id) {
     }
 
 
-    /* ==============================
-       CREAR CONTENIDO
-    ============================== */
+    /* =====================================
+       CONTENIDO DEL PANEL
+    ===================================== */
 
     contenido.innerHTML = `
 
         <!-- =================================
-             IMAGEN GRANDE
+             IMAGEN
         ================================== -->
 
         <div class="producto-panel-imagenes">
@@ -685,6 +679,7 @@ function abrirProducto(id) {
 
                         <button
                             type="button"
+                            id="boton-cantidad-mas"
                             onclick="cambiarCantidad(1)"
                         >
 
@@ -736,28 +731,33 @@ function abrirProducto(id) {
     `;
 
 
-    /* ==============================
-       GUARDAR PRODUCTO ACTUAL
-    ============================== */
+    /* =====================================
+       GUARDAR PRODUCTO
+    ===================================== */
 
     panel.dataset.productoId =
         producto.id;
 
 
-    /* ==============================
-       ABRIR PANEL
-    ============================== */
+    /* =====================================
+       ABRIR
+    ===================================== */
 
     panel.classList.add("abierto");
 
 
-    /* ==============================
-       BLOQUEAR SCROLL
-    ============================== */
+    document.body.style.overflow =
+        "hidden";
 
-    document.body.style.overflow = "hidden";
+
+    /* =====================================
+       ACTUALIZAR BOTONES
+    ===================================== */
+
+    actualizarBotonesColores();
 
 }
+
 
 /* =========================================
    CERRAR PANEL
@@ -778,18 +778,22 @@ function cerrarProducto() {
 
 
 /* =========================================
-   BOTÓN ATRÁS DEL PANEL
+   BOTÓN ATRÁS
 ========================================= */
 
 const botonAtras =
     document.getElementById("producto-panel-atras");
 
 
-botonAtras.addEventListener("click", () => {
+if (botonAtras) {
 
-    cerrarProducto();
+    botonAtras.addEventListener("click", () => {
 
-});
+        cerrarProducto();
+
+    });
+
+}
 
 
 /* =========================================
@@ -798,17 +802,9 @@ botonAtras.addEventListener("click", () => {
 
 function cambiarImagenPanel(direccion) {
 
-    /* ==============================
-       OBTENER PANEL
-    ============================== */
-
     const panel =
         document.getElementById("producto-panel");
 
-
-    /* ==============================
-       OBTENER PRODUCTO ACTUAL
-    ============================== */
 
     const id =
         parseInt(panel.dataset.productoId);
@@ -823,25 +819,13 @@ function cambiarImagenPanel(direccion) {
     }
 
 
-    /* ==============================
-       OBTENER IMAGEN
-    ============================== */
-
     const imagen =
         document.getElementById("imagen-panel");
 
 
-    /* ==============================
-       ÍNDICE ACTUAL
-    ============================== */
-
     let indice =
         parseInt(imagen.dataset.indice || "0");
 
-
-    /* ==============================
-       CALCULAR NUEVO ÍNDICE
-    ============================== */
 
     indice += direccion;
 
@@ -861,10 +845,6 @@ function cambiarImagenPanel(direccion) {
     }
 
 
-    /* ==============================
-       CAMBIAR IMAGEN
-    ============================== */
-
     imagen.src =
         producto.imagenes[indice];
 
@@ -882,54 +862,57 @@ function cambiarImagenPanel(direccion) {
 function cambiarCantidad(cambio) {
 
     const elemento =
-        document.getElementById("cantidad-producto");
+        document.getElementById(
+            "cantidad-producto"
+        );
+
+
+    if (!elemento) {
+        return;
+    }
 
 
     let cantidad =
         parseInt(elemento.textContent);
 
 
-    cantidad += cambio;
+    const nuevaCantidad =
+        cantidad + cambio;
 
 
     /* ==============================
        MÍNIMO: 1
     ============================== */
 
-    if (cantidad < 1) {
-
-        cantidad = 1;
-
+    if (nuevaCantidad < 1) {
+        return;
     }
 
+
+    /* ==============================
+       CAMBIAR CANTIDAD
+    ============================== */
 
     elemento.textContent =
-        cantidad;
+        nuevaCantidad;
 
 
     /* ==============================
-       ACTUALIZAR TOTAL DE COLORES
+       SI REDUJIMOS LA CANTIDAD
     ============================== */
 
-    const totalColores =
-        document.getElementById(
-            "cantidad-total-colores"
-        );
+    if (nuevaCantidad < cantidad) {
 
-
-    if (totalColores) {
-
-        totalColores.textContent =
-            cantidad;
+        ajustarColores(nuevaCantidad);
 
     }
 
 
     /* ==============================
-       AJUSTAR COLORES
+       ACTUALIZAR BOTONES
     ============================== */
 
-    ajustarColores(cantidad);
+    actualizarBotonesColores();
 
 }
 
@@ -959,74 +942,43 @@ function cambiarCantidadColor(color, cambio) {
     }
 
 
-    let cantidad =
+    let cantidadColor =
         parseInt(elemento.textContent);
 
 
-    const cantidadAnterior =
-        cantidad;
+    /* ==============================
+       NUEVA CANTIDAD
+    ============================== */
 
-
-    cantidad += cambio;
+    const nuevaCantidad =
+        cantidadColor + cambio;
 
 
     /* ==============================
-       NO PERMITIR MENOS DE 0
+       MÍNIMO: 0
     ============================== */
 
-    if (cantidad < 0) {
-
-        cantidad = 0;
-
+    if (nuevaCantidad < 0) {
+        return;
     }
 
 
     /* ==============================
-       CALCULAR TOTAL ASIGNADO
+       TOTAL ACTUAL ASIGNADO
     ============================== */
 
-    const filas =
-        document.querySelectorAll(
-            ".color-panel-fila"
-        );
-
-
-    let totalAsignado = 0;
-
-
-    filas.forEach(fila => {
-
-        const numero =
-            parseInt(
-                fila.querySelector(
-                    ".color-panel-cantidad span"
-                ).textContent
-            );
-
-
-        totalAsignado += numero;
-
-    });
+    const totalAsignado =
+        obtenerTotalColores();
 
 
     /* ==============================
-       CALCULAR NUEVO TOTAL
+       SI ESTAMOS AUMENTANDO
     ============================== */
 
-    const diferencia =
-        cantidad -
-        cantidadAnterior;
-
-
-    const nuevoTotal =
-        totalAsignado + diferencia;
-
-
-    /* ==============================
-       NO SUPERAR CANTIDAD TOTAL
-    ============================== */
-
-    if (nuevoTotal > cantidadTotal) {
+    if (
+        cambio > 0 &&
+        totalAsignado >= cantidadTotal
+    ) {
 
         return;
 
@@ -1034,58 +986,121 @@ function cambiarCantidadColor(color, cambio) {
 
 
     /* ==============================
-       GUARDAR CANTIDAD
+       GUARDAR
     ============================== */
 
     elemento.textContent =
-        cantidad;
+        nuevaCantidad;
 
 
     /* ==============================
-       ACTUALIZAR INDICADOR
+       ACTUALIZAR BOTONES
     ============================== */
 
-    actualizarTotalColores();
+    actualizarBotonesColores();
 
 }
 
 
 /* =========================================
-   ACTUALIZAR TOTAL DE COLORES
+   OBTENER TOTAL DE COLORES
 ========================================= */
 
-function actualizarTotalColores() {
+function obtenerTotalColores() {
 
-    const elemento =
-        document.getElementById(
-            "colores-asignados"
-        );
-
-
-    if (!elemento) {
-        return;
-    }
-
-
-    const cantidades =
+    const elementos =
         document.querySelectorAll(
-            ".color-panel-cantidad span"
+            ".cantidad-color span"
         );
 
 
     let total = 0;
 
 
-    cantidades.forEach(cantidad => {
+    elementos.forEach(elemento => {
 
         total +=
-            parseInt(cantidad.textContent);
+            parseInt(elemento.textContent) || 0;
 
     });
 
 
-    elemento.textContent =
-        total;
+    return total;
+
+}
+
+
+/* =========================================
+   ACTUALIZAR BOTONES DE COLORES
+========================================= */
+
+function actualizarBotonesColores() {
+
+    const cantidadElemento =
+        document.getElementById(
+            "cantidad-producto"
+        );
+
+
+    if (!cantidadElemento) {
+        return;
+    }
+
+
+    const cantidadTotal =
+        parseInt(
+            cantidadElemento.textContent
+        );
+
+
+    const totalAsignado =
+        obtenerTotalColores();
+
+
+    /* =====================================
+       BOTÓN + DE CANTIDAD TOTAL
+    ===================================== */
+
+    const botonCantidadMas =
+        document.getElementById(
+            "boton-cantidad-mas"
+        );
+
+
+    /*
+       La cantidad general puede seguir
+       aumentando porque todavía no
+       tenemos un límite de stock.
+    */
+
+    if (botonCantidadMas) {
+
+        botonCantidadMas.disabled = false;
+
+    }
+
+
+    /* =====================================
+       BOTONES + DE LOS COLORES
+    ===================================== */
+
+    const botonesMas =
+        document.querySelectorAll(
+            ".boton-color-mas"
+        );
+
+
+    botonesMas.forEach(boton => {
+
+        /*
+           Si todas las unidades ya están
+           distribuidas, bloquear +.
+        */
+
+        boton.disabled =
+            totalAsignado >= cantidadTotal;
+
+    });
 
 }
 
@@ -1096,41 +1111,23 @@ function actualizarTotalColores() {
 
 function ajustarColores(cantidadTotal) {
 
-    const filas =
+    const elementos =
         document.querySelectorAll(
-            ".color-panel-fila"
+            ".cantidad-color span"
         );
 
 
-    let totalAsignado = 0;
+    let totalAsignado =
+        obtenerTotalColores();
 
 
     /* ==============================
-       CALCULAR TOTAL ACTUAL
-    ============================== */
-
-    filas.forEach(fila => {
-
-        const cantidad =
-            parseInt(
-                fila.querySelector(
-                    ".color-panel-cantidad span"
-                ).textContent
-            );
-
-
-        totalAsignado += cantidad;
-
-    });
-
-
-    /* ==============================
-       SI NO EXCEDE, NO HACER NADA
+       SI NO HAY EXCESO
     ============================== */
 
     if (totalAsignado <= cantidadTotal) {
 
-        actualizarTotalColores();
+        actualizarBotonesColores();
 
         return;
 
@@ -1151,19 +1148,20 @@ function ajustarColores(cantidadTotal) {
     ============================== */
 
     for (
-        let i = filas.length - 1;
+        let i = elementos.length - 1;
         i >= 0 && exceso > 0;
         i--
     ) {
 
-        const elemento =
-            filas[i].querySelector(
-                ".color-panel-cantidad span"
+        let cantidad =
+            parseInt(
+                elementos[i].textContent
             );
 
 
-        let cantidad =
-            parseInt(elemento.textContent);
+        if (cantidad <= 0) {
+            continue;
+        }
 
 
         const reducir =
@@ -1181,17 +1179,13 @@ function ajustarColores(cantidadTotal) {
             reducir;
 
 
-        elemento.textContent =
+        elementos[i].textContent =
             cantidad;
 
     }
 
 
-    /* ==============================
-       ACTUALIZAR TOTAL
-    ============================== */
-
-    actualizarTotalColores();
+    actualizarBotonesColores();
 
 }
 
@@ -1211,10 +1205,6 @@ function agregarAlCarrito(id) {
     }
 
 
-    /* ==============================
-       OBTENER CANTIDAD TOTAL
-    ============================== */
-
     const cantidad =
         parseInt(
             document.getElementById(
@@ -1223,44 +1213,29 @@ function agregarAlCarrito(id) {
         );
 
 
-    /* ==============================
-       PRODUCTO CON COLORES
-    ============================== */
+    /* =====================================
+       PRODUCTOS CON COLOR
+    ===================================== */
 
     if (
         producto.colores &&
         producto.colores.length > 0
     ) {
 
-        const cantidades =
-            document.querySelectorAll(
-                ".color-panel-cantidad span"
-            );
+        const totalColores =
+            obtenerTotalColores();
 
 
-        let totalColores = 0;
-
-
-        cantidades.forEach(elemento => {
-
-            totalColores +=
-                parseInt(
-                    elemento.textContent
-                );
-
-        });
-
-
-        /* ==============================
-           OBLIGAR A ASIGNAR TODO
-        ============================== */
+        /*
+           Todavía debemos asegurarnos
+           de que todas las unidades tengan
+           un color antes de agregarlas.
+        */
 
         if (totalColores !== cantidad) {
 
             alert(
-                "Debes asignar las " +
-                cantidad +
-                " unidades entre los colores disponibles."
+                "Asigna todas las unidades a un color antes de continuar."
             );
 
             return;
@@ -1270,9 +1245,69 @@ function agregarAlCarrito(id) {
     }
 
 
-    /* ==============================
-       POR AHORA SOLO MOSTRAR MENSAJE
-    ============================== */
+    /* =====================================
+       PREPARAR DISTRIBUCIÓN
+    ===================================== */
+
+    let distribucionColores = [];
+
+
+    if (
+        producto.colores &&
+        producto.colores.length > 0
+    ) {
+
+        const opciones =
+            document.querySelectorAll(
+                ".opcion-color"
+            );
+
+
+        opciones.forEach(opcion => {
+
+            const color =
+                opcion.dataset.color;
+
+
+            const cantidadColor =
+                parseInt(
+                    opcion.querySelector(
+                        ".cantidad-color span"
+                    ).textContent
+                );
+
+
+            if (cantidadColor > 0) {
+
+                distribucionColores.push({
+
+                    color: color,
+
+                    cantidad: cantidadColor
+
+                });
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================
+       POR AHORA
+    ===================================== */
+
+    console.log({
+
+        producto: producto.nombre,
+
+        cantidad: cantidad,
+
+        colores: distribucionColores
+
+    });
+
 
     alert(
         producto.nombre +
