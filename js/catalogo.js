@@ -177,6 +177,68 @@ function mostrarProductos(listaProductos) {
 
 }
 
+/* =========================================
+   FILTRO DE CATEGORÍAS
+========================================= */
+
+const botonesCategorias =
+    document.querySelectorAll(".categoria");
+
+
+botonesCategorias.forEach(boton => {
+
+    boton.addEventListener("click", (evento) => {
+
+        evento.preventDefault();
+
+
+        /* ==============================
+           OBTENER CATEGORÍA
+        ============================== */
+
+        const categoria =
+            boton.dataset.categoria;
+
+
+        /* ==============================
+           CAMBIAR BOTÓN ACTIVO
+        ============================== */
+
+        botonesCategorias.forEach(botonCategoria => {
+
+            botonCategoria.classList.remove("activa");
+
+        });
+
+
+        boton.classList.add("activa");
+
+
+        /* ==============================
+           FILTRAR PRODUCTOS
+        ============================== */
+
+        if (categoria === "todos") {
+
+            mostrarProductos(productos);
+
+            return;
+
+        }
+
+
+        const productosFiltrados =
+            productos.filter(producto =>
+                producto.categoria === categoria
+            );
+
+
+        mostrarProductos(productosFiltrados);
+
+    });
+
+});
+
 
 /* =========================================
    CAMBIAR IMAGEN DEL CATÁLOGO
