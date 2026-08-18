@@ -50,6 +50,7 @@
     align-self: start;
 }
 
+
 .categorias h2 {
     color: var(--naranja);
 
@@ -241,7 +242,7 @@
 
 
 /* =========================================
-   COLORES DISPONIBLES
+   COLORES DISPONIBLES EN TARJETA
 ========================================= */
 
 .colores-producto {
@@ -440,9 +441,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    PANEL DE PRODUCTO
-========================================= */
+========================================================= */
 
 .producto-panel {
     position: fixed;
@@ -452,11 +453,10 @@
     width: 100%;
     height: 100%;
 
-    /* Fondo semitransparente */
     background: rgba(11, 11, 11, 0.92);
 
-    /* Desenfoque del catálogo que queda detrás */
     backdrop-filter: blur(8px);
+
     -webkit-backdrop-filter: blur(8px);
 
     z-index: 1000;
@@ -467,6 +467,7 @@
 
     transition: transform 0.45s ease;
 }
+
 
 /* =========================================
    PANEL ABIERTO
@@ -540,11 +541,11 @@
 
     margin: 0 auto;
 
-    padding: 40px 6% 80px;
+    padding: 35px 6% 80px;
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
     gap: 60px;
 
@@ -561,7 +562,7 @@
 
     width: 100%;
 
-    max-width: 650px;
+    max-width: 600px;
 
     aspect-ratio: 1 / 1;
 
@@ -648,23 +649,23 @@
 }
 
 
-/* =========================================
+/* =========================================================
    INFORMACIÓN DEL PANEL
-========================================= */
+========================================================= */
 
 .producto-panel-datos {
     width: 100%;
 
     max-width: 550px;
 
-    padding: 20px 0;
+    padding: 10px 0;
 
     justify-self: start;
 }
 
 
 /* =========================================
-   NOMBRE DEL PRODUCTO
+   NOMBRE
 ========================================= */
 
 .producto-panel-datos h1 {
@@ -676,7 +677,7 @@
 
     line-height: 1.1;
 
-    margin: 0 0 20px;
+    margin: 0 0 18px;
 }
 
 
@@ -691,7 +692,7 @@
 
     line-height: 1.7;
 
-    margin: 0 0 25px;
+    margin: 0 0 22px;
 }
 
 
@@ -706,12 +707,167 @@
 
     font-weight: bold;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   ZONA DE SELECCIÓN
+========================================================= */
+
+.producto-seleccion {
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    padding: 18px;
+
+    background: rgba(21, 21, 21, 0.75);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 6px;
 }
 
 
 /* =========================================
+   TÍTULO DE SELECCIÓN
+========================================= */
+
+.producto-seleccion-titulo {
+    color: var(--blanco);
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   SELECCIÓN DE COLORES
+========================================================= */
+
+.producto-seleccion-colores {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================================
+   OPCIÓN DE COLOR
+========================================= */
+
+.opcion-color {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 10px;
+
+    background: var(--negro-tarjeta);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.opcion-color:hover {
+    border-color: var(--naranja);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   COLOR SELECCIONADO
+========================================= */
+
+.opcion-color.seleccionado {
+    border-color: var(--naranja);
+
+    background: rgba(255, 179, 0, 0.08);
+}
+
+
+/* =========================================
+   CÍRCULO DE COLOR DENTRO DEL PANEL
+========================================= */
+
+.opcion-color .color-producto {
+    width: 22px;
+
+    height: 22px;
+
+    min-width: 22px;
+
+    min-height: 22px;
+
+    border-width: 1px;
+}
+
+
+/* =========================================
+   NOMBRE DEL COLOR
+========================================= */
+
+.nombre-color {
+    color: var(--blanco);
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
    CANTIDAD
+========================================================= */
+
+.producto-cantidad-contenedor {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.producto-cantidad-label {
+    color: var(--gris);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   CONTROL DE CANTIDAD
 ========================================= */
 
 .producto-cantidad {
@@ -727,14 +883,14 @@
 
     overflow: hidden;
 
-    margin-bottom: 25px;
+    margin-bottom: 0;
 }
 
 
 .producto-cantidad button {
-    width: 45px;
+    width: 42px;
 
-    height: 45px;
+    height: 42px;
 
     border: none;
 
@@ -742,7 +898,7 @@
 
     color: var(--blanco);
 
-    font-size: 22px;
+    font-size: 20px;
 
     font-weight: bold;
 
@@ -760,9 +916,9 @@
 
 
 .producto-cantidad span {
-    width: 55px;
+    width: 50px;
 
-    height: 45px;
+    height: 42px;
 
     display: flex;
 
@@ -774,15 +930,30 @@
 
     color: var(--blanco);
 
-    font-size: 18px;
+    font-size: 17px;
 
     font-weight: bold;
 }
 
 
-/* =========================================
+/* =========================================================
+   MENSAJE DE AYUDA
+========================================================= */
+
+.producto-seleccion-ayuda {
+    color: var(--gris-oscuro);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================================
    BOTONES DE COMPRA
-========================================= */
+========================================================= */
 
 .producto-panel-botones {
     display: flex;
@@ -869,9 +1040,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    TABLET
-========================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -904,7 +1075,7 @@
     .producto-panel-contenido {
         grid-template-columns: 1fr 1fr;
 
-        gap: 30px;
+        gap: 35px;
 
         padding: 30px;
     }
@@ -929,12 +1100,17 @@
         font-size: 26px;
     }
 
+
+    .producto-seleccion {
+        padding: 15px;
+    }
+
 }
 
 
-/* =========================================
+/* =========================================================
    MÓVIL
-========================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
@@ -1092,7 +1268,27 @@
     .producto-panel-precio {
         font-size: 26px;
 
-        margin-bottom: 25px;
+        margin-bottom: 20px;
+    }
+
+
+    /* ==============================
+       SELECCIÓN
+    ============================== */
+
+    .producto-seleccion {
+        padding: 15px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .producto-cantidad-contenedor {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
     }
 
 
@@ -1103,9 +1299,9 @@
 }
 
 
-/* =========================================
+/* =========================================================
    TELÉFONOS PEQUEÑOS
-========================================= */
+========================================================= */
 
 @media (max-width: 450px) {
 
@@ -1149,9 +1345,11 @@
 
     .color-producto {
         width: 18px;
+
         height: 18px;
 
         min-width: 18px;
+
         min-height: 18px;
     }
 
@@ -1197,19 +1395,65 @@
 
         line-height: 1.6;
 
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
 
     .producto-panel-precio {
         font-size: 24px;
 
-        margin-bottom: 25px;
+        margin-bottom: 20px;
+    }
+
+
+    /* ==============================
+       SELECCIÓN
+    ============================== */
+
+    .producto-seleccion {
+        padding: 14px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .producto-seleccion-titulo {
+        font-size: 13px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .producto-seleccion-colores {
+        gap: 7px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .opcion-color {
+        padding: 6px 8px;
+    }
+
+
+    .opcion-color .color-producto {
+        width: 20px;
+
+        height: 20px;
+
+        min-width: 20px;
+
+        min-height: 20px;
+    }
+
+
+    .nombre-color {
+        font-size: 12px;
     }
 
 
     .producto-cantidad {
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
 
 
@@ -1226,6 +1470,15 @@
         height: 40px;
     }
 
+
+    .producto-seleccion-ayuda {
+        font-size: 11px;
+    }
+
+
+    /* ==============================
+       BOTONES
+    ============================== */
 
     .boton-carrito,
     .boton-comprar {
