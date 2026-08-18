@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Carrito de compras de Leo Tacticals"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="../img/favicon.png"
+    >
+
+    <title>Carrito — Leo Tacticals</title>
+
+
+    <!-- =================================
+         CSS GENERAL
+    ================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+
+    <!-- =================================
+         CSS DEL CATÁLOGO
+         Reutilizamos el mismo diseño
+    ================================== -->
+
+    <link
+        rel="stylesheet"
+        href="catalogo.css"
+    >
+
+
+    <!-- =================================
+         FONT AWESOME
+    ================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         BARRA DE NAVEGACIÓN
+    ================================== -->
+
+    <header>
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <a href="../index.html">
+
+                <img
+                    src="../img/banner.png"
+                    alt="Leo Tacticals"
+                >
+
+            </a>
+
+        </div>
+
+
+        <!-- Navegación -->
+
+        <nav>
+
+            <a href="../index.html">
+                Inicio
+            </a>
+
+            <a href="catalogo.html">
+                Catálogo
+            </a>
+
+            <a href="carrito.html">
+                Carrito
+            </a>
+
+            <a href="../index.html#contacto">
+                Contáctanos
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =================================
+         CONTENIDO PRINCIPAL
+    ================================== -->
+
+    <main>
+
+
+        <!-- =================================
+             CARRITO
+        ================================== -->
+
+        <section class="catalogo-pagina">
+
+
+            <div class="productos-catalogo">
+
+
+                <!-- =================================
+                     TÍTULO
+                ================================== -->
+
+                <div class="catalogo-titulo">
+
+                    <h1>
+                        CARRITO
+                    </h1>
+
+                    <p>
+                        Revisa los productos que deseas comprar.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================
+                     LISTA DEL CARRITO
+                ================================== -->
+
+                <div
+                    class="carrito-lista"
+                    id="carrito-lista"
+                >
+
+                    <!--
+                        carrito.js generará
+                        los productos aquí.
+                    -->
+
+                </div>
+
+
+                <!-- =================================
+                     RESUMEN
+                ================================== -->
+
+                <div class="carrito-resumen">
+
+
+                    <div class="carrito-total">
+
+                        <span>
+                            TOTAL
+                        </span>
+
+                        <strong id="carrito-total">
+                            $0.00
+                        </strong>
+
+                    </div>
+
+
+                    <!-- =================================
+                         BOTÓN DE PEDIDO
+                    ================================== -->
+
+                    <button
+                        class="boton-carrito"
+                        id="boton-whatsapp"
+                    >
+
+                        <i class="fa-brands fa-whatsapp"></i>
+
+                        Enviar pedido por WhatsApp
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Leo Tacticals — Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script src="../js/productos.js"></script>
+
+    <script src="../js/carrito.js"></script>
+
+
+</body>
+
+</html>
