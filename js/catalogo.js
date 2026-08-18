@@ -407,7 +407,6 @@ function cambiarImagen(boton, direccion) {
 
 }
 
-
 /* =========================================
    ABRIR PANEL DEL PRODUCTO
 ========================================= */
@@ -440,72 +439,63 @@ function abrirProducto(id) {
 
 
     /* ==============================
-       COLORES DISPONIBLES
-    ============================== */
-
-    const coloresCSS = {
-
-        verde: "#43a047",
-
-        verde_oliva: "#636b2f",
-
-        azul: "#1976d2",
-
-        rojo: "#e53935",
-
-        blanco: "#ffffff",
-
-        negro: "#111111",
-
-        gris: "#757575",
-
-        marron: "#795548",
-
-        amarillo: "#facc15",
-
-        naranja: "#f97316",
-
-        morado: "#7e22ce"
-
-    };
-
-
-    /* ==============================
-       GENERAR SELECTOR DE COLORES
+       CREAR SELECTOR DE COLORES
     ============================== */
 
     let selectorColores = "";
 
 
-    if (
-        producto.colores &&
-        producto.colores.length > 0
-    ) {
+    if (producto.colores && producto.colores.length > 0) {
+
+        const coloresCSS = {
+
+            verde: "#43a047",
+
+            verde_oliva: "#636b2f",
+
+            azul: "#1976d2",
+
+            rojo: "#e53935",
+
+            blanco: "#ffffff",
+
+            negro: "#111111",
+
+            gris: "#757575",
+
+            marron: "#795548"
+
+        };
+
 
         selectorColores = `
 
-            <div class="producto-colores-panel">
+            <div class="producto-seleccion">
 
-                <h3>
-                    COLORES
-                </h3>
+                <div class="producto-seleccion-titulo">
+
+                    Distribución por color
+
+                </div>
 
 
-                <div class="colores-panel-lista">
+                <div
+                    class="producto-seleccion-colores"
+                    id="selector-colores"
+                >
 
                     ${
-                        producto.colores.map(color => {
+                        producto.colores.map((color, indice) => {
 
                             return `
 
                                 <div
-                                    class="color-panel-fila"
+                                    class="opcion-color"
                                     data-color="${color}"
+                                    data-cantidad="0"
                                 >
 
-                                    <div
-                                        class="color-panel-nombre"
-                                    >
+                                    <div class="opcion-color-nombre">
 
                                         <span
                                             class="color-producto"
@@ -516,25 +506,20 @@ function abrirProducto(id) {
                                         ></span>
 
 
-                                        <span>
+                                        <span class="nombre-color">
+
                                             ${color.replace("_", " ")}
+
                                         </span>
 
                                     </div>
 
 
-                                    <div
-                                        class="color-panel-cantidad"
-                                    >
+                                    <div class="cantidad-color">
 
                                         <button
                                             type="button"
-                                            onclick="
-                                                cambiarCantidadColor(
-                                                    '${color}',
-                                                    -1
-                                                )
-                                            "
+                                            onclick="cambiarCantidadColor('${color}', -1)"
                                         >
                                             −
                                         </button>
@@ -549,12 +534,7 @@ function abrirProducto(id) {
 
                                         <button
                                             type="button"
-                                            onclick="
-                                                cambiarCantidadColor(
-                                                    '${color}',
-                                                    1
-                                                )
-                                            "
+                                            onclick="cambiarCantidadColor('${color}', 1)"
                                         >
                                             +
                                         </button>
@@ -566,24 +546,17 @@ function abrirProducto(id) {
                             `;
 
                         }).join("")
+
                     }
 
                 </div>
 
 
-                <p class="colores-total">
+                <p class="producto-seleccion-ayuda">
 
-                    Asignado:
+                    Asigna las unidades entre los colores disponibles.
 
-                    <span id="colores-asignados">
-                        0
-                    </span>
-
-                    /
-
-                    <span id="cantidad-total-colores">
-                        1
-                    </span>
+                    La suma no puede superar la cantidad total.
 
                 </p>
 
@@ -595,7 +568,7 @@ function abrirProducto(id) {
 
 
     /* ==============================
-       CREAR CONTENIDO DEL PANEL
+       CREAR CONTENIDO
     ============================== */
 
     contenido.innerHTML = `
@@ -656,12 +629,16 @@ function abrirProducto(id) {
 
 
             <p class="producto-panel-descripcion">
+
                 ${producto.detalles}
+
             </p>
 
 
             <div class="producto-panel-precio">
+
                 $${producto.precio.toFixed(2)}
+
             </div>
 
 
@@ -669,34 +646,58 @@ function abrirProducto(id) {
                  CANTIDAD TOTAL
             ================================== -->
 
-            <div class="producto-cantidad">
+            <div class="producto-seleccion">
 
-                <button
-                    type="button"
-                    onclick="cambiarCantidad(-1)"
-                >
-                    −
-                </button>
+                <div class="producto-seleccion-titulo">
 
+                    Cantidad
 
-                <span id="cantidad-producto">
-                    1
-                </span>
+                </div>
 
 
-                <button
-                    type="button"
-                    onclick="cambiarCantidad(1)"
-                >
-                    +
-                </button>
+                <div class="producto-cantidad-contenedor">
+
+                    <span class="producto-cantidad-label">
+
+                        Unidades
+
+                    </span>
+
+
+                    <div class="producto-cantidad">
+
+                        <button
+                            type="button"
+                            onclick="cambiarCantidad(-1)"
+                        >
+
+                            −
+
+                        </button>
+
+
+                        <span id="cantidad-producto">
+
+                            1
+
+                        </span>
+
+
+                        <button
+                            type="button"
+                            onclick="cambiarCantidad(1)"
+                        >
+
+                            +
+
+                        </button>
+
+                    </div>
+
+                </div>
 
             </div>
 
-
-            <!-- =================================
-                 COLORES
-            ================================== -->
 
             ${selectorColores}
 
@@ -757,7 +758,6 @@ function abrirProducto(id) {
     document.body.style.overflow = "hidden";
 
 }
-
 
 /* =========================================
    CERRAR PANEL
