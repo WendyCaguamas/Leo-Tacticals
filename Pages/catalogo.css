@@ -291,6 +291,11 @@
 }
 
 
+.color-verde_oliva {
+    background: #636b2f;
+}
+
+
 .color-azul {
     background: #2563eb;
 }
@@ -323,6 +328,16 @@
 
 .color-morado {
     background: #7e22ce;
+}
+
+
+.color-gris {
+    background: #757575;
+}
+
+
+.color-marron {
+    background: #795548;
 }
 
 
@@ -425,13 +440,12 @@
 ========================================= */
 
 .producto-panel {
-
     position: fixed;
 
     inset: 0;
 
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     background: var(--negro);
 
@@ -441,8 +455,7 @@
 
     transform: translateY(100%);
 
-    transition:
-        transform 0.45s ease;
+    transition: transform 0.45s ease;
 }
 
 
@@ -451,9 +464,7 @@
 ========================================= */
 
 .producto-panel.abierto {
-
     transform: translateY(0);
-
 }
 
 
@@ -462,7 +473,6 @@
 ========================================= */
 
 .producto-panel-atras {
-
     position: sticky;
 
     top: 20px;
@@ -500,13 +510,11 @@
 
 
 .producto-panel-atras:hover {
-
     background: var(--naranja);
 
     color: var(--negro);
 
     border-color: var(--naranja);
-
 }
 
 
@@ -515,44 +523,36 @@
 ========================================= */
 
 .producto-panel-contenido {
-
     width: 100%;
 
-    max-width: 1200px;
+    max-width: 1400px;
 
-    margin: 35px auto 80px;
+    min-height: calc(100vh - 100px);
 
-    padding: 0 6%;
-}
+    margin: 0 auto;
 
-
-/* =========================================
-   DETALLE DEL PRODUCTO
-========================================= */
-
-.producto-detalle {
+    padding: 40px 6% 80px;
 
     display: grid;
 
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
 
     gap: 60px;
 
-    align-items: start;
+    align-items: center;
 }
 
 
 /* =========================================
-   CONTENEDOR DE IMÁGENES DEL PANEL
+   IMAGEN DEL PANEL
 ========================================= */
 
-.producto-detalle-imagenes {
-
+.producto-panel-imagenes {
     position: relative;
 
     width: 100%;
 
-    max-width: 550px;
+    max-width: 650px;
 
     aspect-ratio: 1 / 1;
 
@@ -572,15 +572,14 @@
    IMAGEN PRINCIPAL DEL PANEL
 ========================================= */
 
-.producto-detalle-imagen {
-
+.producto-panel-imagenes img {
     width: 100%;
 
     height: 100%;
 
-    object-fit: cover;
-
     display: block;
+
+    object-fit: contain;
 
     background: var(--negro-tarjeta);
 }
@@ -590,26 +589,76 @@
    FLECHAS DEL PANEL
 ========================================= */
 
-.producto-detalle-imagenes .flecha {
+.panel-flecha {
+    position: absolute;
+
+    top: 50%;
+
+    width: 42px;
+    height: 42px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    background: rgba(0, 0, 0, 0.7);
+
+    color: var(--blanco);
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
 
     z-index: 10;
 }
 
 
-/* =========================================
-   INFORMACIÓN DEL PRODUCTO
-========================================= */
+.panel-flecha:hover {
+    background: var(--naranja);
 
-.producto-detalle-info {
+    border-color: var(--naranja);
 
-    width: 100%;
-
-    padding-top: 5px;
+    color: var(--negro);
 }
 
 
-.producto-detalle-info h1 {
+.panel-flecha-izquierda {
+    left: 15px;
+}
 
+
+.panel-flecha-derecha {
+    right: 15px;
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL PANEL
+========================================= */
+
+.producto-panel-datos {
+    width: 100%;
+
+    max-width: 550px;
+
+    padding: 20px 0;
+
+    justify-self: start;
+}
+
+
+/* =========================================
+   NOMBRE DEL PRODUCTO
+========================================= */
+
+.producto-panel-datos h1 {
     color: var(--naranja);
 
     font-size: 42px;
@@ -622,8 +671,11 @@
 }
 
 
-.producto-detalle-info p {
+/* =========================================
+   DESCRIPCIÓN
+========================================= */
 
+.producto-panel-descripcion {
     color: var(--blanco);
 
     font-size: 17px;
@@ -638,8 +690,7 @@
    PRECIO
 ========================================= */
 
-.producto-detalle-precio {
-
+.producto-panel-precio {
     color: var(--naranja-claro);
 
     font-size: 30px;
@@ -651,43 +702,10 @@
 
 
 /* =========================================
-   COLORES DEL PRODUCTO EN EL PANEL
-========================================= */
-
-.producto-detalle-colores {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    margin-bottom: 25px;
-}
-
-
-.producto-detalle-colores .color-producto {
-
-    width: 24px;
-    height: 24px;
-
-    min-width: 24px;
-    min-height: 24px;
-
-    cursor: pointer;
-
-    pointer-events: auto;
-
-    border: 1px solid var(--blanco);
-}
-
-
-/* =========================================
    CANTIDAD
 ========================================= */
 
 .producto-cantidad {
-
     display: flex;
 
     align-items: center;
@@ -705,7 +723,6 @@
 
 
 .producto-cantidad button {
-
     width: 45px;
 
     height: 45px;
@@ -727,7 +744,6 @@
 
 
 .producto-cantidad button:hover {
-
     background: var(--naranja);
 
     color: var(--negro);
@@ -735,7 +751,6 @@
 
 
 .producto-cantidad span {
-
     width: 55px;
 
     height: 45px;
@@ -760,8 +775,7 @@
    BOTONES DE COMPRA
 ========================================= */
 
-.producto-acciones {
-
+.producto-panel-botones {
     display: flex;
 
     flex-direction: column;
@@ -774,8 +788,8 @@
 }
 
 
-.producto-boton {
-
+.boton-carrito,
+.boton-comprar {
     width: 100%;
 
     min-height: 50px;
@@ -800,10 +814,9 @@
 }
 
 
-.producto-boton:hover {
-
+.boton-carrito:hover,
+.boton-comprar:hover {
     transform: translateY(-2px);
-
 }
 
 
@@ -812,7 +825,6 @@
 ========================================= */
 
 .boton-carrito {
-
     background: var(--naranja);
 
     color: var(--negro);
@@ -822,7 +834,6 @@
 
 
 .boton-carrito:hover {
-
     background: var(--naranja-claro);
 
     border-color: var(--naranja-claro);
@@ -834,7 +845,6 @@
 ========================================= */
 
 .boton-comprar {
-
     background: transparent;
 
     color: var(--blanco);
@@ -844,7 +854,6 @@
 
 
 .boton-comprar:hover {
-
     background: var(--naranja);
 
     color: var(--negro);
@@ -858,32 +867,24 @@
 @media (max-width: 900px) {
 
     .catalogo-pagina {
-
         padding: 50px 30px;
-
     }
 
 
     .catalogo-layout {
-
         grid-template-columns: 200px 1fr;
 
         gap: 30px;
-
     }
 
 
     .categorias {
-
         padding-right: 20px;
-
     }
 
 
     .productos-grid {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
 
@@ -892,41 +893,31 @@
     ============================== */
 
     .producto-panel-contenido {
+        grid-template-columns: 1fr 1fr;
 
-        max-width: 850px;
+        gap: 30px;
 
+        padding: 30px;
     }
 
 
-    .producto-detalle {
-
-        grid-template-columns: 1fr;
-
-        gap: 35px;
-
+    .producto-panel-imagenes {
+        max-width: 500px;
     }
 
 
-    .producto-detalle-imagenes {
-
-        max-width: 550px;
-
-        width: 100%;
-
+    .producto-panel-datos h1 {
+        font-size: 34px;
     }
 
 
-    .producto-detalle-info {
-
-        padding-top: 0;
-
+    .producto-panel-descripcion {
+        font-size: 15px;
     }
 
 
-    .producto-acciones {
-
-        max-width: 550px;
-
+    .producto-panel-precio {
+        font-size: 26px;
     }
 
 }
@@ -939,20 +930,16 @@
 @media (max-width: 700px) {
 
     .catalogo-pagina {
-
         padding: 40px 20px;
-
     }
 
 
     .catalogo-layout {
-
         display: flex;
 
         flex-direction: column;
 
         gap: 35px;
-
     }
 
 
@@ -961,7 +948,6 @@
     ============================== */
 
     .categorias {
-
         border-right: none;
 
         border-bottom: 1px solid var(--borde);
@@ -969,52 +955,41 @@
         padding-right: 0;
 
         padding-bottom: 25px;
-
     }
 
 
     .categorias h2 {
-
         text-align: center;
 
         margin-bottom: 20px;
-
     }
 
 
     .categorias-lista {
-
         gap: 5px;
-
     }
 
 
     .categoria {
-
         text-align: center;
 
         border-left: none;
 
         border-bottom: 3px solid transparent;
-
     }
 
 
     .categoria:hover {
-
         border-left-color: transparent;
 
         border-bottom-color: var(--naranja);
-
     }
 
 
     .categoria.activa {
-
         border-left-color: transparent;
 
         border-bottom-color: var(--naranja);
-
     }
 
 
@@ -1023,39 +998,29 @@
     ============================== */
 
     .productos-catalogo {
-
         min-height: 400px;
-
     }
 
 
     .productos-grid {
-
         grid-template-columns: 1fr;
-
     }
 
 
     .producto-imagenes {
-
         height: 320px;
 
         aspect-ratio: auto;
-
     }
 
 
     .catalogo-titulo {
-
         text-align: center;
-
     }
 
 
     .catalogo-titulo h1 {
-
         font-size: 28px;
-
     }
 
 
@@ -1064,79 +1029,66 @@
     ============================== */
 
     .producto-panel-atras {
-
         top: 15px;
 
         margin: 15px 20px 0;
-
     }
 
 
     .producto-panel-contenido {
+        display: flex;
 
-        padding: 0 20px;
+        flex-direction: column;
 
-        margin-top: 25px;
-
-        margin-bottom: 50px;
-
-    }
-
-
-    .producto-detalle {
-
-        grid-template-columns: 1fr;
+        align-items: center;
 
         gap: 30px;
 
+        min-height: auto;
+
+        padding: 25px 20px 50px;
     }
 
 
-    .producto-detalle-imagenes {
-
+    .producto-panel-imagenes {
         width: 100%;
 
-        max-width: none;
+        max-width: 500px;
 
         aspect-ratio: 1 / 1;
-
     }
 
 
-    .producto-detalle-info {
-
+    .producto-panel-datos {
         width: 100%;
 
+        max-width: 500px;
+
+        padding: 0;
     }
 
 
-    .producto-detalle-info h1 {
-
+    .producto-panel-datos h1 {
         font-size: 32px;
-
     }
 
 
-    .producto-detalle-info p {
-
+    .producto-panel-descripcion {
         font-size: 15px;
 
         line-height: 1.6;
-
     }
 
 
-    .producto-detalle-precio {
-
+    .producto-panel-precio {
         font-size: 26px;
 
+        margin-bottom: 25px;
     }
 
 
-    .producto-acciones {
-
+    .producto-panel-botones {
         max-width: none;
-
     }
 
 }
@@ -1149,37 +1101,27 @@
 @media (max-width: 450px) {
 
     .catalogo-pagina {
-
         padding: 35px 15px;
-
     }
 
 
     .catalogo-titulo h1 {
-
         font-size: 25px;
-
     }
 
 
     .catalogo-titulo p {
-
         font-size: 14px;
-
     }
 
 
     .categorias h2 {
-
         font-size: 20px;
-
     }
 
 
     .producto-imagenes {
-
         height: 280px;
-
     }
 
 
@@ -1188,26 +1130,20 @@
     ============================== */
 
     .colores-producto {
-
         top: 10px;
 
         left: 10px;
 
         gap: 5px;
-
     }
 
 
     .color-producto {
-
         width: 18px;
-
         height: 18px;
 
         min-width: 18px;
-
         min-height: 18px;
-
     }
 
 
@@ -1216,7 +1152,6 @@
     ============================== */
 
     .producto-panel-atras {
-
         top: 12px;
 
         margin: 12px 15px 0;
@@ -1224,104 +1159,72 @@
         padding: 9px 14px;
 
         font-size: 14px;
-
     }
 
 
     .producto-panel-contenido {
-
-        padding: 0 15px;
-
-        margin-top: 20px;
-
-    }
-
-
-    .producto-detalle {
+        padding: 20px 15px 40px;
 
         gap: 25px;
-
     }
 
 
-    .producto-detalle-imagenes {
-
+    .producto-panel-imagenes {
         width: 100%;
 
         aspect-ratio: 1 / 1;
-
     }
 
 
-    .producto-detalle-info h1 {
-
+    .producto-panel-datos h1 {
         font-size: 27px;
 
         margin-bottom: 15px;
-
     }
 
 
-    .producto-detalle-info p {
-
+    .producto-panel-descripcion {
         font-size: 14px;
 
         line-height: 1.6;
 
         margin-bottom: 20px;
-
     }
 
 
-    .producto-detalle-precio {
-
+    .producto-panel-precio {
         font-size: 24px;
 
         margin-bottom: 25px;
-
-    }
-
-
-    .producto-detalle-colores {
-
-        margin-bottom: 20px;
-
     }
 
 
     .producto-cantidad {
-
         margin-bottom: 20px;
-
     }
 
 
     .producto-cantidad button {
-
         width: 40px;
 
         height: 40px;
-
     }
 
 
     .producto-cantidad span {
-
         width: 50px;
 
         height: 40px;
-
     }
 
 
-    .producto-boton {
-
+    .boton-carrito,
+    .boton-comprar {
         min-height: 45px;
 
         padding: 13px;
 
         font-size: 14px;
-
     }
 
 }
