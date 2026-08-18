@@ -30,12 +30,15 @@ function mostrarProductos(listaProductos) {
 
         tarjeta.onclick = (evento) => {
 
-            // Si se pulsa una flecha,
-            // no abrir el panel.
+            /*
+               Si se pulsa una flecha,
+               no abrir el panel.
+            */
 
             if (evento.target.closest(".flecha")) {
                 return;
             }
+
 
             abrirProducto(producto.id);
 
@@ -65,25 +68,15 @@ function mostrarProductos(listaProductos) {
                                 const coloresCSS = {
 
                                     verde: "#43a047",
-
                                     verde_oliva: "#636b2f",
-
                                     azul: "#1976d2",
-
                                     rojo: "#e53935",
-
                                     blanco: "#ffffff",
-
                                     negro: "#111111",
-
                                     gris: "#757575",
-
                                     marron: "#795548",
-
                                     amarillo: "#facc15",
-
                                     naranja: "#f97316",
-
                                     morado: "#7e22ce"
 
                                 };
@@ -111,9 +104,9 @@ function mostrarProductos(listaProductos) {
                 }
 
 
-                <!-- ==============================
+                <!-- =================================
                      FLECHA IZQUIERDA
-                =============================== -->
+                ================================== -->
 
                 <button
                     class="flecha flecha-izquierda"
@@ -125,9 +118,9 @@ function mostrarProductos(listaProductos) {
                 </button>
 
 
-                <!-- ==============================
+                <!-- =================================
                      FLECHA DERECHA
-                =============================== -->
+                ================================== -->
 
                 <button
                     class="flecha flecha-derecha"
@@ -139,9 +132,9 @@ function mostrarProductos(listaProductos) {
                 </button>
 
 
-                <!-- ==============================
+                <!-- =================================
                      DATOS DE IMÁGENES
-                =============================== -->
+                ================================== -->
 
                 <div
                     class="imagenes-producto-data"
@@ -169,7 +162,9 @@ function mostrarProductos(listaProductos) {
 
 
                 <div class="producto-precio">
+
                     $${producto.precio.toFixed(2)}
+
                 </div>
 
             </div>
@@ -274,6 +269,16 @@ function cambiarImagen(boton, direccion) {
     }
 
 
+    /*
+       Si solamente existe una imagen,
+       no hacemos nada.
+    */
+
+    if (imagenes.length <= 1) {
+        return;
+    }
+
+
     contenedor.dataset.animando = "true";
 
 
@@ -325,6 +330,10 @@ function cambiarImagen(boton, direccion) {
 
 
     imagenNueva.classList.add("imagen-producto");
+
+
+    imagenNueva.dataset.indice =
+        nuevoIndice;
 
 
     /* ==============================
@@ -389,10 +398,6 @@ function cambiarImagen(boton, direccion) {
 
     setTimeout(() => {
 
-        imagenNueva.dataset.indice =
-            nuevoIndice;
-
-
         imagenActual.remove();
 
 
@@ -424,7 +429,9 @@ function abrirProducto(id) {
 
 
     const contenido =
-        document.getElementById("producto-panel-contenido");
+        document.getElementById(
+            "producto-panel-contenido"
+        );
 
 
     /* =====================================
@@ -442,25 +449,15 @@ function abrirProducto(id) {
         const coloresCSS = {
 
             verde: "#43a047",
-
             verde_oliva: "#636b2f",
-
             azul: "#1976d2",
-
             rojo: "#e53935",
-
             blanco: "#ffffff",
-
             negro: "#111111",
-
             gris: "#757575",
-
             marron: "#795548",
-
             amarillo: "#facc15",
-
             naranja: "#f97316",
-
             morado: "#7e22ce"
 
         };
@@ -489,7 +486,6 @@ function abrirProducto(id) {
                             <div
                                 class="opcion-color"
                                 data-color="${color}"
-                                data-cantidad="0"
                             >
 
                                 <div class="opcion-color-nombre">
@@ -517,7 +513,12 @@ function abrirProducto(id) {
                                     <button
                                         type="button"
                                         class="boton-color-menos"
-                                        onclick="cambiarCantidadColor('${color}', -1)"
+                                        onclick="
+                                            cambiarCantidadColor(
+                                                '${color}',
+                                                -1
+                                            )
+                                        "
                                     >
 
                                         −
@@ -528,16 +529,19 @@ function abrirProducto(id) {
                                     <span
                                         id="cantidad-color-${color}"
                                     >
-
                                         0
-
                                     </span>
 
 
                                     <button
                                         type="button"
                                         class="boton-color-mas"
-                                        onclick="cambiarCantidadColor('${color}', 1)"
+                                        onclick="
+                                            cambiarCantidadColor(
+                                                '${color}',
+                                                1
+                                            )
+                                        "
                                     >
 
                                         +
@@ -732,7 +736,7 @@ function abrirProducto(id) {
 
 
     /* =====================================
-       GUARDAR PRODUCTO
+       GUARDAR PRODUCTO ACTUAL
     ===================================== */
 
     panel.dataset.productoId =
@@ -740,7 +744,7 @@ function abrirProducto(id) {
 
 
     /* =====================================
-       ABRIR
+       ABRIR PANEL
     ===================================== */
 
     panel.classList.add("abierto");
@@ -782,16 +786,17 @@ function cerrarProducto() {
 ========================================= */
 
 const botonAtras =
-    document.getElementById("producto-panel-atras");
+    document.getElementById(
+        "producto-panel-atras"
+    );
 
 
 if (botonAtras) {
 
-    botonAtras.addEventListener("click", () => {
-
-        cerrarProducto();
-
-    });
+    botonAtras.addEventListener(
+        "click",
+        cerrarProducto
+    );
 
 }
 
@@ -803,15 +808,21 @@ if (botonAtras) {
 function cambiarImagenPanel(direccion) {
 
     const panel =
-        document.getElementById("producto-panel");
+        document.getElementById(
+            "producto-panel"
+        );
 
 
     const id =
-        parseInt(panel.dataset.productoId);
+        parseInt(
+            panel.dataset.productoId
+        );
 
 
     const producto =
-        productos.find(producto => producto.id === id);
+        productos.find(
+            producto => producto.id === id
+        );
 
 
     if (!producto) {
@@ -820,11 +831,20 @@ function cambiarImagenPanel(direccion) {
 
 
     const imagen =
-        document.getElementById("imagen-panel");
+        document.getElementById(
+            "imagen-panel"
+        );
+
+
+    if (!imagen) {
+        return;
+    }
 
 
     let indice =
-        parseInt(imagen.dataset.indice || "0");
+        parseInt(
+            imagen.dataset.indice || "0"
+        );
 
 
     indice += direccion;
@@ -838,7 +858,10 @@ function cambiarImagenPanel(direccion) {
     }
 
 
-    if (indice >= producto.imagenes.length) {
+    if (
+        indice >=
+        producto.imagenes.length
+    ) {
 
         indice = 0;
 
@@ -873,7 +896,9 @@ function cambiarCantidad(cambio) {
 
 
     let cantidad =
-        parseInt(elemento.textContent);
+        parseInt(
+            elemento.textContent
+        );
 
 
     const nuevaCantidad =
@@ -890,7 +915,7 @@ function cambiarCantidad(cambio) {
 
 
     /* ==============================
-       CAMBIAR CANTIDAD
+       GUARDAR
     ============================== */
 
     elemento.textContent =
@@ -898,7 +923,7 @@ function cambiarCantidad(cambio) {
 
 
     /* ==============================
-       SI REDUJIMOS LA CANTIDAD
+       AJUSTAR COLORES
     ============================== */
 
     if (nuevaCantidad < cantidad) {
@@ -921,13 +946,14 @@ function cambiarCantidad(cambio) {
    CAMBIAR CANTIDAD DE UN COLOR
 ========================================= */
 
-function cambiarCantidadColor(color, cambio) {
+function cambiarCantidadColor(
+    color,
+    cambio
+) {
 
-    const cantidadTotal =
-        parseInt(
-            document.getElementById(
-                "cantidad-producto"
-            ).textContent
+    const cantidadElemento =
+        document.getElementById(
+            "cantidad-producto"
         );
 
 
@@ -937,18 +963,25 @@ function cambiarCantidadColor(color, cambio) {
         );
 
 
-    if (!elemento) {
+    if (
+        !cantidadElemento ||
+        !elemento
+    ) {
         return;
     }
 
 
+    const cantidadTotal =
+        parseInt(
+            cantidadElemento.textContent
+        );
+
+
     let cantidadColor =
-        parseInt(elemento.textContent);
+        parseInt(
+            elemento.textContent
+        );
 
-
-    /* ==============================
-       NUEVA CANTIDAD
-    ============================== */
 
     const nuevaCantidad =
         cantidadColor + cambio;
@@ -964,7 +997,7 @@ function cambiarCantidadColor(color, cambio) {
 
 
     /* ==============================
-       TOTAL ACTUAL ASIGNADO
+       TOTAL ACTUAL
     ============================== */
 
     const totalAsignado =
@@ -972,7 +1005,7 @@ function cambiarCantidadColor(color, cambio) {
 
 
     /* ==============================
-       SI ESTAMOS AUMENTANDO
+       SI AUMENTAMOS
     ============================== */
 
     if (
@@ -980,13 +1013,19 @@ function cambiarCantidadColor(color, cambio) {
         totalAsignado >= cantidadTotal
     ) {
 
+        /*
+           Simplemente no hacemos nada.
+
+           NO mostramos alert.
+        */
+
         return;
 
     }
 
 
     /* ==============================
-       GUARDAR
+       GUARDAR NUEVA CANTIDAD
     ============================== */
 
     elemento.textContent =
@@ -1020,7 +1059,9 @@ function obtenerTotalColores() {
     elementos.forEach(elemento => {
 
         total +=
-            parseInt(elemento.textContent) || 0;
+            parseInt(
+                elemento.textContent
+            ) || 0;
 
     });
 
@@ -1058,30 +1099,7 @@ function actualizarBotonesColores() {
 
 
     /* =====================================
-       BOTÓN + DE CANTIDAD TOTAL
-    ===================================== */
-
-    const botonCantidadMas =
-        document.getElementById(
-            "boton-cantidad-mas"
-        );
-
-
-    /*
-       La cantidad general puede seguir
-       aumentando porque todavía no
-       tenemos un límite de stock.
-    */
-
-    if (botonCantidadMas) {
-
-        botonCantidadMas.disabled = false;
-
-    }
-
-
-    /* =====================================
-       BOTONES + DE LOS COLORES
+       BOTONES + DE COLORES
     ===================================== */
 
     const botonesMas =
@@ -1091,11 +1109,6 @@ function actualizarBotonesColores() {
 
 
     botonesMas.forEach(boton => {
-
-        /*
-           Si todas las unidades ya están
-           distribuidas, bloquear +.
-        */
 
         boton.disabled =
             totalAsignado >= cantidadTotal;
@@ -1122,7 +1135,7 @@ function ajustarColores(cantidadTotal) {
 
 
     /* ==============================
-       SI NO HAY EXCESO
+       NO HAY EXCESO
     ============================== */
 
     if (totalAsignado <= cantidadTotal) {
@@ -1144,7 +1157,7 @@ function ajustarColores(cantidadTotal) {
 
 
     /* ==============================
-       REDUCIR DESDE EL ÚLTIMO COLOR
+       REDUCIR DESDE EL ÚLTIMO
     ============================== */
 
     for (
@@ -1191,13 +1204,97 @@ function ajustarColores(cantidadTotal) {
 
 
 /* =========================================
+   OBTENER CARRITO
+========================================= */
+
+function obtenerCarrito() {
+
+    const carritoGuardado =
+        localStorage.getItem("carrito");
+
+
+    if (!carritoGuardado) {
+
+        return [];
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            carritoGuardado
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Error al leer el carrito:",
+            error
+        );
+
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================
+   GUARDAR CARRITO
+========================================= */
+
+function guardarCarrito(carrito) {
+
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+}
+
+
+/* =========================================
+   CREAR CLAVE DE DISTRIBUCIÓN
+========================================= */
+
+function crearClaveColores(
+    distribucionColores
+) {
+
+    if (
+        !distribucionColores ||
+        distribucionColores.length === 0
+    ) {
+
+        return "";
+
+    }
+
+
+    return distribucionColores
+        .sort((a, b) =>
+            a.color.localeCompare(b.color)
+        )
+        .map(item =>
+            `${item.color}:${item.cantidad}`
+        )
+        .join("|");
+
+}
+
+
+/* =========================================
    AGREGAR AL CARRITO
 ========================================= */
 
 function agregarAlCarrito(id) {
 
     const producto =
-        productos.find(producto => producto.id === id);
+        productos.find(
+            producto => producto.id === id
+        );
 
 
     if (!producto) {
@@ -1205,17 +1302,33 @@ function agregarAlCarrito(id) {
     }
 
 
+    /* ==============================
+       CANTIDAD
+    ============================== */
+
+    const elementoCantidad =
+        document.getElementById(
+            "cantidad-producto"
+        );
+
+
+    if (!elementoCantidad) {
+        return;
+    }
+
+
     const cantidad =
         parseInt(
-            document.getElementById(
-                "cantidad-producto"
-            ).textContent
+            elementoCantidad.textContent
         );
 
 
     /* =====================================
-       PRODUCTOS CON COLOR
+       DISTRIBUCIÓN DE COLORES
     ===================================== */
+
+    let distribucionColores = [];
+
 
     if (
         producto.colores &&
@@ -1227,9 +1340,9 @@ function agregarAlCarrito(id) {
 
 
         /*
-           Todavía debemos asegurarnos
-           de que todas las unidades tengan
-           un color antes de agregarlas.
+           Si todavía no se han
+           asignado todas las unidades,
+           no agregamos el producto.
         */
 
         if (totalColores !== cantidad) {
@@ -1242,20 +1355,6 @@ function agregarAlCarrito(id) {
 
         }
 
-    }
-
-
-    /* =====================================
-       PREPARAR DISTRIBUCIÓN
-    ===================================== */
-
-    let distribucionColores = [];
-
-
-    if (
-        producto.colores &&
-        producto.colores.length > 0
-    ) {
 
         const opciones =
             document.querySelectorAll(
@@ -1269,12 +1368,16 @@ function agregarAlCarrito(id) {
                 opcion.dataset.color;
 
 
+            const cantidadElemento =
+                opcion.querySelector(
+                    ".cantidad-color span"
+                );
+
+
             const cantidadColor =
                 parseInt(
-                    opcion.querySelector(
-                        ".cantidad-color span"
-                    ).textContent
-                );
+                    cantidadElemento.textContent
+                ) || 0;
 
 
             if (cantidadColor > 0) {
@@ -1295,19 +1398,140 @@ function agregarAlCarrito(id) {
 
 
     /* =====================================
-       POR AHORA
+       OBTENER CARRITO ACTUAL
     ===================================== */
 
-    console.log({
+    const carrito =
+        obtenerCarrito();
 
-        producto: producto.nombre,
 
-        cantidad: cantidad,
+    /* =====================================
+       CLAVE DE ESTA VARIACIÓN
+    ===================================== */
 
-        colores: distribucionColores
+    const claveColores =
+        crearClaveColores(
+            [...distribucionColores]
+        );
 
-    });
 
+    /* =====================================
+       BUSCAR PRODUCTO IGUAL
+    ===================================== */
+
+    const productoExistente =
+        carrito.find(item => {
+
+            if (item.productoId !== producto.id) {
+                return false;
+            }
+
+
+            return (
+                crearClaveColores(
+                    [...(item.colores || [])]
+                ) === claveColores
+            );
+
+        });
+
+
+    /* =====================================
+       SI YA EXISTE
+    ===================================== */
+
+    if (productoExistente) {
+
+        productoExistente.cantidad +=
+            cantidad;
+
+
+        /*
+           También acumulamos
+           las cantidades de color.
+        */
+
+        if (
+            distribucionColores.length > 0
+        ) {
+
+            distribucionColores.forEach(
+                nuevoColor => {
+
+                    const colorExistente =
+                        productoExistente.colores.find(
+                            color =>
+                                color.color ===
+                                nuevoColor.color
+                        );
+
+
+                    if (colorExistente) {
+
+                        colorExistente.cantidad +=
+                            nuevoColor.cantidad;
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /* =====================================
+       PRODUCTO NUEVO
+    ===================================== */
+
+    else {
+
+        carrito.push({
+
+            productoId: producto.id,
+
+            nombre: producto.nombre,
+
+            precio: producto.precio,
+
+            imagen: producto.imagenes[0],
+
+            cantidad: cantidad,
+
+            colores:
+                distribucionColores
+
+        });
+
+    }
+
+
+    /* =====================================
+       GUARDAR
+    ===================================== */
+
+    guardarCarrito(carrito);
+
+
+    /* =====================================
+       COMPROBAR
+    ===================================== */
+
+    console.log(
+        "Carrito actualizado:",
+        carrito
+    );
+
+
+    /*
+       POR AHORA dejamos este mensaje
+       únicamente para comprobar que
+       realmente se guardó.
+
+       Después lo reemplazaremos por
+       el contador visual del carrito.
+    */
 
     alert(
         producto.nombre +
@@ -1326,7 +1550,9 @@ function agregarAlCarrito(id) {
 function comprarAhora(id) {
 
     const producto =
-        productos.find(producto => producto.id === id);
+        productos.find(
+            producto => producto.id === id
+        );
 
 
     if (!producto) {
@@ -1334,11 +1560,20 @@ function comprarAhora(id) {
     }
 
 
+    const cantidadElemento =
+        document.getElementById(
+            "cantidad-producto"
+        );
+
+
+    if (!cantidadElemento) {
+        return;
+    }
+
+
     const cantidad =
         parseInt(
-            document.getElementById(
-                "cantidad-producto"
-            ).textContent
+            cantidadElemento.textContent
         );
 
 
