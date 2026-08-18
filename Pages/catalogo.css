@@ -572,3 +572,37 @@
     }
 
 }
+
+/* =========================================
+   PANEL DE PRODUCTO
+========================================= */
+
+.producto-panel {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: var(--negro);
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    transform: translateY(100%);
+
+    transition:
+        transform 0.45s ease;
+}
+
+
+/* PANEL ABIERTO */
+
+.producto-panel.abierto {
+
+    transform: translateY(0);
+
+}
