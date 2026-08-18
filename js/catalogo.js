@@ -551,6 +551,19 @@ function cerrarProducto() {
 
 }
 
+/* =========================================
+   BOTÓN ATRÁS DEL PANEL
+========================================= */
+
+const botonAtras =
+    document.getElementById("producto-panel-atras");
+
+
+botonAtras.addEventListener("click", () => {
+
+    cerrarProducto();
+
+});
 
 /* =========================================
    CAMBIAR IMAGEN DEL PANEL
@@ -734,19 +747,6 @@ function comprarAhora(id) {
 
 }
 
-/* =========================================
-   CERRAR PANEL DE PRODUCTO
-========================================= */
-
-function cerrarProducto() {
-
-    const panel =
-        document.getElementById("producto-panel");
-
-
-    panel.classList.remove("abierto");
-
-}
 
 /* =========================================
    MOSTRAR PRODUCTOS AL CARGAR
