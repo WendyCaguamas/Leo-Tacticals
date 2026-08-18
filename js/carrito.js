@@ -30,11 +30,6 @@ function obtenerCarrito() {
         localStorage.getItem("carrito");
 
 
-    /*
-       Si todavía no existe un carrito,
-       devolvemos un arreglo vacío.
-    */
-
     if (!carritoGuardado) {
 
         return [];
@@ -42,12 +37,20 @@ function obtenerCarrito() {
     }
 
 
-    /*
-       Convertimos el texto guardado
-       nuevamente en un arreglo.
-    */
+    try {
 
-    return JSON.parse(carritoGuardado);
+        return JSON.parse(carritoGuardado);
+
+    } catch (error) {
+
+        console.error(
+            "Error al leer el carrito:",
+            error
+        );
+
+        return [];
+
+    }
 
 }
 
@@ -76,17 +79,16 @@ function mostrarCarrito() {
         obtenerCarrito();
 
 
-    /*
-       Limpiar la lista antes
-       de volver a generarla.
-    */
+    /* =====================================
+       LIMPIAR
+    ===================================== */
 
     listaCarrito.innerHTML = "";
 
 
     /* =====================================
        CARRITO VACÍO
-    ====================================== */
+    ===================================== */
 
     if (carrito.length === 0) {
 
@@ -127,22 +129,23 @@ function mostrarCarrito() {
 
     /* =====================================
        GENERAR PRODUCTOS
-    ====================================== */
+    ===================================== */
 
     carrito.forEach((item, indice) => {
 
 
-        /*
-           Calcular precio de este producto.
-
-           Ejemplo:
-
-           $24.99 × 2 = $49.98
-        */
+        /* =================================
+           SUBTOTAL
+        ================================= */
 
         const subtotal =
-            item.precio * item.cantidad;
+            item.precio *
+            item.cantidad;
 
+
+        /* =================================
+           CREAR ELEMENTO
+        ================================= */
 
         const producto =
             document.createElement("div");
@@ -153,17 +156,98 @@ function mostrarCarrito() {
         );
 
 
+        /* =================================
+           COLORES
+        ================================= */
+
+        let coloresHTML = "";
+
+
+        if (
+            item.colores &&
+            item.colores.length > 0
+        ) {
+
+            coloresHTML =
+                item.colores.map(color => {
+
+                    return `
+
+                        <div class="carrito-color">
+
+                            <span
+                                class="
+                                    color-producto
+                                    color-${color.color}
+                                "
+                            ></span>
+
+                            <span class="carrito-color-nombre">
+
+                                ${color.color.replace("_", " ")}
+
+                                ×
+
+                                ${color.cantidad}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+        /* =================================
+           CONTENIDO
+        ================================= */
+
         producto.innerHTML = `
 
             <!-- ==========================
-                 NOMBRE
+                 IMAGEN
             =========================== -->
 
-            <div class="carrito-producto-nombre">
+            <div class="carrito-producto-imagen">
 
-                <strong>
+                <img
+                    src="${item.imagen}"
+                    alt="${item.nombre}"
+                >
+
+            </div>
+
+
+            <!-- ==========================
+                 INFORMACIÓN
+            =========================== -->
+
+            <div class="carrito-producto-info">
+
+                <h2>
                     ${item.nombre}
-                </strong>
+                </h2>
+
+
+                <div class="carrito-producto-precio">
+
+                    $${item.precio.toFixed(2)}
+
+                </div>
+
+
+                <!-- ======================
+                     COLORES
+                ======================= -->
+
+                <div class="carrito-producto-colores">
+
+                    ${coloresHTML}
+
+                </div>
 
             </div>
 
@@ -175,34 +259,21 @@ function mostrarCarrito() {
             <div class="carrito-producto-cantidad">
 
                 <span>
+                    Cantidad
+                </span>
+
+                <strong>
                     ${item.cantidad}
-                </span>
+                </strong>
 
             </div>
 
 
             <!-- ==========================
-                 COLOR
+                 SUBTOTAL
             =========================== -->
 
-            <div class="carrito-producto-color">
-
-                <span
-                    class="color-producto color-${item.color}"
-                ></span>
-
-                <span>
-                    ${item.color}
-                </span>
-
-            </div>
-
-
-            <!-- ==========================
-                 PRECIO
-            =========================== -->
-
-            <div class="carrito-producto-precio">
+            <div class="carrito-producto-subtotal">
 
                 $${subtotal.toFixed(2)}
 
@@ -232,8 +303,8 @@ function mostrarCarrito() {
 
 
     /* =====================================
-       CALCULAR TOTAL
-    ====================================== */
+       ACTUALIZAR TOTAL
+    ===================================== */
 
     calcularTotal();
 
@@ -256,7 +327,8 @@ function calcularTotal() {
     carrito.forEach(item => {
 
         total +=
-            item.precio * item.cantidad;
+            item.precio *
+            item.cantidad;
 
     });
 
@@ -280,25 +352,26 @@ function eliminarProducto(indice) {
         obtenerCarrito();
 
 
-    /*
-       Eliminar el producto
-       utilizando su posición.
-    */
+    /* =====================================
+       ELIMINAR
+    ===================================== */
 
-    carrito.splice(indice, 1);
+    carrito.splice(
+        indice,
+        1
+    );
 
 
-    /*
-       Guardar nuevamente
-       el carrito.
-    */
+    /* =====================================
+       GUARDAR
+    ===================================== */
 
     guardarCarrito(carrito);
 
 
-    /*
-       Actualizar pantalla.
-    */
+    /* =====================================
+       ACTUALIZAR
+    ===================================== */
 
     mostrarCarrito();
 
@@ -316,8 +389,8 @@ function enviarPedidoWhatsApp() {
 
 
     /* =====================================
-       EVITAR PEDIDO VACÍO
-    ====================================== */
+       CARRITO VACÍO
+    ===================================== */
 
     if (carrito.length === 0) {
 
@@ -332,47 +405,69 @@ function enviarPedidoWhatsApp() {
 
     /* =====================================
        CREAR MENSAJE
-    ====================================== */
+    ===================================== */
 
     let mensaje =
-        "Hola, deseo realizar el siguiente pedido:%0A%0A";
+        "Hola, deseo realizar el siguiente pedido:\n\n";
 
 
     carrito.forEach(item => {
 
         const subtotal =
-            item.precio * item.cantidad;
+            item.precio *
+            item.cantidad;
 
 
         mensaje +=
             "Producto: " +
             item.nombre +
-            "%0A";
+            "\n";
 
 
         mensaje +=
             "Cantidad: " +
             item.cantidad +
-            "%0A";
+            "\n";
 
 
-        mensaje +=
-            "Color: " +
-            item.color +
-            "%0A";
+        /* ==============================
+           COLORES
+        ============================== */
+
+        if (
+            item.colores &&
+            item.colores.length > 0
+        ) {
+
+            mensaje +=
+                "Colores:\n";
+
+
+            item.colores.forEach(color => {
+
+                mensaje +=
+                    "- " +
+                    color.color.replace("_", " ") +
+                    ": " +
+                    color.cantidad +
+                    "\n";
+
+            });
+
+        }
 
 
         mensaje +=
             "Precio: $" +
             subtotal.toFixed(2) +
-            "%0A%0A";
+            "\n\n";
 
     });
 
 
     /* =====================================
        TOTAL
-    ====================================== */
+    ===================================== */
 
     const total =
         calcularTotal();
@@ -384,27 +479,27 @@ function enviarPedidoWhatsApp() {
 
 
     /* =====================================
-       NÚMERO DE WHATSAPP
-    ====================================== */
+       NÚMERO WHATSAPP
+    ===================================== */
 
     const numero =
         "593985065665";
 
 
     /* =====================================
-       CREAR URL
-    ====================================== */
+       URL
+    ===================================== */
 
     const url =
         "https://wa.me/" +
         numero +
         "?text=" +
-        mensaje;
+        encodeURIComponent(mensaje);
 
 
     /* =====================================
        ABRIR WHATSAPP
-    ====================================== */
+    ===================================== */
 
     window.open(
         url,
@@ -415,7 +510,7 @@ function enviarPedidoWhatsApp() {
 
 
 /* =========================================
-   EVENTO DEL BOTÓN WHATSAPP
+   BOTÓN WHATSAPP
 ========================================= */
 
 if (botonWhatsApp) {
@@ -429,7 +524,7 @@ if (botonWhatsApp) {
 
 
 /* =========================================
-   MOSTRAR CARRITO AL CARGAR
+   MOSTRAR AL CARGAR
 ========================================= */
 
 mostrarCarrito();
