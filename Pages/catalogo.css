@@ -42,8 +42,13 @@
     border-right: 1px solid var(--borde);
 
     padding-right: 30px;
-}
 
+    position: sticky;
+
+    top: 90px;
+
+    align-self: start;
+}
 
 .categorias h2 {
     color: var(--naranja);
