@@ -78,7 +78,13 @@ function mostrarProductos(listaProductos) {
 
                                     gris: "#757575",
 
-                                    marron: "#795548"
+                                    marron: "#795548",
+
+                                    amarillo: "#facc15",
+
+                                    naranja: "#f97316",
+
+                                    morado: "#7e22ce"
 
                                 };
 
@@ -176,6 +182,7 @@ function mostrarProductos(listaProductos) {
     });
 
 }
+
 
 /* =========================================
    FILTRO DE CATEGORÍAS
@@ -433,7 +440,162 @@ function abrirProducto(id) {
 
 
     /* ==============================
-       CREAR CONTENIDO
+       COLORES DISPONIBLES
+    ============================== */
+
+    const coloresCSS = {
+
+        verde: "#43a047",
+
+        verde_oliva: "#636b2f",
+
+        azul: "#1976d2",
+
+        rojo: "#e53935",
+
+        blanco: "#ffffff",
+
+        negro: "#111111",
+
+        gris: "#757575",
+
+        marron: "#795548",
+
+        amarillo: "#facc15",
+
+        naranja: "#f97316",
+
+        morado: "#7e22ce"
+
+    };
+
+
+    /* ==============================
+       GENERAR SELECTOR DE COLORES
+    ============================== */
+
+    let selectorColores = "";
+
+
+    if (
+        producto.colores &&
+        producto.colores.length > 0
+    ) {
+
+        selectorColores = `
+
+            <div class="producto-colores-panel">
+
+                <h3>
+                    COLORES
+                </h3>
+
+
+                <div class="colores-panel-lista">
+
+                    ${
+                        producto.colores.map(color => {
+
+                            return `
+
+                                <div
+                                    class="color-panel-fila"
+                                    data-color="${color}"
+                                >
+
+                                    <div
+                                        class="color-panel-nombre"
+                                    >
+
+                                        <span
+                                            class="color-producto"
+                                            style="
+                                                background-color:
+                                                ${coloresCSS[color] || color};
+                                            "
+                                        ></span>
+
+
+                                        <span>
+                                            ${color.replace("_", " ")}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="color-panel-cantidad"
+                                    >
+
+                                        <button
+                                            type="button"
+                                            onclick="
+                                                cambiarCantidadColor(
+                                                    '${color}',
+                                                    -1
+                                                )
+                                            "
+                                        >
+                                            −
+                                        </button>
+
+
+                                        <span
+                                            id="cantidad-color-${color}"
+                                        >
+                                            0
+                                        </span>
+
+
+                                        <button
+                                            type="button"
+                                            onclick="
+                                                cambiarCantidadColor(
+                                                    '${color}',
+                                                    1
+                                                )
+                                            "
+                                        >
+                                            +
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }).join("")
+                    }
+
+                </div>
+
+
+                <p class="colores-total">
+
+                    Asignado:
+
+                    <span id="colores-asignados">
+                        0
+                    </span>
+
+                    /
+
+                    <span id="cantidad-total-colores">
+                        1
+                    </span>
+
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* ==============================
+       CREAR CONTENIDO DEL PANEL
     ============================== */
 
     contenido.innerHTML = `
@@ -504,12 +666,13 @@ function abrirProducto(id) {
 
 
             <!-- =================================
-                 CANTIDAD
+                 CANTIDAD TOTAL
             ================================== -->
 
             <div class="producto-cantidad">
 
                 <button
+                    type="button"
                     onclick="cambiarCantidad(-1)"
                 >
                     −
@@ -522,12 +685,20 @@ function abrirProducto(id) {
 
 
                 <button
+                    type="button"
                     onclick="cambiarCantidad(1)"
                 >
                     +
                 </button>
 
             </div>
+
+
+            <!-- =================================
+                 COLORES
+            ================================== -->
+
+            ${selectorColores}
 
 
             <!-- =================================
@@ -580,7 +751,7 @@ function abrirProducto(id) {
 
 
     /* ==============================
-       BLOQUEAR SCROLL DEL CATÁLOGO
+       BLOQUEAR SCROLL
     ============================== */
 
     document.body.style.overflow = "hidden";
@@ -598,20 +769,13 @@ function cerrarProducto() {
         document.getElementById("producto-panel");
 
 
-    /* ==============================
-       CERRAR PANEL
-    ============================== */
-
     panel.classList.remove("abierto");
 
-
-    /* ==============================
-       VOLVER A PERMITIR SCROLL
-    ============================== */
 
     document.body.style.overflow = "";
 
 }
+
 
 /* =========================================
    BOTÓN ATRÁS DEL PANEL
@@ -626,6 +790,7 @@ botonAtras.addEventListener("click", () => {
     cerrarProducto();
 
 });
+
 
 /* =========================================
    CAMBIAR IMAGEN DEL PANEL
@@ -711,7 +876,7 @@ function cambiarImagenPanel(direccion) {
 
 
 /* =========================================
-   CAMBIAR CANTIDAD
+   CAMBIAR CANTIDAD TOTAL
 ========================================= */
 
 function cambiarCantidad(cambio) {
@@ -728,7 +893,7 @@ function cambiarCantidad(cambio) {
 
 
     /* ==============================
-       MÍNIMO: 1 PRODUCTO
+       MÍNIMO: 1
     ============================== */
 
     if (cantidad < 1) {
@@ -740,6 +905,293 @@ function cambiarCantidad(cambio) {
 
     elemento.textContent =
         cantidad;
+
+
+    /* ==============================
+       ACTUALIZAR TOTAL DE COLORES
+    ============================== */
+
+    const totalColores =
+        document.getElementById(
+            "cantidad-total-colores"
+        );
+
+
+    if (totalColores) {
+
+        totalColores.textContent =
+            cantidad;
+
+    }
+
+
+    /* ==============================
+       AJUSTAR COLORES
+    ============================== */
+
+    ajustarColores(cantidad);
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD DE UN COLOR
+========================================= */
+
+function cambiarCantidadColor(color, cambio) {
+
+    const cantidadTotal =
+        parseInt(
+            document.getElementById(
+                "cantidad-producto"
+            ).textContent
+        );
+
+
+    const elemento =
+        document.getElementById(
+            `cantidad-color-${color}`
+        );
+
+
+    if (!elemento) {
+        return;
+    }
+
+
+    let cantidad =
+        parseInt(elemento.textContent);
+
+
+    const cantidadAnterior =
+        cantidad;
+
+
+    cantidad += cambio;
+
+
+    /* ==============================
+       NO PERMITIR MENOS DE 0
+    ============================== */
+
+    if (cantidad < 0) {
+
+        cantidad = 0;
+
+    }
+
+
+    /* ==============================
+       CALCULAR TOTAL ASIGNADO
+    ============================== */
+
+    const filas =
+        document.querySelectorAll(
+            ".color-panel-fila"
+        );
+
+
+    let totalAsignado = 0;
+
+
+    filas.forEach(fila => {
+
+        const numero =
+            parseInt(
+                fila.querySelector(
+                    ".color-panel-cantidad span"
+                ).textContent
+            );
+
+
+        totalAsignado += numero;
+
+    });
+
+
+    /* ==============================
+       CALCULAR NUEVO TOTAL
+    ============================== */
+
+    const diferencia =
+        cantidad -
+        cantidadAnterior;
+
+
+    const nuevoTotal =
+        totalAsignado + diferencia;
+
+
+    /* ==============================
+       NO SUPERAR CANTIDAD TOTAL
+    ============================== */
+
+    if (nuevoTotal > cantidadTotal) {
+
+        return;
+
+    }
+
+
+    /* ==============================
+       GUARDAR CANTIDAD
+    ============================== */
+
+    elemento.textContent =
+        cantidad;
+
+
+    /* ==============================
+       ACTUALIZAR INDICADOR
+    ============================== */
+
+    actualizarTotalColores();
+
+}
+
+
+/* =========================================
+   ACTUALIZAR TOTAL DE COLORES
+========================================= */
+
+function actualizarTotalColores() {
+
+    const elemento =
+        document.getElementById(
+            "colores-asignados"
+        );
+
+
+    if (!elemento) {
+        return;
+    }
+
+
+    const cantidades =
+        document.querySelectorAll(
+            ".color-panel-cantidad span"
+        );
+
+
+    let total = 0;
+
+
+    cantidades.forEach(cantidad => {
+
+        total +=
+            parseInt(cantidad.textContent);
+
+    });
+
+
+    elemento.textContent =
+        total;
+
+}
+
+
+/* =========================================
+   AJUSTAR COLORES
+========================================= */
+
+function ajustarColores(cantidadTotal) {
+
+    const filas =
+        document.querySelectorAll(
+            ".color-panel-fila"
+        );
+
+
+    let totalAsignado = 0;
+
+
+    /* ==============================
+       CALCULAR TOTAL ACTUAL
+    ============================== */
+
+    filas.forEach(fila => {
+
+        const cantidad =
+            parseInt(
+                fila.querySelector(
+                    ".color-panel-cantidad span"
+                ).textContent
+            );
+
+
+        totalAsignado += cantidad;
+
+    });
+
+
+    /* ==============================
+       SI NO EXCEDE, NO HACER NADA
+    ============================== */
+
+    if (totalAsignado <= cantidadTotal) {
+
+        actualizarTotalColores();
+
+        return;
+
+    }
+
+
+    /* ==============================
+       CALCULAR EXCESO
+    ============================== */
+
+    let exceso =
+        totalAsignado -
+        cantidadTotal;
+
+
+    /* ==============================
+       REDUCIR DESDE EL ÚLTIMO COLOR
+    ============================== */
+
+    for (
+        let i = filas.length - 1;
+        i >= 0 && exceso > 0;
+        i--
+    ) {
+
+        const elemento =
+            filas[i].querySelector(
+                ".color-panel-cantidad span"
+            );
+
+
+        let cantidad =
+            parseInt(elemento.textContent);
+
+
+        const reducir =
+            Math.min(
+                cantidad,
+                exceso
+            );
+
+
+        cantidad -=
+            reducir;
+
+
+        exceso -=
+            reducir;
+
+
+        elemento.textContent =
+            cantidad;
+
+    }
+
+
+    /* ==============================
+       ACTUALIZAR TOTAL
+    ============================== */
+
+    actualizarTotalColores();
 
 }
 
@@ -759,6 +1211,10 @@ function agregarAlCarrito(id) {
     }
 
 
+    /* ==============================
+       OBTENER CANTIDAD TOTAL
+    ============================== */
+
     const cantidad =
         parseInt(
             document.getElementById(
@@ -766,6 +1222,57 @@ function agregarAlCarrito(id) {
             ).textContent
         );
 
+
+    /* ==============================
+       PRODUCTO CON COLORES
+    ============================== */
+
+    if (
+        producto.colores &&
+        producto.colores.length > 0
+    ) {
+
+        const cantidades =
+            document.querySelectorAll(
+                ".color-panel-cantidad span"
+            );
+
+
+        let totalColores = 0;
+
+
+        cantidades.forEach(elemento => {
+
+            totalColores +=
+                parseInt(
+                    elemento.textContent
+                );
+
+        });
+
+
+        /* ==============================
+           OBLIGAR A ASIGNAR TODO
+        ============================== */
+
+        if (totalColores !== cantidad) {
+
+            alert(
+                "Debes asignar las " +
+                cantidad +
+                " unidades entre los colores disponibles."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* ==============================
+       POR AHORA SOLO MOSTRAR MENSAJE
+    ============================== */
 
     alert(
         producto.nombre +
