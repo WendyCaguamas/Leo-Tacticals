@@ -9,8 +9,6 @@ const productos = [
 
         precio: 30.00,
 
-        colores: ["negro"],
-
         imagenes: [
             "../img/001/001.jpeg",
             "../img/001/002.jpeg"
@@ -25,8 +23,6 @@ const productos = [
         categoria: "equipamento",
 
         precio: 30.00,
-
-        colores: ["negro"],
 
         imagenes: [
             "../img/002/001.jpeg",
@@ -120,7 +116,6 @@ const productos = [
 
         precio: 20.00,
 
-        colores: ["verde"],
         imagenes: [
             "../img/008/001.jpg",
             "../img/008/002.jpeg"
@@ -134,7 +129,6 @@ const productos = [
 
         precio: 10.00,
 
-        colores: ["verde"],
         imagenes: [
             "../img/009/001.jpeg"
         ]
@@ -147,7 +141,6 @@ const productos = [
 
         precio: 10.00,
 
-        colores: ["verde_oliva"],
         imagenes: [
             "../img/010/001.jpeg"
         ]
