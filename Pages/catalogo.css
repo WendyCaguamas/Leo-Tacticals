@@ -193,6 +193,8 @@
     overflow: hidden;
 
     transition: 0.3s;
+
+    cursor: pointer;
 }
 
 
@@ -469,10 +471,6 @@
 }
 
 
-/* =========================================
-   PANEL ABIERTO
-========================================= */
-
 .producto-panel.abierto {
     transform: translateY(0);
 }
@@ -578,10 +576,6 @@
 }
 
 
-/* =========================================
-   IMAGEN PRINCIPAL DEL PANEL
-========================================= */
-
 .producto-panel-imagenes img {
     width: 100%;
 
@@ -664,10 +658,6 @@
 }
 
 
-/* =========================================
-   NOMBRE
-========================================= */
-
 .producto-panel-datos h1 {
     color: var(--naranja);
 
@@ -681,10 +671,6 @@
 }
 
 
-/* =========================================
-   DESCRIPCIÓN
-========================================= */
-
 .producto-panel-descripcion {
     color: var(--blanco);
 
@@ -695,10 +681,6 @@
     margin: 0 0 22px;
 }
 
-
-/* =========================================
-   PRECIO
-========================================= */
 
 .producto-panel-precio {
     color: var(--naranja-claro);
@@ -729,10 +711,6 @@
     border-radius: 6px;
 }
 
-
-/* =========================================
-   TÍTULO DE SELECCIÓN
-========================================= */
 
 .producto-seleccion-titulo {
     color: var(--blanco);
@@ -775,9 +753,13 @@
 
     align-items: center;
 
-    gap: 8px;
+    justify-content: space-between;
+
+    gap: 12px;
 
     padding: 7px 10px;
+
+    width: 100%;
 
     background: var(--negro-tarjeta);
 
@@ -785,7 +767,7 @@
 
     border-radius: 5px;
 
-    cursor: pointer;
+    cursor: default;
 
     transition:
         background 0.2s ease,
@@ -802,13 +784,24 @@
 
 
 /* =========================================
-   COLOR SELECCIONADO
+   NOMBRE DEL COLOR
 ========================================= */
 
-.opcion-color.seleccionado {
-    border-color: var(--naranja);
+.opcion-color-nombre {
+    display: flex;
 
-    background: rgba(255, 179, 0, 0.08);
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.nombre-color {
+    color: var(--blanco);
+
+    font-size: 13px;
+
+    font-weight: bold;
 }
 
 
@@ -829,21 +822,81 @@
 }
 
 
-/* =========================================
-   NOMBRE DEL COLOR
-========================================= */
+/* =========================================================
+   CANTIDAD POR COLOR
+========================================================= */
 
-.nombre-color {
+.cantidad-color {
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+
+.cantidad-color button {
+    width: 32px;
+
+    height: 32px;
+
+    border: none;
+
+    background: var(--negro-secundario);
+
     color: var(--blanco);
 
-    font-size: 13px;
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.cantidad-color button:hover:not(:disabled) {
+    background: var(--naranja);
+
+    color: var(--negro);
+}
+
+
+.cantidad-color button:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+
+.cantidad-color span {
+    width: 35px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--negro-tarjeta);
+
+    color: var(--blanco);
+
+    font-size: 14px;
 
     font-weight: bold;
 }
 
 
 /* =========================================================
-   CANTIDAD
+   CANTIDAD TOTAL
 ========================================================= */
 
 .producto-cantidad-contenedor {
@@ -865,10 +918,6 @@
     font-weight: bold;
 }
 
-
-/* =========================================
-   CONTROL DE CANTIDAD
-========================================= */
 
 .producto-cantidad {
     display: flex;
@@ -1000,10 +1049,6 @@
 }
 
 
-/* =========================================
-   AGREGAR AL CARRITO
-========================================= */
-
 .boton-carrito {
     background: var(--naranja);
 
@@ -1020,10 +1065,6 @@
 }
 
 
-/* =========================================
-   COMPRAR AHORA
-========================================= */
-
 .boton-comprar {
     background: transparent;
 
@@ -1037,6 +1078,266 @@
     background: var(--naranja);
 
     color: var(--negro);
+}
+
+
+/* =========================================================
+   POPUP DE PRODUCTO AGREGADO
+========================================================= */
+
+.popup-carrito {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(6px);
+
+    -webkit-backdrop-filter: blur(6px);
+
+    z-index: 5000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+}
+
+
+/* =========================================
+   POPUP VISIBLE
+
+   IMPORTANTE:
+   El JS utiliza .visible
+========================================= */
+
+.popup-carrito.visible {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================
+   CAJA DEL POPUP
+========================================= */
+
+.popup-carrito-contenido {
+
+    position: relative;
+
+    width: min(90%, 430px);
+
+    padding: 40px 35px;
+
+    background: var(--negro-secundario);
+
+    border: 1px solid var(--naranja);
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(255, 179, 0, 0.12);
+
+    transform: translateY(25px) scale(0.95);
+
+    opacity: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+
+/* =========================================
+   ANIMACIÓN DE ENTRADA
+========================================= */
+
+.popup-carrito.visible
+.popup-carrito-contenido {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+}
+
+
+/* =========================================
+   ICONO DE CONFIRMACIÓN
+========================================= */
+
+.popup-carrito-icono {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    font-size: 45px;
+
+    box-shadow:
+        0 0 0 6px rgba(255, 179, 0, 0.10),
+        0 0 30px rgba(255, 179, 0, 0.25);
+
+    animation:
+        popupCheck 0.5s ease;
+}
+
+
+@keyframes popupCheck {
+
+    0% {
+
+        transform: scale(0);
+
+        opacity: 0;
+
+    }
+
+    60% {
+
+        transform: scale(1.15);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================
+   TÍTULO DEL POPUP
+========================================= */
+
+.popup-carrito h2 {
+
+    margin: 0 0 10px;
+
+    color: var(--blanco);
+
+    font-size: 26px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================
+   PRODUCTO
+========================================= */
+
+.popup-carrito p {
+
+    margin: 0 0 8px;
+
+    color: var(--naranja);
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   CANTIDAD
+========================================= */
+
+.popup-carrito span {
+
+    color: var(--gris);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .popup-carrito-contenido {
+
+        width: calc(100% - 30px);
+
+        padding: 35px 25px;
+
+    }
+
+
+    .popup-carrito-icono {
+
+        width: 75px;
+
+        height: 75px;
+
+        font-size: 38px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .popup-carrito h2 {
+
+        font-size: 23px;
+
+    }
+
+
+    .popup-carrito p {
+
+        font-size: 16px;
+
+    }
+
+
+    .popup-carrito span {
+
+        font-size: 13px;
+
+    }
+
 }
 
 
@@ -1067,10 +1368,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-
-    /* ==============================
-       PANEL
-    ============================== */
 
     .producto-panel-contenido {
         grid-template-columns: 1fr 1fr;
@@ -1128,11 +1425,8 @@
     }
 
 
-    /* ==============================
-       CATEGORÍAS
-    ============================== */
-
     .categorias {
+
         border-right: none;
 
         border-bottom: 1px solid var(--borde);
@@ -1144,6 +1438,7 @@
 
 
     .categorias h2 {
+
         text-align: center;
 
         margin-bottom: 20px;
@@ -1156,6 +1451,7 @@
 
 
     .categoria {
+
         text-align: center;
 
         border-left: none;
@@ -1165,6 +1461,7 @@
 
 
     .categoria:hover {
+
         border-left-color: transparent;
 
         border-bottom-color: var(--naranja);
@@ -1172,15 +1469,12 @@
 
 
     .categoria.activa {
+
         border-left-color: transparent;
 
         border-bottom-color: var(--naranja);
     }
 
-
-    /* ==============================
-       PRODUCTOS
-    ============================== */
 
     .productos-catalogo {
         min-height: 400px;
@@ -1193,6 +1487,7 @@
 
 
     .producto-imagenes {
+
         height: 320px;
 
         aspect-ratio: auto;
@@ -1214,6 +1509,7 @@
     ============================== */
 
     .producto-panel-atras {
+
         top: 15px;
 
         margin: 15px 20px 0;
@@ -1221,6 +1517,7 @@
 
 
     .producto-panel-contenido {
+
         display: flex;
 
         flex-direction: column;
@@ -1236,6 +1533,7 @@
 
 
     .producto-panel-imagenes {
+
         width: 100%;
 
         max-width: 500px;
@@ -1245,6 +1543,7 @@
 
 
     .producto-panel-datos {
+
         width: 100%;
 
         max-width: 500px;
@@ -1259,6 +1558,7 @@
 
 
     .producto-panel-descripcion {
+
         font-size: 15px;
 
         line-height: 1.6;
@@ -1266,17 +1566,15 @@
 
 
     .producto-panel-precio {
+
         font-size: 26px;
 
         margin-bottom: 20px;
     }
 
 
-    /* ==============================
-       SELECCIÓN
-    ============================== */
-
     .producto-seleccion {
+
         padding: 15px;
 
         margin-bottom: 20px;
@@ -1284,6 +1582,7 @@
 
 
     .producto-cantidad-contenedor {
+
         align-items: flex-start;
 
         flex-direction: column;
@@ -1335,6 +1634,7 @@
     ============================== */
 
     .colores-producto {
+
         top: 10px;
 
         left: 10px;
@@ -1344,6 +1644,7 @@
 
 
     .color-producto {
+
         width: 18px;
 
         height: 18px;
@@ -1359,6 +1660,7 @@
     ============================== */
 
     .producto-panel-atras {
+
         top: 12px;
 
         margin: 12px 15px 0;
@@ -1370,6 +1672,7 @@
 
 
     .producto-panel-contenido {
+
         padding: 20px 15px 40px;
 
         gap: 25px;
@@ -1377,6 +1680,7 @@
 
 
     .producto-panel-imagenes {
+
         width: 100%;
 
         aspect-ratio: 1 / 1;
@@ -1384,6 +1688,7 @@
 
 
     .producto-panel-datos h1 {
+
         font-size: 27px;
 
         margin-bottom: 15px;
@@ -1391,6 +1696,7 @@
 
 
     .producto-panel-descripcion {
+
         font-size: 14px;
 
         line-height: 1.6;
@@ -1400,17 +1706,15 @@
 
 
     .producto-panel-precio {
+
         font-size: 24px;
 
         margin-bottom: 20px;
     }
 
 
-    /* ==============================
-       SELECCIÓN
-    ============================== */
-
     .producto-seleccion {
+
         padding: 14px;
 
         margin-bottom: 18px;
@@ -1418,6 +1722,7 @@
 
 
     .producto-seleccion-titulo {
+
         font-size: 13px;
 
         margin-bottom: 12px;
@@ -1425,6 +1730,7 @@
 
 
     .producto-seleccion-colores {
+
         gap: 7px;
 
         margin-bottom: 15px;
@@ -1432,11 +1738,13 @@
 
 
     .opcion-color {
+
         padding: 6px 8px;
     }
 
 
     .opcion-color .color-producto {
+
         width: 20px;
 
         height: 20px;
@@ -1458,6 +1766,7 @@
 
 
     .producto-cantidad button {
+
         width: 40px;
 
         height: 40px;
@@ -1465,6 +1774,7 @@
 
 
     .producto-cantidad span {
+
         width: 50px;
 
         height: 40px;
@@ -1482,410 +1792,12 @@
 
     .boton-carrito,
     .boton-comprar {
+
         min-height: 45px;
 
         padding: 13px;
 
         font-size: 14px;
-    }
-
-}
-
-/* =========================================================
-   POPUP DE PRODUCTO AGREGADO
-   Leo Tacticals
-========================================================= */
-
-
-/* =========================================
-   FONDO DEL POPUP
-========================================= */
-
-.popup-carrito {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0, 0, 0, 0.72);
-
-    backdrop-filter: blur(6px);
-
-    -webkit-backdrop-filter: blur(6px);
-
-    z-index: 5000;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.3s ease;
-
-}
-
-
-/* =========================================
-   POPUP VISIBLE
-========================================= */
-
-.popup-carrito.mostrar {
-
-    opacity: 1;
-
-    pointer-events: auto;
-
-}
-
-
-/* =========================================
-   CAJA DEL POPUP
-========================================= */
-
-.popup-carrito-contenido {
-
-    width: min(90%, 430px);
-
-    padding: 40px 35px;
-
-    background: var(--negro-secundario);
-
-    border: 1px solid var(--naranja);
-
-    border-radius: 8px;
-
-    text-align: center;
-
-    box-shadow:
-        0 15px 50px rgba(0, 0, 0, 0.7),
-        0 0 25px rgba(255, 179, 0, 0.12);
-
-    transform: translateY(25px) scale(0.95);
-
-    opacity: 0;
-
-    transition:
-        transform 0.35s ease,
-        opacity 0.35s ease;
-
-}
-
-
-/* =========================================
-   ANIMACIÓN DE ENTRADA
-========================================= */
-
-.popup-carrito.mostrar
-.popup-carrito-contenido {
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    opacity: 1;
-
-}
-
-
-/* =========================================
-   ICONO DE CONFIRMACIÓN
-========================================= */
-
-.popup-carrito-icono {
-
-    width: 85px;
-
-    height: 85px;
-
-    margin: 0 auto 22px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: var(--naranja);
-
-    color: var(--negro);
-
-    font-size: 45px;
-
-    box-shadow:
-        0 0 0 6px rgba(255, 179, 0, 0.10),
-        0 0 30px rgba(255, 179, 0, 0.25);
-
-    animation:
-        popupCheck 0.5s ease;
-}
-
-
-/* =========================================
-   ANIMACIÓN DEL CHECK
-========================================= */
-
-@keyframes popupCheck {
-
-    0% {
-
-        transform: scale(0);
-
-        opacity: 0;
-
-    }
-
-    60% {
-
-        transform: scale(1.15);
-
-        opacity: 1;
-
-    }
-
-    100% {
-
-        transform: scale(1);
-
-        opacity: 1;
-
-    }
-
-}
-
-
-/* =========================================
-   TÍTULO
-========================================= */
-
-.popup-carrito-titulo {
-
-    margin: 0 0 10px;
-
-    color: var(--blanco);
-
-    font-size: 26px;
-
-    font-weight: 900;
-
-}
-
-
-/* =========================================
-   PRODUCTO
-========================================= */
-
-.popup-carrito-producto {
-
-    margin: 0 0 8px;
-
-    color: var(--naranja);
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    line-height: 1.4;
-
-}
-
-
-/* =========================================
-   CANTIDAD
-========================================= */
-
-.popup-carrito-cantidad {
-
-    margin: 0;
-
-    color: var(--gris);
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-}
-
-
-/* =========================================
-   BARRA DE TIEMPO
-========================================= */
-
-.popup-carrito-tiempo {
-
-    width: 100%;
-
-    height: 3px;
-
-    margin-top: 28px;
-
-    overflow: hidden;
-
-    border-radius: 10px;
-
-    background: var(--borde);
-
-}
-
-
-/* =========================================
-   PROGRESO DE LA BARRA
-========================================= */
-
-.popup-carrito-tiempo span {
-
-    display: block;
-
-    width: 100%;
-
-    height: 100%;
-
-    background: var(--naranja);
-
-    transform-origin: left;
-
-    animation:
-        popupTiempo 3s linear forwards;
-
-}
-
-
-@keyframes popupTiempo {
-
-    from {
-
-        transform: scaleX(1);
-
-    }
-
-    to {
-
-        transform: scaleX(0);
-
-    }
-
-}
-
-
-/* =========================================================
-   BOTÓN CERRAR
-========================================================= */
-
-.popup-carrito-cerrar {
-
-    position: absolute;
-
-    top: 20px;
-
-    right: 20px;
-
-    width: 38px;
-
-    height: 38px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid var(--borde);
-
-    border-radius: 50%;
-
-    background: var(--negro-secundario);
-
-    color: var(--gris);
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease;
-
-}
-
-
-.popup-carrito-cerrar:hover {
-
-    background: var(--naranja);
-
-    color: var(--negro);
-
-    border-color: var(--naranja);
-
-}
-
-
-/* =========================================================
-   MÓVIL
-========================================================= */
-
-@media (max-width: 500px) {
-
-    .popup-carrito-contenido {
-
-        width: calc(100% - 30px);
-
-        padding: 35px 25px;
-
-    }
-
-
-    .popup-carrito-icono {
-
-        width: 75px;
-
-        height: 75px;
-
-        font-size: 38px;
-
-        margin-bottom: 20px;
-
-    }
-
-
-    .popup-carrito-titulo {
-
-        font-size: 23px;
-
-    }
-
-
-    .popup-carrito-producto {
-
-        font-size: 16px;
-
-    }
-
-
-    .popup-carrito-cantidad {
-
-        font-size: 13px;
-
-    }
-
-
-    .popup-carrito-cerrar {
-
-        top: 15px;
-
-        right: 15px;
-
-        width: 35px;
-
-        height: 35px;
-
     }
 
 }
