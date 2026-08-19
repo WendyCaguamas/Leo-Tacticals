@@ -282,85 +282,256 @@ nav a:hover {
 }
 
 
-/* =========================================
-   PRODUCTOS
-========================================= */
+/* =========================================================
+   PRODUCTOS DESTACADOS
+========================================================= */
 
 .productos {
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 30px;
+    gap: 25px;
+
+    width: 100%;
 }
 
 
-/* =========================================
+/* =========================================================
    TARJETA DE PRODUCTO
-========================================= */
+   MISMO DISEÑO QUE EL CATÁLOGO
+========================================================= */
 
-.producto {
+.producto-catalogo {
     background: var(--negro-tarjeta);
+
+    border: 1px solid var(--borde);
 
     border-radius: 5px;
 
     overflow: hidden;
 
-    border: 1px solid var(--borde);
-
     transition: 0.3s;
+
+    cursor: pointer;
 }
 
-.producto:hover {
-    transform: translateY(-7px);
+
+.producto-catalogo:hover {
+    border-color: var(--naranja);
+
+    transform: translateY(-5px);
+}
+
+
+/* =========================================
+   IMÁGENES
+========================================= */
+
+.producto-imagenes {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: #101010;
+}
+
+
+.imagen-producto {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transform: translateX(0);
+
+    transition: transform 0.35s ease;
+
+    will-change: transform;
+}
+
+
+/* =========================================
+   COLORES DISPONIBLES
+========================================= */
+
+.colores-producto {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    display: flex;
+
+    gap: 6px;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+.color-producto {
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    border-radius: 50%;
+
+    display: block;
+
+    padding: 0;
+    margin: 0;
+
+    box-sizing: border-box;
+
+    border: 2px solid var(--blanco);
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =========================================
+   COLORES
+========================================= */
+
+.color-verde {
+    background: #2e8b57;
+}
+
+.color-verde_oliva {
+    background: #636b2f;
+}
+
+.color-azul {
+    background: #2563eb;
+}
+
+.color-negro {
+    background: #111111;
+}
+
+.color-rojo {
+    background: #c62828;
+}
+
+.color-blanco {
+    background: #ffffff;
+}
+
+.color-amarillo {
+    background: #facc15;
+}
+
+.color-naranja {
+    background: #f97316;
+}
+
+.color-morado {
+    background: #7e22ce;
+}
+
+.color-gris {
+    background: #757575;
+}
+
+.color-marron {
+    background: #795548;
+}
+
+
+/* =========================================
+   FLECHAS
+========================================= */
+
+.flecha {
+    position: absolute;
+
+    top: 50%;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    color: var(--blanco);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    transition: 0.25s;
+
+    z-index: 5;
+}
+
+
+.flecha-izquierda {
+    left: 12px;
+}
+
+
+.flecha-derecha {
+    right: 12px;
+}
+
+
+.flecha:hover {
+    background: var(--naranja);
+
+    color: var(--negro);
 
     border-color: var(--naranja);
 }
 
 
 /* =========================================
-   IMAGEN DEL PRODUCTO
+   DATOS DEL PRODUCTO
 ========================================= */
 
-.producto img {
-    width: 100%;
-    height: 270px;
-
-    object-fit: cover;
-
-    display: block;
+.producto-datos {
+    padding: 20px;
 }
 
 
-/* =========================================
-   INFORMACIÓN DEL PRODUCTO
-========================================= */
-
-.producto-info {
-    padding: 22px;
-}
-
-
-/* =========================================
-   NOMBRE DEL PRODUCTO
-========================================= */
-
-.producto-info h3 {
+.producto-datos h2 {
     color: var(--naranja);
 
     font-size: 20px;
+
     font-weight: 900;
 
     margin-bottom: 10px;
 }
 
 
-/* =========================================
-   DESCRIPCIÓN
-========================================= */
-
-.producto-info p {
+.producto-datos p {
     color: var(--blanco);
+
+    font-size: 14px;
 
     line-height: 1.5;
 
@@ -368,21 +539,18 @@ nav a:hover {
 }
 
 
-/* =========================================
-   PRECIO
-========================================= */
-
-.precio {
+.producto-precio {
     color: var(--naranja-claro);
 
-    font-size: 19px;
+    font-size: 20px;
+
     font-weight: bold;
 }
 
 
-/* =========================================
+/* =========================================================
    CONTACTO
-========================================= */
+========================================================= */
 
 .contacto {
     width: 100%;
@@ -394,10 +562,6 @@ nav a:hover {
     background: var(--negro-secundario);
 }
 
-
-/* =========================================
-   INFORMACIÓN DE CONTACTO
-========================================= */
 
 .contacto-info {
     display: flex;
@@ -413,10 +577,6 @@ nav a:hover {
 }
 
 
-/* =========================================
-   TÍTULO CONTACTO
-========================================= */
-
 .contacto-info h2 {
     color: var(--naranja);
 
@@ -426,10 +586,6 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-
-/* =========================================
-   TEXTO CONTACTO
-========================================= */
 
 .contacto-info p {
     color: var(--blanco);
@@ -458,10 +614,6 @@ nav a:hover {
 }
 
 
-/* =========================================
-   ENLACES DE REDES
-========================================= */
-
 .redes-sociales a {
     display: flex;
 
@@ -482,10 +634,6 @@ nav a:hover {
 }
 
 
-/* =========================================
-   ICONOS DE REDES
-========================================= */
-
 .redes-sociales i {
     width: 25px;
 
@@ -495,15 +643,12 @@ nav a:hover {
 }
 
 
-/* =========================================
-   EFECTO HOVER REDES
-========================================= */
-
 .redes-sociales a:hover {
     color: var(--naranja);
 
     transform: translateX(3px);
 }
+
 
 .redes-sociales a:hover i {
     filter:
@@ -514,7 +659,7 @@ nav a:hover {
 
 
 /* =========================================
-   LADO DERECHO — MAPA
+   MAPA
 ========================================= */
 
 .contacto-mapa {
@@ -535,10 +680,6 @@ nav a:hover {
 }
 
 
-/* =========================================
-   TÍTULO DEL MAPA
-========================================= */
-
 .contacto-mapa h2 {
     color: var(--naranja);
 
@@ -548,10 +689,6 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-
-/* =========================================
-   MAPA
-========================================= */
 
 .contacto-mapa iframe {
     display: block;
@@ -584,9 +721,187 @@ footer {
 }
 
 
+/* =========================================================
+   POPUP DE PRODUCTO AGREGADO
+========================================================= */
+
+.popup-carrito {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(6px);
+
+    -webkit-backdrop-filter: blur(6px);
+
+    z-index: 5000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+}
+
+
+.popup-carrito.visible {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
 /* =========================================
-   RESPONSIVE — TABLETS
+   CONTENIDO
 ========================================= */
+
+.popup-carrito-contenido {
+    position: relative;
+
+    width: min(90%, 430px);
+
+    padding: 40px 35px;
+
+    background: var(--negro-secundario);
+
+    border: 1px solid var(--naranja);
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(255, 179, 0, 0.12);
+
+    transform: translateY(25px) scale(0.95);
+
+    opacity: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+
+.popup-carrito.visible
+.popup-carrito-contenido {
+    transform: translateY(0) scale(1);
+
+    opacity: 1;
+}
+
+
+/* =========================================
+   ICONO
+========================================= */
+
+.popup-carrito-icono {
+    width: 85px;
+
+    height: 85px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    font-size: 45px;
+
+    box-shadow:
+        0 0 0 6px rgba(255, 179, 0, 0.10),
+        0 0 30px rgba(255, 179, 0, 0.25);
+
+    animation: popupCheck 0.5s ease;
+}
+
+
+@keyframes popupCheck {
+
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.popup-carrito h2 {
+    margin: 0 0 10px;
+
+    color: var(--blanco);
+
+    font-size: 26px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================
+   PRODUCTO
+========================================= */
+
+.popup-carrito p {
+    margin: 0 0 8px;
+
+    color: var(--naranja);
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   CANTIDAD
+========================================= */
+
+.popup-carrito span {
+    color: var(--gris);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -611,12 +926,11 @@ footer {
         font-size: 14px;
     }
 
+
     .productos {
         grid-template-columns: repeat(2, 1fr);
     }
 
-
-    /* CONTACTO */
 
     .contacto {
         grid-template-columns: 1fr 1fr;
@@ -637,9 +951,9 @@ footer {
 }
 
 
-/* =========================================
+/* =========================================================
    RESPONSIVE — MÓVILES
-========================================= */
+========================================================= */
 
 @media (max-width: 800px) {
 
@@ -669,10 +983,6 @@ footer {
     }
 
 
-    /* =====================================
-       HERO
-    ===================================== */
-
     .hero {
         height: 420px;
     }
@@ -691,10 +1001,6 @@ footer {
     }
 
 
-    /* =====================================
-       PRODUCTOS
-    ===================================== */
-
     .productos {
         grid-template-columns: 1fr;
     }
@@ -702,9 +1008,64 @@ footer {
 }
 
 
-/* =========================================
-   RESPONSIVE — TELÉFONOS PEQUEÑOS
-========================================= */
+/* =========================================================
+   CONTACTO — MÓVIL
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .contacto {
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    .contacto-info {
+        width: 100%;
+
+        padding: 55px 20px;
+    }
+
+    .contacto-info h2 {
+        font-size: 28px;
+    }
+
+    .contacto-info p {
+        margin-bottom: 35px;
+    }
+
+
+    .contacto-mapa {
+        width: 100%;
+
+        padding: 40px 20px;
+
+        border-left: none;
+
+        border-top: 1px solid var(--borde);
+    }
+
+    .contacto-mapa h2 {
+        font-size: 23px;
+
+        margin-bottom: 20px;
+    }
+
+    .contacto-mapa iframe {
+        width: 100%;
+
+        max-width: 600px;
+
+        height: 280px;
+    }
+
+}
+
+
+/* =========================================================
+   TELÉFONOS PEQUEÑOS
+========================================================= */
 
 @media (max-width: 550px) {
 
@@ -737,10 +1098,6 @@ footer {
     }
 
 
-    /* =====================================
-       HERO
-    ===================================== */
-
     .hero {
         height: 400px;
     }
@@ -757,10 +1114,6 @@ footer {
     }
 
 
-    /* =====================================
-       CATÁLOGO
-    ===================================== */
-
     .catalogo {
         padding: 50px 20px;
     }
@@ -773,75 +1126,67 @@ footer {
         font-size: 14px;
     }
 
-}
 
-
-/* =========================================
-   CONTACTO — MÓVIL
-========================================= */
-
-@media (max-width: 700px) {
-
-    .contacto {
-        display: flex;
-
-        flex-direction: column;
+    .productos {
+        grid-template-columns: 1fr;
     }
 
 
-    /* ==============================
-       INFORMACIÓN DE CONTACTO
-    ============================== */
+    .colores-producto {
+        top: 10px;
 
-    .contacto-info {
-        width: 100%;
+        left: 10px;
 
-        padding: 55px 20px;
-    }
-
-    .contacto-info h2 {
-        font-size: 28px;
-    }
-
-    .contacto-info p {
-        margin-bottom: 35px;
+        gap: 5px;
     }
 
 
-    /* ==============================
-       MAPA
-    ============================== */
+    .color-producto {
+        width: 18px;
+        height: 18px;
 
-    .contacto-mapa {
-        width: 100%;
-
-        padding: 40px 20px;
-
-        border-left: none;
-
-        border-top: 1px solid var(--borde);
+        min-width: 18px;
+        min-height: 18px;
     }
 
-    .contacto-mapa h2 {
-        font-size: 23px;
+
+    .popup-carrito-contenido {
+        width: calc(100% - 30px);
+
+        padding: 35px 25px;
+    }
+
+
+    .popup-carrito-icono {
+        width: 75px;
+        height: 75px;
+
+        font-size: 38px;
 
         margin-bottom: 20px;
     }
 
-    .contacto-mapa iframe {
-        width: 100%;
 
-        max-width: 600px;
+    .popup-carrito h2 {
+        font-size: 23px;
+    }
 
-        height: 280px;
+
+    .popup-carrito p {
+        font-size: 16px;
+    }
+
+
+    .popup-carrito span {
+        font-size: 13px;
     }
 
 }
 
 
-/* =========================================
+/* =========================================================
    CONTACTO — TELÉFONOS PEQUEÑOS
-========================================= */
+========================================================= */
 
 @media (max-width: 450px) {
 
@@ -868,8 +1213,6 @@ footer {
     }
 
 
-    /* MAPA */
-
     .contacto-mapa {
         padding: 35px 15px;
     }
@@ -880,6 +1223,23 @@ footer {
 
     .contacto-mapa iframe {
         height: 250px;
+    }
+
+
+    .producto-datos {
+        padding: 18px;
+    }
+
+    .producto-datos h2 {
+        font-size: 18px;
+    }
+
+    .producto-datos p {
+        font-size: 13px;
+    }
+
+    .producto-precio {
+        font-size: 19px;
     }
 
 }
