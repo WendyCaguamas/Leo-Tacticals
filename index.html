@@ -44,27 +44,19 @@
 
 
         <!-- Navegación -->
-<nav>
-
-    <a href="index.html">
-        <i class="fa-solid fa-house"></i>
-        <span>Inicio</span>
-    </a>
-
-
-    <a href="/Pages/catalogo.html">
-        <i class="fa-solid fa-box"></i>
-        <span>Catálogo</span>
-    </a>
-
-
-    <a href="/Pages/carrito.html">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span>Carrito</span>
-    </a>
-
-</nav>
-
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/carrito",
+      "destination": "/carrito.html"
+    },
+    {
+      "source": "/catalogo",
+      "destination": "/catalogo.html"
+    }
+  ]
+}
     </header>
 
 
