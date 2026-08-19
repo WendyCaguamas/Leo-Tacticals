@@ -12,6 +12,11 @@ const contenedorProductos =
 
 function mostrarProductos(listaProductos) {
 
+    if (!contenedorProductos) {
+        return;
+    }
+
+
     contenedorProductos.innerHTML = "";
 
 
@@ -21,7 +26,9 @@ function mostrarProductos(listaProductos) {
             document.createElement("article");
 
 
-        tarjeta.classList.add("producto-catalogo");
+        tarjeta.classList.add(
+            "producto-catalogo"
+        );
 
 
         /* =====================================
@@ -202,11 +209,15 @@ botonesCategorias.forEach(boton => {
            CAMBIAR BOTÓN ACTIVO
         ============================== */
 
-        botonesCategorias.forEach(botonCategoria => {
+        botonesCategorias.forEach(
+            botonCategoria => {
 
-            botonCategoria.classList.remove("activa");
+                botonCategoria.classList.remove(
+                    "activa"
+                );
 
-        });
+            }
+        );
 
 
         boton.classList.add("activa");
@@ -253,19 +264,27 @@ function cambiarImagen(boton, direccion) {
 
 
     const datos =
-        contenedor.querySelector(".imagenes-producto-data");
+        contenedor.querySelector(
+            ".imagenes-producto-data"
+        );
 
 
     const imagenes =
-        JSON.parse(datos.dataset.imagenes);
+        JSON.parse(
+            datos.dataset.imagenes
+        );
 
 
     /* ==============================
        EVITAR ANIMACIONES SIMULTÁNEAS
     ============================== */
 
-    if (contenedor.dataset.animando === "true") {
+    if (
+        contenedor.dataset.animando === "true"
+    ) {
+
         return;
+
     }
 
 
@@ -279,7 +298,8 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    contenedor.dataset.animando = "true";
+    contenedor.dataset.animando =
+        "true";
 
 
     /* ==============================
@@ -287,7 +307,9 @@ function cambiarImagen(boton, direccion) {
     ============================== */
 
     let indice =
-        parseInt(imagenActual.dataset.indice || "0");
+        parseInt(
+            imagenActual.dataset.indice || "0"
+        );
 
 
     /* ==============================
@@ -306,7 +328,10 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    if (nuevoIndice >= imagenes.length) {
+    if (
+        nuevoIndice >=
+        imagenes.length
+    ) {
 
         nuevoIndice = 0;
 
@@ -329,7 +354,9 @@ function cambiarImagen(boton, direccion) {
         imagenActual.alt;
 
 
-    imagenNueva.classList.add("imagen-producto");
+    imagenNueva.classList.add(
+        "imagen-producto"
+    );
 
 
     imagenNueva.dataset.indice =
@@ -357,7 +384,9 @@ function cambiarImagen(boton, direccion) {
        AÑADIR IMAGEN
     ============================== */
 
-    contenedor.appendChild(imagenNueva);
+    contenedor.appendChild(
+        imagenNueva
+    );
 
 
     /* ==============================
@@ -416,7 +445,9 @@ function cambiarImagen(boton, direccion) {
 function abrirProducto(id) {
 
     const producto =
-        productos.find(producto => producto.id === id);
+        productos.find(
+            producto => producto.id === id
+        );
 
 
     if (!producto) {
@@ -425,7 +456,9 @@ function abrirProducto(id) {
 
 
     const panel =
-        document.getElementById("producto-panel");
+        document.getElementById(
+            "producto-panel"
+        );
 
 
     const contenido =
@@ -436,7 +469,7 @@ function abrirProducto(id) {
 
     /* =====================================
        SELECTOR DE COLORES
-    ===================================== */
+    ====================================== */
 
     let selectorColores = "";
 
@@ -567,13 +600,9 @@ function abrirProducto(id) {
 
     /* =====================================
        CONTENIDO DEL PANEL
-    ===================================== */
+    ====================================== */
 
     contenido.innerHTML = `
-
-        <!-- =================================
-             IMAGEN
-        ================================== -->
 
         <div class="producto-panel-imagenes">
 
@@ -614,10 +643,6 @@ function abrirProducto(id) {
 
         </div>
 
-
-        <!-- =================================
-             INFORMACIÓN
-        ================================== -->
 
         <div class="producto-panel-datos">
 
@@ -737,7 +762,7 @@ function abrirProducto(id) {
 
     /* =====================================
        GUARDAR PRODUCTO ACTUAL
-    ===================================== */
+    ====================================== */
 
     panel.dataset.productoId =
         producto.id;
@@ -745,7 +770,7 @@ function abrirProducto(id) {
 
     /* =====================================
        ABRIR PANEL
-    ===================================== */
+    ====================================== */
 
     panel.classList.add("abierto");
 
@@ -756,7 +781,7 @@ function abrirProducto(id) {
 
     /* =====================================
        ACTUALIZAR BOTONES
-    ===================================== */
+    ====================================== */
 
     actualizarBotonesColores();
 
@@ -770,13 +795,23 @@ function abrirProducto(id) {
 function cerrarProducto() {
 
     const panel =
-        document.getElementById("producto-panel");
+        document.getElementById(
+            "producto-panel"
+        );
 
 
-    panel.classList.remove("abierto");
+    if (!panel) {
+        return;
+    }
 
 
-    document.body.style.overflow = "";
+    panel.classList.remove(
+        "abierto"
+    );
+
+
+    document.body.style.overflow =
+        "";
 
 }
 
@@ -914,10 +949,6 @@ function cambiarCantidad(cambio) {
     }
 
 
-    /* ==============================
-       GUARDAR
-    ============================== */
-
     elemento.textContent =
         nuevaCantidad;
 
@@ -928,14 +959,12 @@ function cambiarCantidad(cambio) {
 
     if (nuevaCantidad < cantidad) {
 
-        ajustarColores(nuevaCantidad);
+        ajustarColores(
+            nuevaCantidad
+        );
 
     }
 
-
-    /* ==============================
-       ACTUALIZAR BOTONES
-    ============================== */
 
     actualizarBotonesColores();
 
@@ -967,7 +996,9 @@ function cambiarCantidadColor(
         !cantidadElemento ||
         !elemento
     ) {
+
         return;
+
     }
 
 
@@ -996,16 +1027,12 @@ function cambiarCantidadColor(
     }
 
 
-    /* ==============================
-       TOTAL ACTUAL
-    ============================== */
-
     const totalAsignado =
         obtenerTotalColores();
 
 
     /* ==============================
-       SI AUMENTAMOS
+       EVITAR EXCEDER TOTAL
     ============================== */
 
     if (
@@ -1013,28 +1040,14 @@ function cambiarCantidadColor(
         totalAsignado >= cantidadTotal
     ) {
 
-        /*
-           Simplemente no hacemos nada.
-
-           NO mostramos alert.
-        */
-
         return;
 
     }
 
 
-    /* ==============================
-       GUARDAR NUEVA CANTIDAD
-    ============================== */
-
     elemento.textContent =
         nuevaCantidad;
 
-
-    /* ==============================
-       ACTUALIZAR BOTONES
-    ============================== */
 
     actualizarBotonesColores();
 
@@ -1098,10 +1111,6 @@ function actualizarBotonesColores() {
         obtenerTotalColores();
 
 
-    /* =====================================
-       BOTONES + DE COLORES
-    ===================================== */
-
     const botonesMas =
         document.querySelectorAll(
             ".boton-color-mas"
@@ -1134,11 +1143,9 @@ function ajustarColores(cantidadTotal) {
         obtenerTotalColores();
 
 
-    /* ==============================
-       NO HAY EXCESO
-    ============================== */
-
-    if (totalAsignado <= cantidadTotal) {
+    if (
+        totalAsignado <= cantidadTotal
+    ) {
 
         actualizarBotonesColores();
 
@@ -1147,17 +1154,13 @@ function ajustarColores(cantidadTotal) {
     }
 
 
-    /* ==============================
-       CALCULAR EXCESO
-    ============================== */
-
     let exceso =
         totalAsignado -
         cantidadTotal;
 
 
     /* ==============================
-       REDUCIR DESDE EL ÚLTIMO
+       REDUCIR DESDE EL ÚLTIMO COLOR
     ============================== */
 
     for (
@@ -1210,13 +1213,13 @@ function ajustarColores(cantidadTotal) {
 function obtenerCarrito() {
 
     const carritoGuardado =
-        localStorage.getItem("carrito");
+        localStorage.getItem(
+            "carrito"
+        );
 
 
     if (!carritoGuardado) {
-
         return [];
-
     }
 
 
@@ -1286,10 +1289,10 @@ function crearClaveColores(
 
 
 /* =========================================
-   AGREGAR AL CARRITO
+   OBTENER DATOS DEL PRODUCTO ACTUAL
 ========================================= */
 
-function agregarAlCarrito(id) {
+function obtenerDatosProductoActual(id) {
 
     const producto =
         productos.find(
@@ -1298,13 +1301,9 @@ function agregarAlCarrito(id) {
 
 
     if (!producto) {
-        return;
+        return null;
     }
 
-
-    /* ==============================
-       CANTIDAD
-    ============================== */
 
     const elementoCantidad =
         document.getElementById(
@@ -1313,7 +1312,7 @@ function agregarAlCarrito(id) {
 
 
     if (!elementoCantidad) {
-        return;
+        return null;
     }
 
 
@@ -1325,7 +1324,7 @@ function agregarAlCarrito(id) {
 
     /* =====================================
        DISTRIBUCIÓN DE COLORES
-    ===================================== */
+    ====================================== */
 
     let distribucionColores = [];
 
@@ -1340,18 +1339,20 @@ function agregarAlCarrito(id) {
 
 
         /*
-           Si todavía no se han
-           asignado todas las unidades,
-           no agregamos el producto.
+           TODAS las unidades deben
+           tener un color asignado.
         */
 
-        if (totalColores !== cantidad) {
+        if (
+            totalColores !== cantidad
+        ) {
 
             alert(
                 "Asigna todas las unidades a un color antes de continuar."
             );
 
-            return;
+
+            return null;
 
         }
 
@@ -1397,17 +1398,55 @@ function agregarAlCarrito(id) {
     }
 
 
+    return {
+
+        producto,
+
+        cantidad,
+
+        distribucionColores
+
+    };
+
+}
+
+
+/* =========================================
+   GUARDAR PRODUCTO EN CARRITO
+========================================= */
+
+function guardarProductoEnCarrito(
+    datos
+) {
+
+    if (!datos) {
+        return false;
+    }
+
+
+    const producto =
+        datos.producto;
+
+
+    const cantidad =
+        datos.cantidad;
+
+
+    const distribucionColores =
+        datos.distribucionColores;
+
+
     /* =====================================
-       OBTENER CARRITO ACTUAL
-    ===================================== */
+       OBTENER CARRITO
+    ====================================== */
 
     const carrito =
         obtenerCarrito();
 
 
     /* =====================================
-       CLAVE DE ESTA VARIACIÓN
-    ===================================== */
+       CLAVE DE COLORES
+    ====================================== */
 
     const claveColores =
         crearClaveColores(
@@ -1417,13 +1456,18 @@ function agregarAlCarrito(id) {
 
     /* =====================================
        BUSCAR PRODUCTO IGUAL
-    ===================================== */
+    ====================================== */
 
     const productoExistente =
         carrito.find(item => {
 
-            if (item.productoId !== producto.id) {
+            if (
+                item.productoId !==
+                producto.id
+            ) {
+
                 return false;
+
             }
 
 
@@ -1438,7 +1482,7 @@ function agregarAlCarrito(id) {
 
     /* =====================================
        SI YA EXISTE
-    ===================================== */
+    ====================================== */
 
     if (productoExistente) {
 
@@ -1447,57 +1491,68 @@ function agregarAlCarrito(id) {
 
 
         /*
-           También acumulamos
-           las cantidades de color.
+           Acumular cantidades
+           por color.
         */
 
-        if (
-            distribucionColores.length > 0
-        ) {
+        distribucionColores.forEach(
+            nuevoColor => {
 
-            distribucionColores.forEach(
-                nuevoColor => {
-
-                    const colorExistente =
-                        productoExistente.colores.find(
-                            color =>
-                                color.color ===
-                                nuevoColor.color
-                        );
+                const colorExistente =
+                    productoExistente.colores.find(
+                        color =>
+                            color.color ===
+                            nuevoColor.color
+                    );
 
 
-                    if (colorExistente) {
+                if (colorExistente) {
 
-                        colorExistente.cantidad +=
-                            nuevoColor.cantidad;
+                    colorExistente.cantidad +=
+                        nuevoColor.cantidad;
 
-                    }
+                } else {
+
+                    productoExistente.colores.push({
+
+                        color:
+                            nuevoColor.color,
+
+                        cantidad:
+                            nuevoColor.cantidad
+
+                    });
 
                 }
-            );
 
-        }
+            }
+        );
 
     }
 
 
     /* =====================================
        PRODUCTO NUEVO
-    ===================================== */
+    ====================================== */
 
     else {
 
         carrito.push({
 
-            productoId: producto.id,
+            productoId:
+                producto.id,
 
-            nombre: producto.nombre,
+            nombre:
+                producto.nombre,
 
-            precio: producto.precio,
+            precio:
+                producto.precio,
 
-            imagen: producto.imagenes[0],
+            imagen:
+                producto.imagenes[0],
 
-            cantidad: cantidad,
+            cantidad:
+                cantidad,
 
             colores:
                 distribucionColores
@@ -1509,14 +1564,12 @@ function agregarAlCarrito(id) {
 
     /* =====================================
        GUARDAR
-    ===================================== */
+    ====================================== */
 
-    guardarCarrito(carrito);
+    guardarCarrito(
+        carrito
+    );
 
-
-    /* =====================================
-       COMPROBAR
-    ===================================== */
 
     console.log(
         "Carrito actualizado:",
@@ -1524,20 +1577,167 @@ function agregarAlCarrito(id) {
     );
 
 
-    /*
-       POR AHORA dejamos este mensaje
-       únicamente para comprobar que
-       realmente se guardó.
+    return true;
 
-       Después lo reemplazaremos por
-       el contador visual del carrito.
+}
+
+
+/* =========================================
+   POPUP DE PRODUCTO AGREGADO
+========================================= */
+
+function mostrarPopupAgregado(
+    nombre,
+    cantidad
+) {
+
+    /*
+       Si ya existe un popup,
+       lo eliminamos primero.
     */
 
-    alert(
-        producto.nombre +
-        " x" +
-        cantidad +
-        " agregado al carrito."
+    const popupAnterior =
+        document.getElementById(
+            "popup-carrito"
+        );
+
+
+    if (popupAnterior) {
+
+        popupAnterior.remove();
+
+    }
+
+
+    /* =====================================
+       CREAR POPUP
+    ====================================== */
+
+    const popup =
+        document.createElement("div");
+
+
+    popup.id =
+        "popup-carrito";
+
+
+    popup.className =
+        "popup-carrito";
+
+
+    popup.innerHTML = `
+
+        <div class="popup-carrito-contenido">
+
+            <div class="popup-carrito-icono">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+
+            <h2>
+                ¡Agregado al carrito!
+            </h2>
+
+
+            <p>
+                ${nombre}
+            </p>
+
+
+            <span>
+                ${cantidad}
+                ${cantidad === 1 ? "unidad" : "unidades"}
+                agregada${cantidad === 1 ? "" : "s"}
+            </span>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        popup
+    );
+
+
+    /* =====================================
+       ENTRADA
+    ====================================== */
+
+    requestAnimationFrame(() => {
+
+        popup.classList.add(
+            "visible"
+        );
+
+    });
+
+
+    /* =====================================
+       CERRAR AUTOMÁTICAMENTE
+    ====================================== */
+
+    setTimeout(() => {
+
+        popup.classList.remove(
+            "visible"
+        );
+
+
+        setTimeout(() => {
+
+            popup.remove();
+
+        }, 400);
+
+    }, 2500);
+
+}
+
+
+/* =========================================
+   AGREGAR AL CARRITO
+========================================= */
+
+function agregarAlCarrito(id) {
+
+    const datos =
+        obtenerDatosProductoActual(id);
+
+
+    /*
+       Si los datos no son válidos,
+       no hacemos nada.
+    */
+
+    if (!datos) {
+        return;
+    }
+
+
+    const guardado =
+        guardarProductoEnCarrito(
+            datos
+        );
+
+
+    if (!guardado) {
+        return;
+    }
+
+
+    /* =====================================
+       MOSTRAR POPUP
+    ====================================== */
+
+    mostrarPopupAgregado(
+
+        datos.producto.nombre,
+
+        datos.cantidad
+
     );
 
 }
@@ -1549,40 +1749,38 @@ function agregarAlCarrito(id) {
 
 function comprarAhora(id) {
 
-    const producto =
-        productos.find(
-            producto => producto.id === id
-        );
+    const datos =
+        obtenerDatosProductoActual(id);
 
 
-    if (!producto) {
+    /*
+       Si falta distribuir colores
+       o hay algún problema,
+       NO redirigimos.
+    */
+
+    if (!datos) {
         return;
     }
 
 
-    const cantidadElemento =
-        document.getElementById(
-            "cantidad-producto"
+    const guardado =
+        guardarProductoEnCarrito(
+            datos
         );
 
 
-    if (!cantidadElemento) {
+    if (!guardado) {
         return;
     }
 
 
-    const cantidad =
-        parseInt(
-            cantidadElemento.textContent
-        );
+    /* =====================================
+       IR DIRECTAMENTE AL CARRITO
+    ====================================== */
 
-
-    alert(
-        "Comprar ahora: " +
-        producto.nombre +
-        " x" +
-        cantidad
-    );
+    window.location.href =
+        "carrito.html";
 
 }
 
