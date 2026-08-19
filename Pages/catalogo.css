@@ -1490,3 +1490,402 @@
     }
 
 }
+
+/* =========================================================
+   POPUP DE PRODUCTO AGREGADO
+   Leo Tacticals
+========================================================= */
+
+
+/* =========================================
+   FONDO DEL POPUP
+========================================= */
+
+.popup-carrito {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    backdrop-filter: blur(6px);
+
+    -webkit-backdrop-filter: blur(6px);
+
+    z-index: 5000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease;
+
+}
+
+
+/* =========================================
+   POPUP VISIBLE
+========================================= */
+
+.popup-carrito.mostrar {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+/* =========================================
+   CAJA DEL POPUP
+========================================= */
+
+.popup-carrito-contenido {
+
+    width: min(90%, 430px);
+
+    padding: 40px 35px;
+
+    background: var(--negro-secundario);
+
+    border: 1px solid var(--naranja);
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.7),
+        0 0 25px rgba(255, 179, 0, 0.12);
+
+    transform: translateY(25px) scale(0.95);
+
+    opacity: 0;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+
+}
+
+
+/* =========================================
+   ANIMACIÓN DE ENTRADA
+========================================= */
+
+.popup-carrito.mostrar
+.popup-carrito-contenido {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* =========================================
+   ICONO DE CONFIRMACIÓN
+========================================= */
+
+.popup-carrito-icono {
+
+    width: 85px;
+
+    height: 85px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    font-size: 45px;
+
+    box-shadow:
+        0 0 0 6px rgba(255, 179, 0, 0.10),
+        0 0 30px rgba(255, 179, 0, 0.25);
+
+    animation:
+        popupCheck 0.5s ease;
+}
+
+
+/* =========================================
+   ANIMACIÓN DEL CHECK
+========================================= */
+
+@keyframes popupCheck {
+
+    0% {
+
+        transform: scale(0);
+
+        opacity: 0;
+
+    }
+
+    60% {
+
+        transform: scale(1.15);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.popup-carrito-titulo {
+
+    margin: 0 0 10px;
+
+    color: var(--blanco);
+
+    font-size: 26px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================================
+   PRODUCTO
+========================================= */
+
+.popup-carrito-producto {
+
+    margin: 0 0 8px;
+
+    color: var(--naranja);
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================
+   CANTIDAD
+========================================= */
+
+.popup-carrito-cantidad {
+
+    margin: 0;
+
+    color: var(--gris);
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================
+   BARRA DE TIEMPO
+========================================= */
+
+.popup-carrito-tiempo {
+
+    width: 100%;
+
+    height: 3px;
+
+    margin-top: 28px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: var(--borde);
+
+}
+
+
+/* =========================================
+   PROGRESO DE LA BARRA
+========================================= */
+
+.popup-carrito-tiempo span {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: var(--naranja);
+
+    transform-origin: left;
+
+    animation:
+        popupTiempo 3s linear forwards;
+
+}
+
+
+@keyframes popupTiempo {
+
+    from {
+
+        transform: scaleX(1);
+
+    }
+
+    to {
+
+        transform: scaleX(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR
+========================================================= */
+
+.popup-carrito-cerrar {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 50%;
+
+    background: var(--negro-secundario);
+
+    color: var(--gris);
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.popup-carrito-cerrar:hover {
+
+    background: var(--naranja);
+
+    color: var(--negro);
+
+    border-color: var(--naranja);
+
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .popup-carrito-contenido {
+
+        width: calc(100% - 30px);
+
+        padding: 35px 25px;
+
+    }
+
+
+    .popup-carrito-icono {
+
+        width: 75px;
+
+        height: 75px;
+
+        font-size: 38px;
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .popup-carrito-titulo {
+
+        font-size: 23px;
+
+    }
+
+
+    .popup-carrito-producto {
+
+        font-size: 16px;
+
+    }
+
+
+    .popup-carrito-cantidad {
+
+        font-size: 13px;
+
+    }
+
+
+    .popup-carrito-cerrar {
+
+        top: 15px;
+
+        right: 15px;
+
+        width: 35px;
+
+        height: 35px;
+
+    }
+
+}
