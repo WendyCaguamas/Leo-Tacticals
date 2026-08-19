@@ -590,3 +590,127 @@
     }
 
 }
+/* =========================================
+   CONTROL DE CANTIDAD
+========================================= */
+
+.carrito-cantidad-control {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.carrito-cantidad-control button,
+.carrito-color-cantidad button {
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--borde);
+
+    border-radius: 5px;
+
+    background: var(--negro-secundario);
+
+    color: var(--blanco);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.carrito-cantidad-control button:hover,
+.carrito-color-cantidad button:hover {
+    background: var(--naranja);
+
+    color: var(--negro);
+}
+
+
+/* =========================================
+   COLORES DEL CARRITO
+========================================= */
+
+.carrito-producto-colores {
+    margin-top: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.carrito-colores-titulo {
+    color: var(--gris-oscuro);
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 3px;
+}
+
+
+.carrito-color {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.carrito-color-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.carrito-color-cantidad {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.carrito-color-cantidad span {
+    min-width: 18px;
+
+    text-align: center;
+
+    color: var(--blanco);
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   BOTÓN DESHABILITADO
+========================================= */
+
+.carrito-color-cantidad button:disabled {
+    opacity: 0.3;
+
+    cursor: not-allowed;
+
+    pointer-events: none;
+}
