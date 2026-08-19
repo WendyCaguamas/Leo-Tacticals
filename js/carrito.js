@@ -79,10 +79,6 @@ function mostrarCarrito() {
         obtenerCarrito();
 
 
-    /* =====================================
-       LIMPIAR
-    ===================================== */
-
     listaCarrito.innerHTML = "";
 
 
@@ -134,18 +130,10 @@ function mostrarCarrito() {
     carrito.forEach((item, indice) => {
 
 
-        /* =================================
-           SUBTOTAL
-        ================================= */
-
         const subtotal =
             item.precio *
             item.cantidad;
 
-
-        /* =================================
-           CREAR ELEMENTO
-        ================================= */
 
         const producto =
             document.createElement("div");
@@ -169,28 +157,77 @@ function mostrarCarrito() {
         ) {
 
             coloresHTML =
-                item.colores.map(color => {
+                item.colores.map((color, colorIndice) => {
 
                     return `
 
-                        <div class="carrito-color">
+                        <div
+                            class="carrito-color"
+                            data-color-indice="${colorIndice}"
+                        >
 
-                            <span
-                                class="
-                                    color-producto
-                                    color-${color.color}
-                                "
-                            ></span>
+                            <div class="carrito-color-info">
 
-                            <span class="carrito-color-nombre">
+                                <span
+                                    class="
+                                        color-producto
+                                        color-${color.color}
+                                    "
+                                ></span>
 
-                                ${color.color.replace("_", " ")}
 
-                                ×
+                                <span class="carrito-color-nombre">
 
-                                ${color.cantidad}
+                                    ${color.color.replace("_", " ")}
 
-                            </span>
+                                </span>
+
+                            </div>
+
+
+                            <div class="carrito-color-cantidad">
+
+                                <button
+                                    type="button"
+                                    class="carrito-color-menos"
+                                    onclick="
+                                        cambiarCantidadColorCarrito(
+                                            ${indice},
+                                            ${colorIndice},
+                                            -1
+                                        )
+                                    "
+                                >
+
+                                    −
+
+                                </button>
+
+
+                                <span>
+
+                                    ${color.cantidad}
+
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="carrito-color-mas"
+                                    onclick="
+                                        cambiarCantidadColorCarrito(
+                                            ${indice},
+                                            ${colorIndice},
+                                            1
+                                        )
+                                    "
+                                >
+
+                                    +
+
+                                </button>
+
+                            </div>
 
                         </div>
 
@@ -236,6 +273,10 @@ function mostrarCarrito() {
 
                     $${item.precio.toFixed(2)}
 
+                    <span>
+                        / unidad
+                    </span>
+
                 </div>
 
 
@@ -243,17 +284,39 @@ function mostrarCarrito() {
                      COLORES
                 ======================= -->
 
-                <div class="carrito-producto-colores">
+                ${
+                    item.colores &&
+                    item.colores.length > 0
+                    ?
 
-                    ${coloresHTML}
+                    `
 
-                </div>
+                        <div class="carrito-producto-colores">
+
+                            <div class="carrito-colores-titulo">
+
+                                Distribución por color
+
+                            </div>
+
+
+                            ${coloresHTML}
+
+                        </div>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
 
             </div>
 
 
             <!-- ==========================
-                 CANTIDAD
+                 CANTIDAD GENERAL
             =========================== -->
 
             <div class="carrito-producto-cantidad">
@@ -262,9 +325,46 @@ function mostrarCarrito() {
                     Cantidad
                 </span>
 
-                <strong>
-                    ${item.cantidad}
-                </strong>
+
+                <div class="carrito-cantidad-control">
+
+                    <button
+                        type="button"
+                        onclick="
+                            cambiarCantidadCarrito(
+                                ${indice},
+                                -1
+                            )
+                        "
+                    >
+
+                        −
+
+                    </button>
+
+
+                    <strong>
+
+                        ${item.cantidad}
+
+                    </strong>
+
+
+                    <button
+                        type="button"
+                        onclick="
+                            cambiarCantidadCarrito(
+                                ${indice},
+                                1
+                            )
+                        "
+                    >
+
+                        +
+
+                    </button>
+
+                </div>
 
             </div>
 
@@ -303,10 +403,366 @@ function mostrarCarrito() {
 
 
     /* =====================================
+       ACTUALIZAR BOTONES DE COLORES
+    ===================================== */
+
+    actualizarBotonesColoresCarrito();
+
+
+    /* =====================================
        ACTUALIZAR TOTAL
     ===================================== */
 
     calcularTotal();
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD GENERAL
+========================================= */
+
+function cambiarCantidadCarrito(
+    indice,
+    cambio
+) {
+
+    const carrito =
+        obtenerCarrito();
+
+
+    const item =
+        carrito[indice];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    const nuevaCantidad =
+        item.cantidad + cambio;
+
+
+    /* =====================================
+       MÍNIMO: 1
+    ===================================== */
+
+    if (nuevaCantidad < 1) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       CAMBIAR CANTIDAD
+    ===================================== */
+
+    item.cantidad =
+        nuevaCantidad;
+
+
+    /* =====================================
+       AJUSTAR COLORES
+    ===================================== */
+
+    if (
+        item.colores &&
+        item.colores.length > 0
+    ) {
+
+        ajustarColoresCarrito(item);
+
+    }
+
+
+    /* =====================================
+       GUARDAR
+    ===================================== */
+
+    guardarCarrito(carrito);
+
+
+    /* =====================================
+       ACTUALIZAR
+    ===================================== */
+
+    mostrarCarrito();
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD DE UN COLOR
+========================================= */
+
+function cambiarCantidadColorCarrito(
+    indiceProducto,
+    indiceColor,
+    cambio
+) {
+
+    const carrito =
+        obtenerCarrito();
+
+
+    const item =
+        carrito[indiceProducto];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    if (
+        !item.colores ||
+        !item.colores[indiceColor]
+    ) {
+
+        return;
+
+    }
+
+
+    const color =
+        item.colores[indiceColor];
+
+
+    const nuevaCantidad =
+        color.cantidad + cambio;
+
+
+    /* =====================================
+       MÍNIMO: 0
+    ===================================== */
+
+    if (nuevaCantidad < 0) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       TOTAL ACTUAL DE COLORES
+    ===================================== */
+
+    let totalColores = 0;
+
+
+    item.colores.forEach(colorItem => {
+
+        totalColores +=
+            colorItem.cantidad;
+
+    });
+
+
+    /* =====================================
+       NO SUPERAR CANTIDAD TOTAL
+    ===================================== */
+
+    if (
+        cambio > 0 &&
+        totalColores >= item.cantidad
+    ) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       GUARDAR NUEVA CANTIDAD
+    ===================================== */
+
+    color.cantidad =
+        nuevaCantidad;
+
+
+    /* =====================================
+       GUARDAR
+    ===================================== */
+
+    guardarCarrito(carrito);
+
+
+    /* =====================================
+       ACTUALIZAR
+    ===================================== */
+
+    mostrarCarrito();
+
+}
+
+
+/* =========================================
+   AJUSTAR COLORES
+========================================= */
+
+function ajustarColoresCarrito(item) {
+
+    if (
+        !item.colores ||
+        item.colores.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       CALCULAR TOTAL
+    ===================================== */
+
+    let totalColores = 0;
+
+
+    item.colores.forEach(color => {
+
+        totalColores +=
+            color.cantidad;
+
+    });
+
+
+    /* =====================================
+       SI NO HAY EXCESO
+    ===================================== */
+
+    if (
+        totalColores <= item.cantidad
+    ) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       CALCULAR EXCESO
+    ===================================== */
+
+    let exceso =
+        totalColores -
+        item.cantidad;
+
+
+    /* =====================================
+       REDUCIR DESDE EL ÚLTIMO COLOR
+    ===================================== */
+
+    for (
+        let i = item.colores.length - 1;
+
+        i >= 0 && exceso > 0;
+
+        i--
+    ) {
+
+        const color =
+            item.colores[i];
+
+
+        if (color.cantidad <= 0) {
+
+            continue;
+
+        }
+
+
+        const reducir =
+            Math.min(
+                color.cantidad,
+                exceso
+            );
+
+
+        color.cantidad -=
+            reducir;
+
+
+        exceso -=
+            reducir;
+
+    }
+
+}
+
+
+/* =========================================
+   ACTUALIZAR BOTONES DE COLORES
+========================================= */
+
+function actualizarBotonesColoresCarrito() {
+
+    const carrito =
+        obtenerCarrito();
+
+
+    const productos =
+        document.querySelectorAll(
+            ".carrito-producto"
+        );
+
+
+    productos.forEach((elemento, indice) => {
+
+        const item =
+            carrito[indice];
+
+
+        if (!item) {
+            return;
+        }
+
+
+        if (
+            !item.colores ||
+            item.colores.length === 0
+        ) {
+
+            return;
+
+        }
+
+
+        /* ==============================
+           TOTAL DE COLORES
+        ============================== */
+
+        let totalColores = 0;
+
+
+        item.colores.forEach(color => {
+
+            totalColores +=
+                color.cantidad;
+
+        });
+
+
+        /* ==============================
+           BOTONES +
+        ============================== */
+
+        const botonesMas =
+            elemento.querySelectorAll(
+                ".carrito-color-mas"
+            );
+
+
+        botonesMas.forEach(boton => {
+
+            boton.disabled =
+                totalColores >= item.cantidad;
+
+        });
+
+    });
 
 }
 
@@ -352,26 +808,14 @@ function eliminarProducto(indice) {
         obtenerCarrito();
 
 
-    /* =====================================
-       ELIMINAR
-    ===================================== */
-
     carrito.splice(
         indice,
         1
     );
 
 
-    /* =====================================
-       GUARDAR
-    ===================================== */
-
     guardarCarrito(carrito);
 
-
-    /* =====================================
-       ACTUALIZAR
-    ===================================== */
 
     mostrarCarrito();
 
