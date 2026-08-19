@@ -8,6 +8,10 @@
     {
       "source": "/catalogo",
       "destination": "/Pages/catalogo.html"
+    },
+    {
+      "source": "/contacto",
+      "destination": "/Pages/contacto.html"
     }
   ]
 }
