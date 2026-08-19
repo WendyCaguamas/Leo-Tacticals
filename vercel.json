@@ -1,12 +1,3 @@
 {
-  "rewrites": [
-    {
-      "source": "/catalogo",
-      "destination": "/Pages/catalogo.html"
-    },
-    {
-      "source": "/carrito",
-      "destination": "/Pages/carrito.html"
-    }
-  ]
+  "cleanUrls": true
 }
