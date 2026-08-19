@@ -288,11 +288,6 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    /*
-       Si solamente existe una imagen,
-       no hacemos nada.
-    */
-
     if (imagenes.length <= 1) {
         return;
     }
@@ -380,10 +375,6 @@ function cambiarImagen(boton, direccion) {
     }
 
 
-    /* ==============================
-       AÑADIR IMAGEN
-    ============================== */
-
     contenedor.appendChild(
         imagenNueva
     );
@@ -465,6 +456,11 @@ function abrirProducto(id) {
         document.getElementById(
             "producto-panel-contenido"
         );
+
+
+    if (!panel || !contenido) {
+        return;
+    }
 
 
     /* =====================================
@@ -700,9 +696,7 @@ function abrirProducto(id) {
 
 
                         <span id="cantidad-producto">
-
                             1
-
                         </span>
 
 
@@ -733,6 +727,7 @@ function abrirProducto(id) {
             <div class="producto-panel-botones">
 
                 <button
+                    type="button"
                     class="boton-carrito"
                     onclick="agregarAlCarrito(${producto.id})"
                 >
@@ -745,6 +740,7 @@ function abrirProducto(id) {
 
 
                 <button
+                    type="button"
                     class="boton-comprar"
                     onclick="comprarAhora(${producto.id})"
                 >
@@ -848,6 +844,11 @@ function cambiarImagenPanel(direccion) {
         );
 
 
+    if (!panel) {
+        return;
+    }
+
+
     const id =
         parseInt(
             panel.dataset.productoId
@@ -940,10 +941,6 @@ function cambiarCantidad(cambio) {
         cantidad + cambio;
 
 
-    /* ==============================
-       MÍNIMO: 1
-    ============================== */
-
     if (nuevaCantidad < 1) {
         return;
     }
@@ -952,10 +949,6 @@ function cambiarCantidad(cambio) {
     elemento.textContent =
         nuevaCantidad;
 
-
-    /* ==============================
-       AJUSTAR COLORES
-    ============================== */
 
     if (nuevaCantidad < cantidad) {
 
@@ -1018,10 +1011,6 @@ function cambiarCantidadColor(
         cantidadColor + cambio;
 
 
-    /* ==============================
-       MÍNIMO: 0
-    ============================== */
-
     if (nuevaCantidad < 0) {
         return;
     }
@@ -1030,10 +1019,6 @@ function cambiarCantidadColor(
     const totalAsignado =
         obtenerTotalColores();
 
-
-    /* ==============================
-       EVITAR EXCEDER TOTAL
-    ============================== */
 
     if (
         cambio > 0 &&
@@ -1158,10 +1143,6 @@ function ajustarColores(cantidadTotal) {
         totalAsignado -
         cantidadTotal;
 
-
-    /* ==============================
-       REDUCIR DESDE EL ÚLTIMO COLOR
-    ============================== */
 
     for (
         let i = elementos.length - 1;
@@ -1338,11 +1319,6 @@ function obtenerDatosProductoActual(id) {
             obtenerTotalColores();
 
 
-        /*
-           TODAS las unidades deben
-           tener un color asignado.
-        */
-
         if (
             totalColores !== cantidad
         ) {
@@ -1436,17 +1412,9 @@ function guardarProductoEnCarrito(
         datos.distribucionColores;
 
 
-    /* =====================================
-       OBTENER CARRITO
-    ====================================== */
-
     const carrito =
         obtenerCarrito();
 
-
-    /* =====================================
-       CLAVE DE COLORES
-    ====================================== */
 
     const claveColores =
         crearClaveColores(
@@ -1489,11 +1457,6 @@ function guardarProductoEnCarrito(
         productoExistente.cantidad +=
             cantidad;
 
-
-        /*
-           Acumular cantidades
-           por color.
-        */
 
         distribucionColores.forEach(
             nuevoColor => {
@@ -1582,19 +1545,18 @@ function guardarProductoEnCarrito(
 }
 
 
-/* =========================================
+/* =========================================================
    POPUP DE PRODUCTO AGREGADO
-========================================= */
+========================================================= */
 
 function mostrarPopupAgregado(
     nombre,
     cantidad
 ) {
 
-    /*
-       Si ya existe un popup,
-       lo eliminamos primero.
-    */
+    /* =====================================
+       ELIMINAR POPUP ANTERIOR
+    ====================================== */
 
     const popupAnterior =
         document.getElementById(
@@ -1636,26 +1598,40 @@ function mostrarPopupAgregado(
             </div>
 
 
-            <h2>
-                ¡Agregado al carrito!
-            </h2>
+            <div class="popup-carrito-texto">
+
+                <h2>
+                    ¡Agregado al carrito!
+                </h2>
 
 
-            <p>
-                ${nombre}
-            </p>
+                <p>
+                    ${nombre}
+                </p>
 
 
-            <span>
-                ${cantidad}
-                ${cantidad === 1 ? "unidad" : "unidades"}
-                agregada${cantidad === 1 ? "" : "s"}
-            </span>
+                <span>
+                    ${cantidad}
+                    ${cantidad === 1
+                        ? "unidad"
+                        : "unidades"
+                    }
+                    agregada${cantidad === 1
+                        ? ""
+                        : "s"
+                    }
+                </span>
+
+            </div>
 
         </div>
 
     `;
 
+
+    /* =====================================
+       AÑADIR AL BODY
+    ====================================== */
 
     document.body.appendChild(
         popup
@@ -1663,20 +1639,24 @@ function mostrarPopupAgregado(
 
 
     /* =====================================
-       ENTRADA
+       ACTIVAR ANIMACIÓN
     ====================================== */
 
     requestAnimationFrame(() => {
 
-        popup.classList.add(
-            "visible"
-        );
+        requestAnimationFrame(() => {
+
+            popup.classList.add(
+                "visible"
+            );
+
+        });
 
     });
 
 
     /* =====================================
-       CERRAR AUTOMÁTICAMENTE
+       CIERRE AUTOMÁTICO
     ====================================== */
 
     setTimeout(() => {
@@ -1688,7 +1668,12 @@ function mostrarPopupAgregado(
 
         setTimeout(() => {
 
-            popup.remove();
+            if (popup &&
+                popup.parentNode) {
+
+                popup.remove();
+
+            }
 
         }, 400);
 
@@ -1707,15 +1692,18 @@ function agregarAlCarrito(id) {
         obtenerDatosProductoActual(id);
 
 
-    /*
-       Si los datos no son válidos,
-       no hacemos nada.
-    */
+    /* =====================================
+       VALIDAR
+    ====================================== */
 
     if (!datos) {
         return;
     }
 
+
+    /* =====================================
+       GUARDAR
+    ====================================== */
 
     const guardado =
         guardarProductoEnCarrito(
@@ -1753,12 +1741,6 @@ function comprarAhora(id) {
         obtenerDatosProductoActual(id);
 
 
-    /*
-       Si falta distribuir colores
-       o hay algún problema,
-       NO redirigimos.
-    */
-
     if (!datos) {
         return;
     }
@@ -1776,7 +1758,7 @@ function comprarAhora(id) {
 
 
     /* =====================================
-       IR DIRECTAMENTE AL CARRITO
+       IR AL CARRITO
     ====================================== */
 
     window.location.href =
