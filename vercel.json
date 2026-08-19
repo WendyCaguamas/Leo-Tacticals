@@ -1,4 +1,14 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/catalogo",
+      "destination": "/Pages/catalogo.html"
+    },
+    {
+      "source": "/carrito",
+      "destination": "/Pages/carrito.html"
+    }
+  ]
 }
