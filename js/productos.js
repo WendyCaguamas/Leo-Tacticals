@@ -4,7 +4,7 @@ const productos = [
         nombre: "Cinturón Táctico Liberación Rápida",
         categoria: "correas",
         precio: 30.00,
-        detalles: "* Disponible exclusivamente en color negro. * Sistema integral con 10 acoples y estuches desmontables incluidos.* Fabricado en nylon reforzado de alta resistencia para uso profesional.",
+        detalles: "* Disponible exclusivamente en color negro.* Diseñado específicamente para el soporte de equipo de servicio pesado.* Hebilla reforzada de seguridad con cierre y apertura rápida.",
         imagenes: [
             "../img/001/001.jpeg",
             "../img/001/002.jpeg"
@@ -19,7 +19,7 @@ const productos = [
         categoria: "equipamento",
 
         precio: 30.00,
-
+        detalles: "* Disponible exclusivamente en color negro.* Sistema integral con 10 acoples y estuches desmontables incluidos.* Fabricado en nylon reforzado de alta resistencia para uso profesional.";
         imagenes: [
             "../img/002/001.jpeg",
             "../img/002/002.jpeg"
@@ -28,13 +28,10 @@ const productos = [
 
     {
         id: 3,
-
         nombre: "Gas Pimienta SABRE Red",
-
         categoria: "otros",
-
         precio: 30.00,
-
+        detalles:"* Formulación de máxima potencia para incapacitar temporalmente a un agresor.* Dispara un chorro potente que reduce el riesgo de retroceso por viento.* Tamaño compacto con seguro de activación rápida para evitar disparos accidentales.";
         imagenes: [
             "../img/003/001.jpeg",
             "../img/003/002.jpeg"
@@ -43,45 +40,30 @@ const productos = [
 
     {
         id: 4,
-
         nombre: "Taser con Linterna 928 Type",
-
         categoria: "otros",
-
         precio: 20.00,
-
-        detalles: "Taser de defensa personal",
-
+        detalles: "* Dispositivo de defensa que emite descargas eléctricas de alto voltaje.* Incluye linterna LED integrada para iluminar zonas oscuras.* Diseño ergonómico con hendiduras para los dedos para un agarre firme.",
         imagenes: [
             "../img/004/001.jpeg",
             "../img/004/002.jpeg"
         ]
     },{
         id: 5,
-
         nombre: "Tolete Retráctil de Policarbonato",
-
         categoria: "otros",
-
         precio: 15.00,
-
-        //detalles: "Bastón de defensa personal",
-
+        detalles: "* Estructura desplegable que facilita su almacenamiento y transporte.* Construcción en policarbonato liviano, flexible y sumamente resistente.* Mango antideslizante que garantiza una sujeción firme durante el uso.",
         imagenes: [
             "../img/005/001.jpeg",
             "../img/005/002.jpeg"
         ]
     },{
         id: 6,
-
         nombre: "Porta Tolete Retráctil",
-
         categoria: "otros",
-
         precio: 15.00,
-
-        //detalles: "Portador de Bastón de defensa para correa",
-
+        detalles: "* Funda rígida diseñada para transportar y desenfundar el tolete rápidamente.* Sistema de acople ajustable para sujetarse firmemente al cinturón.* Fabricado en polímero o nylon de alta resistencia al impacto.",
         imagenes: [
             "../img/006/001.jpeg",
             "../img/006/002.jpeg",
