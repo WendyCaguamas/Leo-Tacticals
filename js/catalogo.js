@@ -37,11 +37,6 @@ function mostrarProductos(listaProductos) {
 
         tarjeta.onclick = (evento) => {
 
-            /*
-               Si se pulsa una flecha,
-               no abrir el panel.
-            */
-
             if (evento.target.closest(".flecha")) {
                 return;
             }
@@ -161,12 +156,6 @@ function mostrarProductos(listaProductos) {
                 <h2>
                     ${producto.nombre}
                 </h2>
-
-
-                <p>
-                    ${producto.detalles}
-                </p>
-
 
                 <div class="producto-precio">
 
