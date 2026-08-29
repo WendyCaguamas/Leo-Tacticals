@@ -1,4 +1,3 @@
-```js
 const productos = [
     {
         id: 1,
@@ -140,4 +139,3 @@ const productos = [
         ]
     }
 ];
-```
