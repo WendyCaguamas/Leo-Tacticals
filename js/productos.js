@@ -54,7 +54,7 @@ const productos = [
 
         precio: 20.00,
 
-        //detalles: "Taser de defensa personal",
+        detalles: "Taser de defensa personal",
 
         imagenes: [
             "../img/004/001.jpeg",
