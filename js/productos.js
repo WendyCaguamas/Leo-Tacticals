@@ -156,7 +156,22 @@ const productos = [
         colores: ["verde", "negro"],
         imagenes: [
             "../img/011/001.jpeg",
-            "../img/011/002.jpeg",
+            "../img/011/002.jpeg"
+        ]
+    },{
+        id: 12,
+
+        nombre: "Bluetooth Headset YYK-525",
+
+        categoria: "otros",
+
+        precio: 10.00,
+
+        colores: ["verde", "negro"],
+        imagenes: [
+            "../img/012/001.jpeg",
+            "../img/012/002.jpeg",
+            "../img/012/003.jpeg"
         ]
     }
 
