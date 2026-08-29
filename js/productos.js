@@ -77,6 +77,7 @@ const productos = [
         nombre: "Cinturón Táctico 5.11 Nylon",
         categoria: "otros",
         precio: 10.00,
+        detalles: "* Disponible en colores verde y negro.* Diseño clásico ultraligero confeccionado en cinta de nylon duradera.* Hebilla no metálica de perfil bajo ideal para rápido paso por detectores.",
         colores: ["verde", "negro"],
         imagenes: [
             "../img/007/001.jpeg",
@@ -89,6 +90,7 @@ const productos = [
         nombre: "Cinturón Hebilla Liberación Rápida",
         categoria: "otros",
         precio: 20.00,
+        detalles: "* Disponible exclusivamente en color verde.* Incorpora hebilla metálica de enganche y desenganche instantáneo.* Estructura rígida diseñada para soportar peso sin deformarse.",
         imagenes: [
             "../img/008/001.jpg",
             "../img/008/002.jpeg"
@@ -100,6 +102,7 @@ const productos = [
         nombre: "Cinturón 5.11 Hebilla Metálica",
         categoria: "otros",
         precio: 10.00,
+        detalles: "* Disponible exclusivamente en color verde.* Equipado con una sólida hebilla de aleación metálica de gran durabilidad.* Cinta de nylon resistente a tensiones y rasgaduras.",
         imagenes: [
             "../img/009/001.jpeg"
         ]
@@ -110,6 +113,7 @@ const productos = [
         nombre: "Cinturón Militar 5.11",
         categoria: "otros",
         precio: 10.00,
+        detalles: "* Disponible exclusivamente en color verde oliva.* Fabricado en materiales resistentes a la humedad y al uso rudo.* Ajuste firme y seguro para mantener el equipo en su posición.",
         imagenes: [
             "../img/010/001.jpeg"
         ]
@@ -120,6 +124,7 @@ const productos = [
         nombre: "Guantes Tácticos Cobra Medio Dedo",
         categoria: "otros",
         precio: 10.00,
+        detalles: "* Disponible en colores verde y negro.* Diseño de medio dedo que permite mantener la sensibilidad táctil.* Protecciones reforzadas en los nudillos para absorber impactos.",
         colores: ["verde", "negro"],
         imagenes: [
             "../img/011/001.jpeg",
