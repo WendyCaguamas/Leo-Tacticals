@@ -1,14 +1,10 @@
 const productos = [
-
     {
         id: 1,
-
         nombre: "Cinturón Táctico Liberación Rápida",
-
         categoria: "correas",
-
         precio: 30.00,
-
+        detalles: "* Disponible exclusivamente en color negro. * Sistema integral con 10 acoples y estuches desmontables incluidos.* Fabricado en nylon reforzado de alta resistencia para uso profesional.",
         imagenes: [
             "../img/001/001.jpeg",
             "../img/001/002.jpeg"
