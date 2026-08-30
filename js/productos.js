@@ -137,6 +137,7 @@ const productos = [
         nombre: "Bluetooth Headset YYK-525",
         categoria: "otros",
         precio: 10.00,
+        detalles: "Bluetooth 5.1 + reducción de ruido 📞 Micrófono integrado para llamadas claras",
         imagenes: [
             "../img/012/001.jpeg",
             "../img/012/002.jpeg",
