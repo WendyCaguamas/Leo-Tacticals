@@ -170,6 +170,20 @@ const productos = [
             "../img/013/002.jpg",
             "../img/013/003.jpeg"
         ]
+    },{
+        id: 14,
+        nombre: "TG113 Parlante Portátil Bluetooth",
+        categoria: "tecnologia",
+        precio: 20.00,
+        colores: ["verde", "blanco", "naranja", "negro", "azul"],
+        detalles: "• Altavoz inalámbrico cilíndrico, portátil y con diseño resistente al agua.<br>• Cuenta con Bluetooth, puerto USB, ranura para tarjetas microSD, entrada auxiliar de 3.5 mm y radio FM.<br>•  Ofrece una potencia de salida de 5W y batería recargable con autonomía de 3 a 4 horas de reproducción.",
+        imagenes: [
+            "../img/014/001.jpg",
+            "../img/014/002.jpg",
+            "../img/014/003.jpg",
+            "../img/014/004.jpg",
+            "../img/014/005.jpg"
+        ]
     }
 
 ];
