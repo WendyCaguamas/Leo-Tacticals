@@ -237,10 +237,21 @@ const productos = [
         nombre: "Licuadora Portátil",
         categoria: "camping",
         precio: 20.00,
-        detalles: "• Capacidad de 340 ml<br>• Funciona con batería recargable mediante USB.<br>• Diseñada para preparar batidos, jugos y smoothies de forma inalámbrica.",
+        detalles: "• Capacidad de 340 ml. <br>• Funciona con batería recargable mediante USB.<br>• Diseñada para preparar batidos, jugos y smoothies de forma inalámbrica.",
         imagenes: [
             "../img/019/001.jpg",
             "../img/019/002.jpg"
+        ]
+    },{
+        id: 20,
+        nombre: "Taladro Eléctrico Multifuncional",
+        categoria: "hogar",
+        precio: 50.00,
+        detalles: "• Operado por una batería integrada de 4.2V.<br>• Cuenta con un torque máximo de 5 N·m e incluye 4 marchas o niveles de ajuste de torque.<br>• Equipado con una batería de 2000 mAh recargable mediante un puerto moderno USB Tipo-C.",
+        imagenes: [
+            "../img/020/001.jpg",
+            "../img/020/002.jpg",
+            "../img/020/003.jpg"
         ]
     }
 ];
