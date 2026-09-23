@@ -198,6 +198,19 @@ const productos = [
             "../img/015/004.jpg",
             "../img/015/005.jpg"
         ]
+    },{
+        id: 16,
+        nombre: "Mini Parlante Bluetooth Inalámbrico ",
+        categoria: "tecnologia",
+        precio: 20.00,
+        colores: ["verde", "azul", "rosa"],
+        detalles: "• Conectividad Bluetooth integrado para enlace rápido con dispositivos móviles.<br>•  Tamaño de bolsillo, sumamente ligero y portátil, ideal para llevar en la mochila o la mano.<br>•    Recargable mediante cable USB, con una autonomía promedio de 2 a 4 horas dependiendo del volumen.",
+        imagenes: [
+            "../img/016/001.jpg",
+            "../img/016/002.jpg",
+            "../img/016/003.jpg"
+        ]
     }
+
 
 ];
