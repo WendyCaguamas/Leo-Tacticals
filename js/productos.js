@@ -258,6 +258,7 @@ const productos = [
         nombre: "Purificador de Aire Portátil AeroSafe",
         categoria: "hogar",
         precio: 30.00,
+        colores: ["rosa", "negro", "gris"],
         detalles: "• Forma cilíndrica ideal para el portavasos del auto o el escritorio.<br>• Purifica el aire y difunde aromas para refrescar el ambiente.<br>• Acabado metálico elegante, duradero y de estilo moderno.",
         imagenes: [
             "../img/021/001.jpg",
