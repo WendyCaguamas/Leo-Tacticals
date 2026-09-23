@@ -276,5 +276,17 @@ const productos = [
             "../img/022/001.jpg",
             "../img/022/002.jpg"
         ]
+    },{
+        id: 23,
+        nombre: "Ventilador de Mano",
+        categoria: "hogar",
+        precio: 25.00,
+        detalles: "• Compacto y ligero, ideal para llevar en el bolso o usar en el escritorio.<br>•  Cuenta con niveles de velocidad ajustables e incluye iluminación LED.<br>• Recargable mediante un cable USB incluido.",
+        imagenes: [
+            "../img/023/001.jpeg",
+            "../img/023/002.jpg",
+            "../img/023/003.jpeg",
+            "../img/023/004.jpg"
+        ]
     }
 ];
