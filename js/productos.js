@@ -220,7 +220,16 @@ const productos = [
             "../img/017/001.jpg",
             "../img/017/002.jpg"
         ]
+    },{
+        id: 18,
+        nombre: "Colorful Desktop Fan",
+        categoria: "hogar",
+        precio: 30.00,
+        detalles: "• Funcionan conectados a tu computadora, monitor o batería portátil. Son los más comunes y eficientes para el escritorio.<br>• Te permiten moverlos libremente sin depender de cables. Su autonomía suele variar entre 2 y 8 horas según la velocidad.<br>• ofrece entre 3 y 4 niveles de potencia controlados por un solo botón o una perilla trasera.",
+        imagenes: [
+            "../img/017/001.jpg",
+            "../img/017/002.jpg",
+            "../img/017/003.jpg"
+        ]
     }
-
-
 ];
