@@ -213,7 +213,7 @@ const productos = [
     },{
         id: 17,
         nombre: "Jortan - Cámara de Seguridad Inteligente",
-        categoria: "tecnologia",
+        categoria: "tecnologia", "hogar",
         precio: 50.00,
         detalles: "• Diseño tipo ampolleta, se enrosca directamente en un soquete estándar E27 como un foco común.<br>•  Funciona mediante red Wi-Fi y es compatible con aplicaciones móviles como YOOSee para control remoto..<br>• Ofrece calidad de imagen Full HD (1080p / 2MP) con movimiento panorámico de 360° y función de visión nocturna por infrarrojos y LEDs",
         imagenes: [
