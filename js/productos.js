@@ -165,7 +165,9 @@ const productos = [
         precio: 20.00,
         detalles: "• Bluetooth 5.0 para una conexión estable.<br>• Estuche de aluminio en forma de tubo disponible en colores como negro, plateado y rojo.<br>•  Incluyen micrófono incorporado y estuche recargable que permite cargar los audífonos en cualquier lugar..",
         imagenes: [
-            "../img/013/001.jpeg"
+            "../img/013/001.jpg",
+            "../img/013/002.jpg",
+            "../img/013/003.jpeg"
         ]
     }
 
