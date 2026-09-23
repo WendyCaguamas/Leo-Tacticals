@@ -266,5 +266,15 @@ const productos = [
             "../img/021/003.jpg",
             "../img/021/004.jpg"
         ]
+    },{
+        id: 22,
+        nombre: "Humidificador Q3",
+        categoria: "hogar",
+        precio: 25.00,
+        detalles: "• Capacidad de 320 ml de agua.<br>• Permite añadir unas gotas de aceite esencial en el depósito para aromatizar estancias pequeñas, dormitorios u oficinas.<br>• Luz ambiental LED con 7 colores cambiantes.",
+        imagenes: [
+            "../img/022/001.jpg",
+            "../img/022/002.jpg"
+        ]
     }
 ];
