@@ -162,7 +162,7 @@ const productos = [
         id: 13,
         nombre: "Audífonos inalámbricos Bluetooth",
         categoria: "tecnologia",
-        precio: 20.00,
+        precio: 25.00,
         colores: ["gris", "rojo"],
         detalles: "• Bluetooth 5.0 para una conexión estable.<br>• Estuche de aluminio en forma de tubo disponible en colores como negro, plateado y rojo.<br>•  Incluyen micrófono incorporado y estuche recargable que permite cargar los audífonos en cualquier lugar..",
         imagenes: [
@@ -174,7 +174,7 @@ const productos = [
         id: 14,
         nombre: "TG113 Parlante Portátil Bluetooth",
         categoria: "tecnologia",
-        precio: 20.00,
+        precio: 40.00,
         colores: ["verde", "blanco", "naranja", "negro", "azul"],
         detalles: "• Altavoz inalámbrico cilíndrico, portátil y con diseño resistente al agua.<br>• Cuenta con Bluetooth, puerto USB, ranura para tarjetas microSD, entrada auxiliar de 3.5 mm y radio FM.<br>•  Ofrece una potencia de salida de 5W y batería recargable con autonomía de 3 a 4 horas de reproducción.",
         imagenes: [
@@ -183,6 +183,20 @@ const productos = [
             "../img/014/003.jpg",
             "../img/014/004.jpg",
             "../img/014/005.jpg"
+        ]
+    },{
+        id: 15,
+        nombre: "Parlante A011 Pro Max",
+        categoria: "tecnologia",
+        precio: 30.00,
+        colores: ["gris", "verde", "morado", "negro", "rojo"],
+        detalles: "• Conectividad inalámbrica por Bluetooth.<br>•  Cuenta con luces LED de colores cambiantes y función de soporte para celular.<br>•   Ofrece potencia de graves mejorados (Super Bass) en un tamaño pequeño.",
+        imagenes: [
+            "../img/015/001.jpg",
+            "../img/015/002.jpg",
+            "../img/015/003.jpg",
+            "../img/015/004.jpg",
+            "../img/015/005.jpg"
         ]
     }
 
