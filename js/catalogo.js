@@ -79,7 +79,8 @@ function mostrarProductos(listaProductos) {
                                     marron: "#795548",
                                     amarillo: "#facc15",
                                     naranja: "#f97316",
-                                    morado: "#7e22ce"
+                                    morado: "#7e22ce",
+                                    rosa: "#ffc0cb"
 
                                 };
 
