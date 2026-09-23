@@ -232,5 +232,15 @@ const productos = [
             "../img/018/002.jpg",
             "../img/018/003.jpg"
         ]
+    },{
+        id: 19,
+        nombre: "Licuadora Portátil",
+        categoria: "camping",
+        precio: 20.00,
+        detalles: "• Capacidad de 340 ml<br>• Funciona con batería recargable mediante USB.<br>• Diseñada para preparar batidos, jugos y smoothies de forma inalámbrica.",
+        imagenes: [
+            "../img/019/001.jpg",
+            "../img/019/002.jpg"
+        ]
     }
 ];
