@@ -301,5 +301,16 @@ const productos = [
             "../img/024/002.jpg",
             "../img/024/003.jpg"
         ]
+    },{
+        id: 25,
+        nombre: "IDV Mini Camera Full HD",
+        categoria: "equipamento",
+        precio: 40.00,
+        detalles: "• Grabación en calidad Full HD 1080P.<br>•  Incluye detección de movimiento y opciones de montaje magnético o mediante clip para ropa, bolsillos o uso en exteriores.<br>• Carcasa compacta y lente frontal circular marcado con líneas concéntricas.",
+        imagenes: [
+            "../img/025/001.jpg",
+            "../img/025/002.jpg",
+            "../img/025/003.jpg"
+        ]
     }
 ];
