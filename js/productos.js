@@ -424,12 +424,24 @@ const productos = [
         categoria: "tecnologia",
         colores: ["negro", "amarillo", "verde"],
         precio: 35.00,
-        detalles: "• Cuenta con 6 modos de iluminación.<br>• Encendedor de arco (plasma). <br>• Muestra el nivel de batería con batería recargable con puerto USB Tipo-C",
+        detalles: "• Cuenta con 6 modos de iluminación.<br>• Encendedor de arco (plasma). <br>• Muestra el nivel de batería con batería recargable con puerto USB Tipo-C.",
         imagenes: [
             "../img/036/001.jpg",
             "../img/036/002.jpg",
             "../img/036/003.jpg",
             "../img/036/004.jpg"
+        ]
+    },{
+        id: 37,
+        nombre: "Lámpara Portátil Multifuncional D72-1",
+        categoria: "tecnologia",
+        colores: ["rojo", "amarillo", "verde"],
+        precio: 35.00,
+        detalles: "• Funciona con un arco eléctrico doble que enciende sin gas ni llama.<br>• Cuenta con luz LED frontal para uso en campamentos o emergencias.<br>• Se carga mediante un cable USB.",
+        imagenes: [
+            "../img/037/001.jpg",
+            "../img/037/002.jpg",
+            "../img/037/003.jpg"
         ]
     }
 ];
