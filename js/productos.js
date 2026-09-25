@@ -356,5 +356,15 @@ const productos = [
             "../img/029/002.jpg",
             "../img/029/003.jpg"
         ]
+    },{
+        id: 30,
+        nombre: "Farol LED recargable para bicicleta",
+        categoria: "equipamento",
+        precio: 30.00,
+        detalles: "• Cuenta con un foco central ajustable y dos luces laterales auxiliares de advertencia.<br>• Recargable mediante USB.<br>• Zoom ajustable mediante rotación del foco central.",
+        imagenes: [
+            "../img/030/001.jpg",
+            "../img/030/002.jpg"
+        ]
     }
 ];
