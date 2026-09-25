@@ -443,5 +443,16 @@ const productos = [
             "../img/037/002.jpg",
             "../img/037/003.jpg"
         ]
+    },{
+        id: 38,
+        nombre: "Lámpara LED Solar Portátil Recargable",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Cuenta con un panel solar integrado en la parte superior y puerto USB para carga conveniente.<br>• Ofrece un tiempo de iluminación estimado entre 7 y 13 horas según la carga completa.<br>• Diseñada para iluminación en exteriores, campamentos, negocios o como luz de respaldo durante cortes de energía.",
+        imagenes: [
+            "../img/038/001.jpg",
+            "../img/038/002.jpg",
+            "../img/038/003.jpg"
+        ]
     }
 ];
