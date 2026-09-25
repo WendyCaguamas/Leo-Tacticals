@@ -396,5 +396,15 @@ const productos = [
             "../img/033/001.jpg",
             "../img/033/002.jpg"
         ]
+    },{
+        id: 34,
+        nombre: "Linterna Multifuncional para Camping Yesnice",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Hasta 1000 lúmenes de brillo.<br>• Cuenta con base magnética fuerte y funciones de luz tipo antorcha y lámpara de camping.<br>• Incluye múltiples modos de iluminación (como luz frontal y lateral) y carga rápida por USB.",
+        imagenes: [
+            "../img/034/001.jpg",
+            "../img/034/002.jpg"
+        ]
     }
 ];
