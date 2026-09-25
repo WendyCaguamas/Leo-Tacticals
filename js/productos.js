@@ -376,5 +376,15 @@ const productos = [
             "../img/031/001.jpg",
             "../img/031/002.jpg"
         ]
+    },{
+        id: 32,
+        nombre: " Aemai W11 Watch Ultra",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Pantalla táctil AMOLED con resolución de 420 x 456 px.<br>• certificación IP6X, alta protección contra el polvo y resistencia a salpicaduras de agua.",
+        imagenes: [
+            "../img/032/001.jpg",
+            "../img/032/002.jpg"
+        ]
     }
 ];
