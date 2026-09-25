@@ -322,5 +322,16 @@ const productos = [
             "../img/026/001.jpg",
             "../img/026/002.jpg"
         ]
+    },{
+        id: 27,
+        nombre: "Candado Antirrobo para Manillar de Motocicleta",
+        categoria: "equipamento",
+        precio: 40.00,
+        detalles: "• Se coloca en el manillar para bloquear la maneta de freno delantero y el puño del acelerador.<br>• Cuenta con una alarma integrada que se activa ante movimientos o manipulación sospechosa.<br>• Carcasa de plástico resistente.",
+        imagenes: [
+            "../img/027/001.jpg",
+            "../img/027/002.jpg",
+            "../img/027/003.jpg"
+        ]
     }
 ];
