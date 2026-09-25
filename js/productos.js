@@ -418,5 +418,18 @@ const productos = [
             "../img/035/002.jpg",
             "../img/035/003.jpg"
         ]
+    },{
+        id: 36,
+        nombre: "Lámpara Portátil Multifuncional Ignition",
+        categoria: "tecnologia",
+        colores: ["negro", "amarillo", "verde"],
+        precio: 35.00,
+        detalles: "• Cuenta con 6 modos de iluminación.<br>• Encendedor de arco (plasma). <br>• Muestra el nivel de batería con batería recargable con puerto USB Tipo-C",
+        imagenes: [
+            "../img/036/001.jpg",
+            "../img/036/002.jpg",
+            "../img/036/003.jpg",
+            "../img/036/004.jpg"
+        ]
     }
 ];
