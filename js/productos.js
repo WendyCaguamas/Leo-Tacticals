@@ -312,5 +312,15 @@ const productos = [
             "../img/025/002.jpg",
             "../img/025/003.jpg"
         ]
+    },{
+        id: 26,
+        nombre: "Alcohol Tester Digital Breath",
+        categoria: "equipamento",
+        precio: 40.00,
+        detalles: "• Pantalla LCD que muestra los resultados de forma digital.<br>• Rango de medición: 0.00% y 0.19% BAC (y 0.0 - 1.9 g/l).<br>• ncluye boquillas sopladoras reemplazables.",
+        imagenes: [
+            "../img/026/001.jpg",
+            "../img/026/002.jpg"
+        ]
     }
 ];
