@@ -386,5 +386,15 @@ const productos = [
             "../img/032/001.jpg",
             "../img/032/002.jpg"
         ]
+    },{
+        id: 33,
+        nombre: "Linterna Reflector Led W5119",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• LED de alta potencia (alcance largo).<br>• Batería recargable por USB. <br>•  Incluye capacidad de carga USB.",
+        imagenes: [
+            "../img/033/001.jpg",
+            "../img/033/002.jpg"
+        ]
     }
 ];
