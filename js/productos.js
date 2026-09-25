@@ -326,12 +326,24 @@ const productos = [
         id: 27,
         nombre: "Candado Antirrobo para Manillar de Motocicleta",
         categoria: "equipamento",
+        colores: ["naranja", "azul"],
         precio: 40.00,
         detalles: "• Se coloca en el manillar para bloquear la maneta de freno delantero y el puño del acelerador.<br>• Cuenta con una alarma integrada que se activa ante movimientos o manipulación sospechosa.<br>• Carcasa de plástico resistente.",
         imagenes: [
             "../img/027/001.jpg",
             "../img/027/002.jpg",
             "../img/027/003.jpg"
+        ]
+    },{
+        id: 28,
+        nombre: " Gerber Bear Grylls Ultimate Multi-Tool",
+        categoria: "equipamento",
+        precio: 50.00,
+        detalles: "• Acero inoxidable de alta resistencia.<br>• Incluye pinzas de punta fina con resorte, cortador de alambre, hoja de cuchillo lisa y dentada, sierra, tijeras, destornilladores planos y de estrella (Phillips), y abridor de botellas.<br>•  Sistema de bloqueo Safe.T.Plus que asegura las herramientas en posición abierta durante su uso.",
+        imagenes: [
+            "../img/028/001.jpg",
+            "../img/028/002.jpg",
+            "../img/028/003.jpg"
         ]
     }
 ];
