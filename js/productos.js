@@ -299,7 +299,7 @@ const productos = [
         imagenes: [
             "../img/024/001.jpg",
             "../img/024/002.jpg",
-            "../img/024/003.jpeg"
+            "../img/024/003.jpg"
         ]
     }
 ];
