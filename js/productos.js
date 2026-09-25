@@ -394,7 +394,8 @@ const productos = [
         detalles: "• LED de alta potencia (alcance largo).<br>• Batería recargable por USB. <br>•  Incluye capacidad de carga USB.",
         imagenes: [
             "../img/033/001.jpg",
-            "../img/033/002.jpg"
+            "../img/033/002.jpg",
+            "../img/033/003.jpg"
         ]
     },{
         id: 34,
