@@ -407,5 +407,16 @@ const productos = [
             "../img/034/001.jpg",
             "../img/034/002.jpg"
         ]
+    },{
+        id: 35,
+        nombre: "Lámpara LED Solar Portátil para Camping",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Funciona con energía solar mediante un pequeño panel integrado y batería recargable.<br>• Ideal para actividades al aire libre como campamentos, excursiones o como luz de emergencia en el hogar.",
+        imagenes: [
+            "../img/035/001.jpg",
+            "../img/035/002.jpg",
+            "../img/035/003.jpg"
+        ]
     }
 ];
