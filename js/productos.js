@@ -289,5 +289,17 @@ const productos = [
             "../img/023/003.jpeg",
             "../img/023/004.jpg"
         ]
+    },{
+        id: 24,
+        nombre: "Audifonos de Caso Inalámbrico",
+        categoria: "hogar",
+        colores: ["blanco", "azul"],
+        precio: 40.00,
+        detalles: "• Audio de alta fidelidad y cancelación activa de ruido.<br>• Diseño acústico con una diadema de malla de punto transpirable.<br>• Audio espacial personalizado.",
+        imagenes: [
+            "../img/024/001.jpg",
+            "../img/024/002.jpg",
+            "../img/024/003.jpeg"
+        ]
     }
 ];
