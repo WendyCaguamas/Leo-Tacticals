@@ -366,5 +366,15 @@ const productos = [
             "../img/030/001.jpg",
             "../img/030/002.jpg"
         ]
+    },{
+        id: 31,
+        nombre: "Linterna LED Fuerte modelo T6",
+        categoria: "equipamento",
+        precio: 30.00,
+        detalles: "• Diseño resistente al agua y enfoque ajustable (zoom).<br>• Utiliza batería recargable.",
+        imagenes: [
+            "../img/031/001.jpg",
+            "../img/031/002.jpg"
+        ]
     }
 ];
