@@ -345,5 +345,16 @@ const productos = [
             "../img/028/002.jpg",
             "../img/028/003.jpg"
         ]
+    },{
+        id: 29,
+        nombre: "Lámpara de bicicleta recargable",
+        categoria: "equipamento",
+        precio: 30.00,
+        detalles: "• Luz delantera para bicicleta o patinete eléctrico.<br>• Batería recargable mediante un puerto USB.<br>• Incluye un soporte práctico para ajustar al manillar.",
+        imagenes: [
+            "../img/029/001.jpg",
+            "../img/029/002.jpg",
+            "../img/029/003.jpg"
+        ]
     }
 ];
