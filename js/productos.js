@@ -485,5 +485,15 @@ const productos = [
             "../img/041/002.jpg",
             "../img/041/003.jpg"
         ]
+    },{
+        id: 42,
+        nombre: "Linterna Frontal de Buceo Profesional",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Diseñado impermeables para uso bajo el agua (clasificación común IP68).<br>• Incluye soporte para la cabeza o casco.<br>• Incluye soporte para la cabeza o casco.",
+        imagenes: [
+            "../img/042/001.jpg",
+            "../img/042/002.jpg"
+        ]
     }
 ];
