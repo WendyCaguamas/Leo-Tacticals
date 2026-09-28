@@ -621,5 +621,17 @@ const productos = [
             "../img/054/001.jpg",
             "../img/054/002.jpg"
         ]
+    },{
+        id: 55,
+        nombre: "Ventilador Portátil de Camping",
+        categoria: "hogar",
+        precio: 40.00,
+        colores: ["blanco", "azul"],
+        detalles: "• Funciona como ventilador de escritorio, de pie o suspendidol.<br>• Gancho para colgar el ventilador en carpas o repisas.<br>• Recargable mediante USB para mayor portabilidad.",
+        imagenes: [
+            "../img/055/001.jpg",
+            "../img/055/002.jpg",
+            "../img/055/003.jpg"
+        ]
     }
 ];
