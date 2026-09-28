@@ -464,5 +464,15 @@ const productos = [
             "../img/039/001.jpg",
             "../img/039/002.jpg"
         ]
+    },{
+        id: 40,
+        nombre: "Lámpara Solar Portátil HG-D03",
+        categoria: "tecnologia",
+        precio: 45.00,
+        detalles: "• Cuenta con un panel solar integrado en la parte posterior para recargarse con la luz del sol.<br>• Solución de iluminación autónoma para emergencias y zonas sin electricidad.<br>• Incluye un asa superior con gancho para colgarla fácilmente en campamentos o durante cortes de luz.",
+        imagenes: [
+            "../img/040/001.jpg",
+            "../img/040/002.jpg"
+        ]
     }
 ];
