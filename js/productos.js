@@ -515,5 +515,16 @@ const productos = [
             "../img/044/001.jpg",
             "../img/044/002.jpg"
         ]
+    },{
+        id: 45,
+        nombre: "Aroma Difusor de Vehículo",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "•  Nebulizador de aceites esenciales portátil sin agua.<br>• Sistema de nebulización ultrasónica en seco que no requiere añadir agua.<br>• Funciona de manera recargable vía USB.",
+        imagenes: [
+            "../img/045/001.jpg",
+            "../img/045/002.jpg",
+            "../img/045/003.jpg"
+        ]
     }
 ];
