@@ -578,5 +578,15 @@ const productos = [
             "../img/050/001.jpg",
             "../img/050/002.jpg"
         ]
+    },{
+        id: 51,
+        nombre: "Foco de Emergencia Portátil de 20W",
+        categoria: "hogar",
+        precio: 50.00,
+        detalles: "• Se recarga de forma normal mientras está conectada.<br>• Utiliza una rosca tipo E27.<br>• Utiliza baterías recargables de tipo 18650.",
+        imagenes: [
+            "../img/051/001.jpg",
+            "../img/051/002.jpg"
+        ]
     }
 ];
