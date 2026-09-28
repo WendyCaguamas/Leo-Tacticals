@@ -565,7 +565,7 @@ const productos = [
         detalles: "• Certificación IP66, resistente al agua, lluvia y polvo para exteriores.<br>• Incluye un control remoto para ajustar la velocidad del aire y la intensidad de la luz.<br>• Incluye el foco reflector, un panel solar para la recarga y un control remoto.",
         imagenes: [
             "../img/049/001.jpg",
-            "../img/049/002.jpg",
+            "../img/049/002.jpeg",
             "../img/049/003.jpg",
         ]
     }
