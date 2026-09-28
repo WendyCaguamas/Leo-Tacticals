@@ -505,5 +505,15 @@ const productos = [
             "../img/043/001.jpg",
             "../img/043/002.jpg"
         ]
+    },{
+        id: 44,
+        nombre: "Linterna de Buceo Keenso",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "•  Diseñada para uso subacuático con certificación IPX8.<br>• Soporta profundidades de hasta 50 metros (164 pies).<br>• Funciona con una batería recargable de larga duración.",
+        imagenes: [
+            "../img/044/001.jpg",
+            "../img/044/002.jpg"
+        ]
     }
 ];
