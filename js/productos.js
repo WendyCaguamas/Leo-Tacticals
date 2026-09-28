@@ -610,5 +610,16 @@ const productos = [
             "../img/053/001.jpeg",
             "../img/053/002.jpeg"
         ]
+    },{
+        id: 54,
+        nombre: "Ventilador de Escritorio Portátil Multifuncional",
+        categoria: "hogar",
+        precio: 30.00,
+        colores: ["blanco", "beige"],
+        detalles: "• Función de inclinación de forma vertical.<br>• • Función de luz de ambiente.<br>• Recargable mediante USB para mayor portabilidad.",
+        imagenes: [
+            "../img/054/001.jpg",
+            "../img/054/002.jpg"
+        ]
     }
 ];
