@@ -539,13 +539,23 @@ const productos = [
         ]
     },{
         id: 47,
-        nombre: " Linterna Táctica LED",
+        nombre: "Linterna Táctica LED",
         categoria: "tecnologia",
         precio: 35.00,
         detalles: "• Enfoque ajustable y varios modos de iluminación.<br>• Aleación de aluminio resistente a impactos y salpicaduras.<br>• Batería recargable con puerto de carga integrado.",
         imagenes: [
             "../img/047/001.jpg",
             "../img/047/002.jpg"
+        ]
+    },{
+        id: 48,
+        nombre: "Foco Ventilador de Techo",
+        categoria: "hogar",
+        precio: 45.00,
+        detalles: "• Se instala directamente a un portalámparas E27.<br>• Incluye un control remoto para ajustar la velocidad del aire y la intensidad de la luz.<br>• Dispositivo que combina iluminación y ventilación.",
+        imagenes: [
+            "../img/048/001.jpg",
+            "../img/048/002.jpg"
         ]
     }
 ];
