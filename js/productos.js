@@ -454,5 +454,15 @@ const productos = [
             "../img/038/002.jpg",
             "../img/038/003.jpg"
         ]
+    },{
+        id: 39,
+        nombre: "Despertador Digital de Carga Inalámbrica",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Presenta la hora y la temperatura ambiente en grados Celsius.<br>• Sistema de carga inalámbrica.<br>•  Configuración de alarmas múltiples y ajuste automático o manual de brillo.",
+        imagenes: [
+            "../img/039/001.jpg",
+            "../img/039/002.jpg"
+        ]
     }
 ];
