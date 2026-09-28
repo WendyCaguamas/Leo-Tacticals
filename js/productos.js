@@ -557,5 +557,16 @@ const productos = [
             "../img/048/001.jpg",
             "../img/048/002.jpg"
         ]
+    },{
+        id: 49,
+        nombre: " Reflector Solar Jortan 2000W",
+        categoria: "hogar",
+        precio: 50.00,
+        detalles: "• Certificación IP66, resistente al agua, lluvia y polvo para exteriores.<br>• Incluye un control remoto para ajustar la velocidad del aire y la intensidad de la luz.<br>• Incluye el foco reflector, un panel solar para la recarga y un control remoto.",
+        imagenes: [
+            "../img/049/001.jpg",
+            "../img/049/002.jpg",
+            "../img/049/003.jpg",
+        ]
     }
 ];
