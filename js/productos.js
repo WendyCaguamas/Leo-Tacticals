@@ -474,5 +474,16 @@ const productos = [
             "../img/040/001.jpg",
             "../img/040/002.jpg"
         ]
+    },{
+        id: 41,
+        nombre: "Linterna de Buceo Profesional",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Diseñado impermeables para uso bajo el agua (clasificación común IPX8).<br>• Cuerpo de plástico ABS amarillo de alta visibilidad.<br>• 14.3 cm de largo.",
+        imagenes: [
+            "../img/041/001.jpg",
+            "../img/041/002.jpg",
+            "../img/041/003.jpg"
+        ]
     }
 ];
