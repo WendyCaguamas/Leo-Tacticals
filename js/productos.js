@@ -559,14 +559,24 @@ const productos = [
         ]
     },{
         id: 49,
-        nombre: " Reflector Solar Jortan 2000W",
+        nombre: "Reflector Solar Jortan 2000W",
         categoria: "hogar",
         precio: 50.00,
         detalles: "• Certificación IP66, resistente al agua, lluvia y polvo para exteriores.<br>• Incluye un control remoto para ajustar la velocidad del aire y la intensidad de la luz.<br>• Incluye el foco reflector, un panel solar para la recarga y un control remoto.",
         imagenes: [
             "../img/049/001.jpg",
             "../img/049/002.jpeg",
-            "../img/049/003.jpg",
+            "../img/049/003.jpg"
+        ]
+    },{
+        id: 50,
+        nombre: "Foco de Emergencia Portátil de 30W",
+        categoria: "hogar",
+        precio: 50.00,
+        detalles: "• Cuenta con batería de respaldo para cortes de energía.<br>• Compatible con casquillo universal E27 / B22.<br>• Potencia de 30w.",
+        imagenes: [
+            "../img/050/001.jpg",
+            "../img/050/002.jpg"
         ]
     }
 ];
