@@ -495,5 +495,15 @@ const productos = [
             "../img/042/001.jpg",
             "../img/042/002.jpg"
         ]
+    },{
+        id: 43,
+        nombre: "Linterna Mini Táctica",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Cuenta con 3 modos de luz y zoom ajustable de enfoque.<br>• Batería recargable interna de ion de litio con puerto de carga micro-USB.<br>• 9 cm de largo y 2,5 cm de diámetro.",
+        imagenes: [
+            "../img/043/001.jpg",
+            "../img/043/002.jpg"
+        ]
     }
 ];
