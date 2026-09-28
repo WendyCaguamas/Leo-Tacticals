@@ -588,5 +588,15 @@ const productos = [
             "../img/051/001.jpg",
             "../img/051/002.jpg"
         ]
+    },{
+        id: 52,
+        nombre: "Lámpara Portátil de Gancho",
+        categoria: "hogar",
+        precio: 30.00,
+        detalles: "• LED de alta luminosidad (luz fría blanca).<br>• Recargable mediante interfaz USB (5V).<br>• Entre 6 y 8 horas de iluminación sostenible.",
+        imagenes: [
+            "../img/052/001.jpg",
+            "../img/052/002.jpg"
+        ]
     }
 ];
