@@ -531,6 +531,7 @@ const productos = [
         nombre: "Mini Ventilador de Escritorio Portátil",
         categoria: "tecnologia",
         precio: 35.00,
+        colores: ["blanco", "cafe"],
         detalles: "• Ventilador de mesa con aspas y opción de decoración.<br>• Plástico ABS y polipropileno (PP), ligeros y resistentes.<br>• Inalámbrico y recargable mediante USB.",
         imagenes: [
             "../img/046/001.jpg",
@@ -597,6 +598,17 @@ const productos = [
         imagenes: [
             "../img/052/001.jpg",
             "../img/052/002.jpg"
+        ]
+    },{
+        id: 53,
+        nombre: "Ventilador Portátil Plegable de Escritorio",
+        categoria: "hogar",
+        precio: 30.00,
+        colores: ["blanco", "verde"],
+        detalles: "• Estructura de altura ajustable y plegable en forma de disco compacto.<br>• Batería recargable por USB.<br>• Permite inclinar el flujo de aire hasta 180 grados.",
+        imagenes: [
+            "../img/053/001.jpeg",
+            "../img/053/002.jpeg"
         ]
     }
 ];
