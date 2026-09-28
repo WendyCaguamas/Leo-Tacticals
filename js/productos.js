@@ -526,5 +526,16 @@ const productos = [
             "../img/045/002.jpg",
             "../img/045/003.jpg"
         ]
+    },{
+        id: 46,
+        nombre: "Mini Ventilador de Escritorio Portátil",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Ventilador de mesa con aspas y opción de decoración.<br>• Plástico ABS y polipropileno (PP), ligeros y resistentes.<br>• Inalámbrico y recargable mediante USB.",
+        imagenes: [
+            "../img/046/001.jpg",
+            "../img/046/002.jpg",
+            "../img/046/003.jpg"
+        ]
     }
 ];
