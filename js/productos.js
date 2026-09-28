@@ -633,5 +633,15 @@ const productos = [
             "../img/055/002.jpg",
             "../img/055/003.jpg"
         ]
+    },{
+        id: 56,
+        nombre: "Aroma Difusor de Cesta",
+        categoria: "hogar",
+        precio: 25.00,
+        detalles: "• Función de dispersión de aromatizante.<br>• Cuenta con luz de noche.<br>• Incluye un sistema de apagado automático cuando el nivel de agua es bajo.",
+        imagenes: [
+            "../img/056/001.jpg",
+            "../img/056/002.jpg"
+        ]
     }
 ];
