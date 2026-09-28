@@ -537,5 +537,15 @@ const productos = [
             "../img/046/002.jpg",
             "../img/046/003.jpg"
         ]
+    },{
+        id: 47,
+        nombre: " Linterna Táctica LED",
+        categoria: "tecnologia",
+        precio: 35.00,
+        detalles: "• Enfoque ajustable y varios modos de iluminación.<br>• Aleación de aluminio resistente a impactos y salpicaduras.<br>• Batería recargable con puerto de carga integrado.",
+        imagenes: [
+            "../img/047/001.jpg",
+            "../img/047/002.jpg"
+        ]
     }
 ];
