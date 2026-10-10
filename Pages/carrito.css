@@ -887,3 +887,235 @@
     overflow: hidden;
 }
 
+
+/* =====================================================
+   CORRECCIONES FINALES — PANEL DE TALLAS Y BOTONES
+   Estas reglas van al final para sobrescribir estilos previos.
+===================================================== */
+
+.producto-seleccion-tallas,
+.producto-seleccion-colores {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.producto-seleccion-tallas .opcion-talla,
+.producto-seleccion-colores .opcion-color {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 14px !important;
+    width: 100% !important;
+    min-height: 40px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.producto-seleccion-tallas .opcion-talla-nombre,
+.producto-seleccion-colores .opcion-color-nombre {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 9px !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+}
+
+.producto-seleccion-tallas .talla-producto {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #252525 !important;
+    color: #ffffff !important;
+    border: 1px solid #505050 !important;
+    border-radius: 6px !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+.producto-seleccion-tallas .cantidad-talla,
+.producto-seleccion-colores .cantidad-color {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 7px !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+}
+
+.producto-seleccion-tallas .cantidad-talla button,
+.producto-seleccion-colores .cantidad-color button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 34px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #252525 !important;
+    color: #ffffff !important;
+    border: 1px solid #505050 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    text-indent: 0 !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.producto-seleccion-tallas .cantidad-talla button:hover:not(:disabled),
+.producto-seleccion-colores .cantidad-color button:hover:not(:disabled) {
+    background: var(--naranja, #ffb300) !important;
+    color: #111111 !important;
+    border-color: var(--naranja, #ffb300) !important;
+}
+
+.producto-seleccion-tallas .cantidad-talla button:disabled,
+.producto-seleccion-colores .cantidad-color button:disabled {
+    background: #1a1a1a !important;
+    color: #777777 !important;
+    border-color: #333333 !important;
+    opacity: 0.55 !important;
+    cursor: not-allowed !important;
+}
+
+.producto-seleccion-tallas .cantidad-talla span,
+.producto-seleccion-colores .cantidad-color span {
+    display: inline-block !important;
+    flex: 0 0 22px !important;
+    min-width: 22px !important;
+    max-width: 22px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #ffffff !important;
+    font-family: inherit !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+
+/* Mantener las tallas visibles delante de las imágenes del catálogo. */
+.producto-imagenes {
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+}
+
+.producto-imagenes > img {
+    position: relative !important;
+    z-index: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.producto-imagenes .variantes-producto {
+    position: absolute !important;
+    left: 10px !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    z-index: 5 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    max-width: calc(100% - 20px) !important;
+    pointer-events: none !important;
+}
+
+.producto-imagenes .tallas-producto {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 5px !important;
+}
+
+.producto-imagenes .talla-catalogo {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    margin: 0 !important;
+    padding: 0 5px !important;
+    background: #171717 !important;
+    color: #ffffff !important;
+    border: 1px solid #555555 !important;
+    border-radius: 5px !important;
+    font-family: inherit !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 480px) {
+    .producto-seleccion-tallas .opcion-talla,
+    .producto-seleccion-colores .opcion-color {
+        gap: 8px !important;
+    }
+
+    .producto-seleccion-tallas .talla-producto {
+        flex-basis: 34px !important;
+        width: 34px !important;
+        min-width: 34px !important;
+        max-width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+    }
+
+    .producto-seleccion-tallas .cantidad-talla,
+    .producto-seleccion-colores .cantidad-color {
+        gap: 5px !important;
+    }
+
+    .producto-seleccion-tallas .cantidad-talla button,
+    .producto-seleccion-colores .cantidad-color button {
+        flex-basis: 30px !important;
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+        max-height: 30px !important;
+    }
+}
