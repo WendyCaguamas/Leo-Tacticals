@@ -1,9 +1,30 @@
+
 /* =========================================
    CONTENEDOR DE PRODUCTOS
 ========================================= */
 
 const contenedorProductos =
     document.getElementById("productos-container");
+
+
+/* =========================================
+   COLORES CSS
+========================================= */
+
+const coloresCSS = {
+    verde: "#43a047",
+    verde_oliva: "#636b2f",
+    azul: "#1976d2",
+    rojo: "#e53935",
+    blanco: "#ffffff",
+    negro: "#111111",
+    gris: "#757575",
+    marron: "#795548",
+    amarillo: "#facc15",
+    naranja: "#f97316",
+    morado: "#7e22ce",
+    rosa: "#ffc0cb"
+};
 
 
 /* =========================================
@@ -22,13 +43,47 @@ function mostrarProductos(listaProductos) {
 
         tarjeta.classList.add("producto-catalogo");
 
-        tarjeta.onclick = (evento) => {
+        tarjeta.onclick = evento => {
 
-            if (evento.target.closest(".flecha")) return;
+            if (
+                evento.target.closest(".flecha") ||
+                evento.target.closest(".variantes-producto")
+            ) {
+                return;
+            }
 
             abrirProducto(producto.id);
 
         };
+
+        const selectorColoresCatalogo =
+            producto.colores?.length
+            ? `
+                <div class="colores-producto">
+                    ${producto.colores.map(color => `
+                        <span
+                            class="color-producto"
+                            title="${color.replace("_", " ")}"
+                            style="background-color: ${coloresCSS[color] || color};"
+                        ></span>
+                    `).join("")}
+                </div>
+            `
+            : "";
+
+        const selectorTallasCatalogo =
+            producto.tallas?.length
+            ? `
+                <div class="tallas-producto">
+                    ${producto.tallas.map(talla => `
+                        <span
+                            class="talla-catalogo"
+                            title="Talla ${talla}"
+                        >${talla}</span>
+                    `).join("")}
+                </div>
+            `
+            : "";
 
         tarjeta.innerHTML = `
 
@@ -42,52 +97,30 @@ function mostrarProductos(listaProductos) {
                 >
 
                 ${
-                    producto.colores && producto.colores.length > 0
+                    selectorColoresCatalogo || selectorTallasCatalogo
                     ? `
-                        <div class="colores-producto">
-
-                            ${producto.colores.map(color => {
-
-                                const coloresCSS = {
-                                    verde: "#43a047",
-                                    verde_oliva: "#636b2f",
-                                    azul: "#1976d2",
-                                    rojo: "#e53935",
-                                    blanco: "#ffffff",
-                                    negro: "#111111",
-                                    gris: "#757575",
-                                    marron: "#795548",
-                                    amarillo: "#facc15",
-                                    naranja: "#f97316",
-                                    morado: "#7e22ce",
-                                    rosa: "#ffc0cb"
-                                };
-
-                                return `
-                                    <span
-                                        class="color-producto"
-                                        title="${color}"
-                                        style="background-color: ${coloresCSS[color] || color};"
-                                    ></span>
-                                `;
-
-                            }).join("")}
-
+                        <div class="variantes-producto">
+                            ${selectorColoresCatalogo}
+                            ${selectorTallasCatalogo}
                         </div>
                     `
                     : ""
                 }
 
                 <button
+                    type="button"
                     class="flecha flecha-izquierda"
                     onclick="cambiarImagen(this, -1)"
+                    aria-label="Imagen anterior"
                 >
                     <i class="fa-solid fa-chevron-left"></i>
                 </button>
 
                 <button
+                    type="button"
                     class="flecha flecha-derecha"
                     onclick="cambiarImagen(this, 1)"
+                    aria-label="Imagen siguiente"
                 >
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
@@ -127,7 +160,7 @@ const botonesCategorias =
 
 botonesCategorias.forEach(boton => {
 
-    boton.addEventListener("click", (evento) => {
+    boton.addEventListener("click", evento => {
 
         evento.preventDefault();
 
@@ -195,9 +228,7 @@ function cambiarImagen(boton, direccion) {
 
     imagenNueva.src = imagenes[nuevoIndice];
     imagenNueva.alt = imagenActual.alt;
-
     imagenNueva.classList.add("imagen-producto");
-
     imagenNueva.dataset.indice = nuevoIndice;
 
     imagenNueva.style.transform =
@@ -251,28 +282,11 @@ function abrirProducto(id) {
     if (!panel || !contenido) return;
 
 
-    /* =====================================
-       SELECTOR DE COLORES
-    ====================================== */
+    /* SELECTOR DE COLORES */
 
     let selectorColores = "";
 
-    if (producto.colores && producto.colores.length > 0) {
-
-        const coloresCSS = {
-            verde: "#43a047",
-            verde_oliva: "#636b2f",
-            azul: "#1976d2",
-            rojo: "#e53935",
-            blanco: "#ffffff",
-            negro: "#111111",
-            gris: "#757575",
-            marron: "#795548",
-            amarillo: "#facc15",
-            naranja: "#f97316",
-            morado: "#7e22ce",
-            rosa: "#ffc0cb"
-        };
+    if (producto.colores?.length) {
 
         selectorColores = `
 
@@ -338,13 +352,11 @@ function abrirProducto(id) {
     }
 
 
-    /* =====================================
-       SELECTOR DE TALLAS
-    ====================================== */
+    /* SELECTOR DE TALLAS */
 
     let selectorTallas = "";
 
-    if (producto.tallas && producto.tallas.length > 0) {
+    if (producto.tallas?.length) {
 
         selectorTallas = `
 
@@ -405,9 +417,7 @@ function abrirProducto(id) {
     }
 
 
-    /* =====================================
-       CONTENIDO DEL PANEL
-    ====================================== */
+    /* CONTENIDO DEL PANEL */
 
     contenido.innerHTML = `
 
@@ -424,6 +434,7 @@ function abrirProducto(id) {
                 producto.imagenes.length > 1
                 ? `
                     <button
+                        type="button"
                         class="panel-flecha panel-flecha-izquierda"
                         onclick="cambiarImagenPanel(-1)"
                     >
@@ -431,6 +442,7 @@ function abrirProducto(id) {
                     </button>
 
                     <button
+                        type="button"
                         class="panel-flecha panel-flecha-derecha"
                         onclick="cambiarImagenPanel(1)"
                     >
@@ -447,7 +459,7 @@ function abrirProducto(id) {
             <h1>${producto.nombre}</h1>
 
             <p class="producto-panel-descripcion">
-                ${producto.detalles}
+                ${producto.detalles || ""}
             </p>
 
             <div class="producto-panel-precio">
@@ -515,7 +527,6 @@ function abrirProducto(id) {
         </div>
 
     `;
-
 
     panel.dataset.productoId = producto.id;
 
@@ -588,14 +599,13 @@ function cambiarImagenPanel(direccion) {
     }
 
     imagen.src = producto.imagenes[indice];
-
     imagen.dataset.indice = indice;
 
 }
 
 
 /* =========================================
-   CAMBIAR CANTIDAD TOTAL
+   CANTIDAD TOTAL
 ========================================= */
 
 function cambiarCantidad(cambio) {
@@ -605,8 +615,7 @@ function cambiarCantidad(cambio) {
 
     if (!elemento) return;
 
-    let cantidad = parseInt(elemento.textContent);
-
+    const cantidad = parseInt(elemento.textContent);
     const nuevaCantidad = cantidad + cambio;
 
     if (nuevaCantidad < 1) return;
@@ -614,10 +623,8 @@ function cambiarCantidad(cambio) {
     elemento.textContent = nuevaCantidad;
 
     if (nuevaCantidad < cantidad) {
-
         ajustarColores(nuevaCantidad);
         ajustarTallas(nuevaCantidad);
-
     }
 
     actualizarBotonesColores();
@@ -627,7 +634,7 @@ function cambiarCantidad(cambio) {
 
 
 /* =========================================
-   CAMBIAR CANTIDAD DE UN COLOR
+   CANTIDAD POR COLOR
 ========================================= */
 
 function cambiarCantidadColor(color, cambio) {
@@ -641,16 +648,15 @@ function cambiarCantidadColor(color, cambio) {
     if (!cantidadElemento || !elemento) return;
 
     const cantidadTotal = parseInt(cantidadElemento.textContent);
-
-    let cantidadColor = parseInt(elemento.textContent);
-
+    const cantidadColor = parseInt(elemento.textContent);
     const nuevaCantidad = cantidadColor + cambio;
 
     if (nuevaCantidad < 0) return;
 
-    const totalAsignado = obtenerTotalColores();
-
-    if (cambio > 0 && totalAsignado >= cantidadTotal) return;
+    if (
+        cambio > 0 &&
+        obtenerTotalColores() >= cantidadTotal
+    ) return;
 
     elemento.textContent = nuevaCantidad;
 
@@ -658,30 +664,17 @@ function cambiarCantidadColor(color, cambio) {
 
 }
 
-
-/* =========================================
-   OBTENER TOTAL DE COLORES
-========================================= */
-
 function obtenerTotalColores() {
-
-    const elementos =
-        document.querySelectorAll(".cantidad-color span");
 
     let total = 0;
 
-    elementos.forEach(elemento => {
+    document.querySelectorAll(".cantidad-color span").forEach(elemento => {
         total += parseInt(elemento.textContent) || 0;
     });
 
     return total;
 
 }
-
-
-/* =========================================
-   ACTUALIZAR BOTONES DE COLORES
-========================================= */
 
 function actualizarBotonesColores() {
 
@@ -691,7 +684,6 @@ function actualizarBotonesColores() {
     if (!cantidadElemento) return;
 
     const cantidadTotal = parseInt(cantidadElemento.textContent);
-
     const totalAsignado = obtenerTotalColores();
 
     document.querySelectorAll(".boton-color-mas").forEach(boton => {
@@ -700,37 +692,20 @@ function actualizarBotonesColores() {
 
 }
 
-
-/* =========================================
-   AJUSTAR COLORES
-========================================= */
-
 function ajustarColores(cantidadTotal) {
 
     const elementos =
         document.querySelectorAll(".cantidad-color span");
 
-    let totalAsignado = obtenerTotalColores();
-
-    if (totalAsignado <= cantidadTotal) {
-        actualizarBotonesColores();
-        return;
-    }
-
-    let exceso = totalAsignado - cantidadTotal;
+    let exceso = obtenerTotalColores() - cantidadTotal;
 
     for (let i = elementos.length - 1; i >= 0 && exceso > 0; i--) {
 
-        let cantidad = parseInt(elementos[i].textContent);
-
-        if (cantidad <= 0) continue;
-
+        const cantidad = parseInt(elementos[i].textContent) || 0;
         const reducir = Math.min(cantidad, exceso);
 
-        cantidad -= reducir;
+        elementos[i].textContent = cantidad - reducir;
         exceso -= reducir;
-
-        elementos[i].textContent = cantidad;
 
     }
 
@@ -740,7 +715,7 @@ function ajustarColores(cantidadTotal) {
 
 
 /* =========================================
-   CAMBIAR CANTIDAD DE UNA TALLA
+   CANTIDAD POR TALLA
 ========================================= */
 
 function cambiarCantidadTalla(talla, cambio) {
@@ -754,16 +729,15 @@ function cambiarCantidadTalla(talla, cambio) {
     if (!cantidadElemento || !elemento) return;
 
     const cantidadTotal = parseInt(cantidadElemento.textContent);
-
-    let cantidadTalla = parseInt(elemento.textContent);
-
+    const cantidadTalla = parseInt(elemento.textContent);
     const nuevaCantidad = cantidadTalla + cambio;
 
     if (nuevaCantidad < 0) return;
 
-    const totalAsignado = obtenerTotalTallas();
-
-    if (cambio > 0 && totalAsignado >= cantidadTotal) return;
+    if (
+        cambio > 0 &&
+        obtenerTotalTallas() >= cantidadTotal
+    ) return;
 
     elemento.textContent = nuevaCantidad;
 
@@ -771,30 +745,17 @@ function cambiarCantidadTalla(talla, cambio) {
 
 }
 
-
-/* =========================================
-   OBTENER TOTAL DE TALLAS
-========================================= */
-
 function obtenerTotalTallas() {
-
-    const elementos =
-        document.querySelectorAll(".cantidad-talla span");
 
     let total = 0;
 
-    elementos.forEach(elemento => {
+    document.querySelectorAll(".cantidad-talla span").forEach(elemento => {
         total += parseInt(elemento.textContent) || 0;
     });
 
     return total;
 
 }
-
-
-/* =========================================
-   ACTUALIZAR BOTONES DE TALLAS
-========================================= */
 
 function actualizarBotonesTallas() {
 
@@ -804,7 +765,6 @@ function actualizarBotonesTallas() {
     if (!cantidadElemento) return;
 
     const cantidadTotal = parseInt(cantidadElemento.textContent);
-
     const totalAsignado = obtenerTotalTallas();
 
     document.querySelectorAll(".boton-talla-mas").forEach(boton => {
@@ -813,37 +773,20 @@ function actualizarBotonesTallas() {
 
 }
 
-
-/* =========================================
-   AJUSTAR TALLAS
-========================================= */
-
 function ajustarTallas(cantidadTotal) {
 
     const elementos =
         document.querySelectorAll(".cantidad-talla span");
 
-    let totalAsignado = obtenerTotalTallas();
-
-    if (totalAsignado <= cantidadTotal) {
-        actualizarBotonesTallas();
-        return;
-    }
-
-    let exceso = totalAsignado - cantidadTotal;
+    let exceso = obtenerTotalTallas() - cantidadTotal;
 
     for (let i = elementos.length - 1; i >= 0 && exceso > 0; i--) {
 
-        let cantidad = parseInt(elementos[i].textContent);
-
-        if (cantidad <= 0) continue;
-
+        const cantidad = parseInt(elementos[i].textContent) || 0;
         const reducir = Math.min(cantidad, exceso);
 
-        cantidad -= reducir;
+        elementos[i].textContent = cantidad - reducir;
         exceso -= reducir;
-
-        elementos[i].textContent = cantidad;
 
     }
 
@@ -884,14 +827,12 @@ function guardarCarrito(carrito) {
 
 
 /* =========================================
-   CREAR CLAVE DE DISTRIBUCIÓN DE COLORES
+   CLAVE DE COLORES
 ========================================= */
 
 function crearClaveColores(distribucionColores) {
 
-    if (!distribucionColores || distribucionColores.length === 0) {
-        return "";
-    }
+    if (!distribucionColores?.length) return "";
 
     return [...distribucionColores]
         .sort((a, b) => a.color.localeCompare(b.color))
@@ -902,14 +843,12 @@ function crearClaveColores(distribucionColores) {
 
 
 /* =========================================
-   CREAR CLAVE DE DISTRIBUCIÓN DE TALLAS
+   CLAVE DE TALLAS
 ========================================= */
 
 function crearClaveTallas(distribucionTallas) {
 
-    if (!distribucionTallas || distribucionTallas.length === 0) {
-        return "";
-    }
+    if (!distribucionTallas?.length) return "";
 
     return [...distribucionTallas]
         .sort((a, b) => Number(a.talla) - Number(b.talla))
@@ -920,7 +859,7 @@ function crearClaveTallas(distribucionTallas) {
 
 
 /* =========================================
-   OBTENER DATOS DEL PRODUCTO ACTUAL
+   DATOS DEL PRODUCTO ACTUAL
 ========================================= */
 
 function obtenerDatosProductoActual(id) {
@@ -938,18 +877,15 @@ function obtenerDatosProductoActual(id) {
 
     const cantidad = parseInt(elementoCantidad.textContent);
 
-
-    /* =====================================
-       DISTRIBUCIÓN DE COLORES
-    ====================================== */
-
     let distribucionColores = [];
+    let distribucionTallas = [];
 
-    if (producto.colores && producto.colores.length > 0) {
 
-        const totalColores = obtenerTotalColores();
+    /* VALIDAR COLORES */
 
-        if (totalColores !== cantidad) {
+    if (producto.colores?.length) {
+
+        if (obtenerTotalColores() !== cantidad) {
 
             alert("Asigna todas las unidades a un color antes de continuar.");
 
@@ -969,7 +905,7 @@ function obtenerDatosProductoActual(id) {
 
             if (cantidadColor > 0) {
                 distribucionColores.push({
-                    color: color,
+                    color,
                     cantidad: cantidadColor
                 });
             }
@@ -979,17 +915,11 @@ function obtenerDatosProductoActual(id) {
     }
 
 
-    /* =====================================
-       DISTRIBUCIÓN DE TALLAS
-    ====================================== */
+    /* VALIDAR TALLAS */
 
-    let distribucionTallas = [];
+    if (producto.tallas?.length) {
 
-    if (producto.tallas && producto.tallas.length > 0) {
-
-        const totalTallas = obtenerTotalTallas();
-
-        if (totalTallas !== cantidad) {
+        if (obtenerTotalTallas() !== cantidad) {
 
             alert("Asigna todas las unidades a una talla antes de continuar.");
 
@@ -1009,7 +939,7 @@ function obtenerDatosProductoActual(id) {
 
             if (cantidadTalla > 0) {
                 distribucionTallas.push({
-                    talla: talla,
+                    talla,
                     cantidad: cantidadTalla
                 });
             }
@@ -1017,7 +947,6 @@ function obtenerDatosProductoActual(id) {
         });
 
     }
-
 
     return {
         producto,
@@ -1048,118 +977,73 @@ function guardarProductoEnCarrito(datos) {
     const claveColores = crearClaveColores(distribucionColores);
     const claveTallas = crearClaveTallas(distribucionTallas);
 
-
-    /* =====================================
-       BUSCAR PRODUCTO IGUAL
-    ====================================== */
-
     const productoExistente = carrito.find(item => {
 
         if (item.productoId !== producto.id) return false;
 
-        const coloresExistentes =
-            crearClaveColores(item.colores || []);
-
-        const tallasExistentes =
-            crearClaveTallas(item.tallas || []);
-
         return (
-            coloresExistentes === claveColores &&
-            tallasExistentes === claveTallas
+            crearClaveColores(item.colores || []) === claveColores &&
+            crearClaveTallas(item.tallas || []) === claveTallas
         );
 
     });
 
 
-    /* =====================================
-       SI YA EXISTE
-    ====================================== */
-
     if (productoExistente) {
 
         productoExistente.cantidad += cantidad;
 
+        if (!productoExistente.colores) {
+            productoExistente.colores = [];
+        }
+
         distribucionColores.forEach(nuevoColor => {
 
-            const colorExistente =
-                (productoExistente.colores || []).find(
-                    color => color.color === nuevoColor.color
-                );
+            const existente = productoExistente.colores.find(
+                color => color.color === nuevoColor.color
+            );
 
-            if (colorExistente) {
-
-                colorExistente.cantidad += nuevoColor.cantidad;
-
+            if (existente) {
+                existente.cantidad += nuevoColor.cantidad;
             } else {
-
-                productoExistente.colores.push({
-                    color: nuevoColor.color,
-                    cantidad: nuevoColor.cantidad
-                });
-
+                productoExistente.colores.push({ ...nuevoColor });
             }
 
         });
+
+        if (!productoExistente.tallas) {
+            productoExistente.tallas = [];
+        }
 
         distribucionTallas.forEach(nuevaTalla => {
 
-            const tallaExistente =
-                (productoExistente.tallas || []).find(
-                    talla => String(talla.talla) === String(nuevaTalla.talla)
-                );
+            const existente = productoExistente.tallas.find(
+                talla => String(talla.talla) === String(nuevaTalla.talla)
+            );
 
-            if (tallaExistente) {
-
-                tallaExistente.cantidad += nuevaTalla.cantidad;
-
+            if (existente) {
+                existente.cantidad += nuevaTalla.cantidad;
             } else {
-
-                if (!productoExistente.tallas) {
-                    productoExistente.tallas = [];
-                }
-
-                productoExistente.tallas.push({
-                    talla: nuevaTalla.talla,
-                    cantidad: nuevaTalla.cantidad
-                });
-
+                productoExistente.tallas.push({ ...nuevaTalla });
             }
 
         });
 
-    }
-
-
-    /* =====================================
-       PRODUCTO NUEVO
-    ====================================== */
-
-    else {
+    } else {
 
         carrito.push({
 
             productoId: producto.id,
-
             nombre: producto.nombre,
-
             precio: producto.precio,
-
             imagen: producto.imagenes[0],
-
-            cantidad: cantidad,
-
+            cantidad,
             colores: distribucionColores,
-
             tallas: distribucionTallas
 
         });
 
     }
-
-
-    /* =====================================
-       GUARDAR
-    ====================================== */
 
     guardarCarrito(carrito);
 
