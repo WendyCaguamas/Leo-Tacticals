@@ -1,4 +1,3 @@
-```javascript
 /* =========================================
    CONTENEDOR DE PRODUCTOS
 ========================================= */
@@ -1279,4 +1278,3 @@ function comprarAhora(id) {
 ========================================= */
 
 mostrarProductos(productos);
-```
