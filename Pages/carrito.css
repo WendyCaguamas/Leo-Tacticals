@@ -714,3 +714,166 @@
 
     pointer-events: none;
 }
+/* =========================================
+   TALLAS DEL PRODUCTO
+========================================= */
+
+.producto-seleccion-tallas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.opcion-talla {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.opcion-talla-nombre {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.talla-producto {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--negro-secundario);
+    color: var(--blanco);
+
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.cantidad-talla {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cantidad-talla button {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--negro-secundario);
+    color: var(--blanco);
+
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+
+    font-size: 18px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.cantidad-talla button:hover:not(:disabled) {
+    background: var(--naranja);
+    color: var(--negro);
+}
+
+.cantidad-talla button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.cantidad-talla span {
+    min-width: 18px;
+
+    text-align: center;
+
+    color: var(--blanco);
+    font-size: 14px;
+}
+
+/* =========================================
+   TALLAS EN EL CARRITO
+========================================= */
+
+.carrito-producto-tallas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.carrito-tallas-titulo {
+    color: var(--gris-oscuro);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.carrito-talla {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.carrito-talla-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carrito-talla-cuadrado {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--negro-secundario);
+    color: var(--blanco);
+
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.carrito-talla-cantidad {
+    color: var(--blanco);
+    font-size: 14px;
+}
+
+/* =========================================
+   RESPONSIVE — MÓVIL
+========================================= */
+
+@media (max-width: 650px) {
+
+    .carrito-producto-tallas {
+        grid-column: 2;
+    }
+
+    .producto-seleccion-tallas {
+        width: 100%;
+    }
+
+}
