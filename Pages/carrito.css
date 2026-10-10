@@ -48,7 +48,7 @@
     justify-content: center;
 
     background: var(--negro-secundario);
-    color: var(--blanco);
+    color: var(--negro);
 
     border: 1px solid var(--borde);
     border-radius: 4px;
