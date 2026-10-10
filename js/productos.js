@@ -648,7 +648,7 @@ const productos = [
         nombre: "Botas Tácticas",
         categoria: "equipamento",
         precio: 40.00,
-        colores: ["39", "40", "41", "42", "43", "44"],
+        tallas: ["39", "40", "41", "42", "43", "44"],
         imagenes: [
             "../img/057/001.jpg",
             "../img/057/002.jpg"
