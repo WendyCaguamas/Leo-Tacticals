@@ -643,5 +643,15 @@ const productos = [
             "../img/056/001.jpg",
             "../img/056/002.jpg"
         ]
+    },{
+        id: 57,
+        nombre: "Botas Tácticas",
+        categoria: "equipamento",
+        precio: 40.00,
+        colores: ["39", "40", "41", "42", "43", "44"],
+        imagenes: [
+            "../img/057/001.jpg",
+            "../img/057/002.jpg"
+        ]
     }
 ];
