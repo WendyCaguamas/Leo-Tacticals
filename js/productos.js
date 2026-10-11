@@ -653,5 +653,25 @@ const productos = [
             "../img/057/001.jpg",
             "../img/057/002.jpg"
         ]
+    },{
+        id: 58,
+        nombre: "Botas Tácticas Sahara",
+        categoria: "equipamento",
+        precio: 40.00,
+        tallas: ["39", "40", "41", "42", "43", "44"],
+        imagenes: [
+            "../img/058/001.jpg",
+            "../img/058/002.jpg"
+        ]
+    },{
+        id: 59,
+        nombre: "Botas Tácticas BLC",
+        categoria: "equipamento",
+        precio: 40.00,
+        tallas: ["39", "40", "41", "42", "43", "44"],
+        imagenes: [
+            "../img/059/001.jpg",
+            "../img/059/002.jpg"
+        ]
     }
 ];
