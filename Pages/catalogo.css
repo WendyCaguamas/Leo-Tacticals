@@ -1801,3 +1801,153 @@
     }
 
 }
+
+/* =========================================
+   PANEL DEL PRODUCTO — BOTONES DE TALLAS
+========================================= */
+
+.producto-seleccion-tallas .opcion-talla {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+/* Cuadrado del número de talla */
+.producto-seleccion-tallas .talla-producto {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #222222;
+    color: #ffffff;
+
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-sizing: border-box;
+}
+
+/* Grupo de controles */
+.producto-seleccion-tallas .cantidad-talla {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Botones + y - */
+.producto-seleccion-tallas .cantidad-talla button {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    background: #222222;
+    color: #ffffff;
+
+    border: 1px solid #414141;
+    border-radius: 7px;
+
+    box-shadow: none;
+
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+
+    box-sizing: border-box;
+}
+
+/* Efecto naranja */
+.producto-seleccion-tallas .cantidad-talla button:hover:not(:disabled) {
+    background: var(--naranja);
+    color: #111111;
+    border-color: var(--naranja);
+    transform: translateY(-1px);
+}
+
+/* Al presionar */
+.producto-seleccion-tallas .cantidad-talla button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+/* Botones deshabilitados */
+.producto-seleccion-tallas .cantidad-talla button:disabled {
+    background: #191919;
+    color: #666666;
+    border-color: #303030;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Cantidad seleccionada */
+.producto-seleccion-tallas .cantidad-talla span {
+    display: inline-block;
+
+    min-width: 22px;
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Separación del selector */
+.producto-seleccion-tallas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 480px) {
+    .producto-seleccion-tallas .cantidad-talla {
+        gap: 6px;
+    }
+
+    .producto-seleccion-tallas .cantidad-talla button {
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        min-height: 32px;
+    }
+}
+
