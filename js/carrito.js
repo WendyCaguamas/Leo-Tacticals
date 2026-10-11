@@ -1,3 +1,4 @@
+
 /* =========================================
    CARRITO DE COMPRAS
    Leo Tacticals
@@ -8,16 +9,11 @@
    OBTENER ELEMENTOS DEL HTML
 ========================================= */
 
-const listaCarrito =
-    document.getElementById("carrito-lista");
+const listaCarrito = document.getElementById("carrito-lista");
 
+const totalCarrito = document.getElementById("carrito-total");
 
-const totalCarrito =
-    document.getElementById("carrito-total");
-
-
-const botonWhatsApp =
-    document.getElementById("boton-whatsapp");
+const botonWhatsApp = document.getElementById("boton-whatsapp");
 
 
 /* =========================================
@@ -25,33 +21,18 @@ const botonWhatsApp =
 ========================================= */
 
 function obtenerCarrito() {
-
-    const carritoGuardado =
-        localStorage.getItem("carrito");
-
+    const carritoGuardado = localStorage.getItem("carrito");
 
     if (!carritoGuardado) {
-
         return [];
-
     }
-
 
     try {
-
         return JSON.parse(carritoGuardado);
-
     } catch (error) {
-
-        console.error(
-            "Error al leer el carrito:",
-            error
-        );
-
+        console.error("Error al leer el carrito:", error);
         return [];
-
     }
-
 }
 
 
@@ -60,12 +41,18 @@ function obtenerCarrito() {
 ========================================= */
 
 function guardarCarrito(carrito) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
-    localStorage.setItem(
-        "carrito",
-        JSON.stringify(carrito)
-    );
 
+/* =========================================
+   FORMATEAR NOMBRE DE VARIANTE
+========================================= */
+
+function formatearNombre(valor) {
+    return String(valor ?? "")
+        .replace(/_/g, " ")
+        .trim();
 }
 
 
@@ -74,52 +61,38 @@ function guardarCarrito(carrito) {
 ========================================= */
 
 function mostrarCarrito() {
+    if (!listaCarrito || !totalCarrito) {
+        console.error("No se encontraron los elementos principales del carrito.");
+        return;
+    }
 
-    const carrito =
-        obtenerCarrito();
-
+    const carrito = obtenerCarrito();
 
     listaCarrito.innerHTML = "";
-
 
     /* =====================================
        CARRITO VACÍO
     ===================================== */
 
     if (carrito.length === 0) {
-
         listaCarrito.innerHTML = `
-
             <div class="carrito-vacio">
-
                 <i class="fa-solid fa-cart-shopping"></i>
 
-                <h2>
-                    Tu carrito está vacío
-                </h2>
+                <h2>Tu carrito está vacío</h2>
 
                 <p>
                     Agrega productos desde nuestro catálogo.
                 </p>
 
-                <a
-                    href="catalogo.html"
-                    class="boton-comprar"
-                >
+                <a href="catalogo.html" class="boton-comprar">
                     Ir al catálogo
                 </a>
-
             </div>
-
         `;
 
-
-        totalCarrito.textContent =
-            "$0.00";
-
-
+        totalCarrito.textContent = "$0.00";
         return;
-
     }
 
 
@@ -128,293 +101,202 @@ function mostrarCarrito() {
     ===================================== */
 
     carrito.forEach((item, indice) => {
+        const subtotal = Number(item.precio) * Number(item.cantidad);
 
-
-        const subtotal =
-            item.precio *
-            item.cantidad;
-
-
-        const producto =
-            document.createElement("div");
-
-
-        producto.classList.add(
-            "carrito-producto"
-        );
+        const producto = document.createElement("div");
+        producto.classList.add("carrito-producto");
 
 
         /* =================================
-           COLORES
+           DISTRIBUCIÓN POR COLORES
         ================================= */
 
         let coloresHTML = "";
 
+        if (Array.isArray(item.colores) && item.colores.length > 0) {
+            coloresHTML = item.colores.map((color, colorIndice) => `
+                <div
+                    class="carrito-color"
+                    data-color-indice="${colorIndice}"
+                >
+                    <div class="carrito-color-info">
+                        <span
+                            class="color-producto color-${formatearNombre(color.color)}"
+                        ></span>
 
-        if (
-            item.colores &&
-            item.colores.length > 0
-        ) {
+                        <span class="carrito-color-nombre">
+                            ${formatearNombre(color.color)}
+                        </span>
+                    </div>
 
-            coloresHTML =
-                item.colores.map((color, colorIndice) => {
+                    <div class="carrito-color-cantidad">
+                        <button
+                            type="button"
+                            class="carrito-color-menos"
+                            aria-label="Reducir cantidad del color ${formatearNombre(color.color)}"
+                            onclick="cambiarCantidadColorCarrito(${indice}, ${colorIndice}, -1)"
+                        >−</button>
 
-                    return `
+                        <span>${Number(color.cantidad) || 0}</span>
 
-                        <div
-                            class="carrito-color"
-                            data-color-indice="${colorIndice}"
-                        >
-
-                            <div class="carrito-color-info">
-
-                                <span
-                                    class="
-                                        color-producto
-                                        color-${color.color}
-                                    "
-                                ></span>
-
-
-                                <span class="carrito-color-nombre">
-
-                                    ${color.color.replace("_", " ")}
-
-                                </span>
-
-                            </div>
-
-
-                            <div class="carrito-color-cantidad">
-
-                                <button
-                                    type="button"
-                                    class="carrito-color-menos"
-                                    onclick="
-                                        cambiarCantidadColorCarrito(
-                                            ${indice},
-                                            ${colorIndice},
-                                            -1
-                                        )
-                                    "
-                                >
-
-                                    −
-
-                                </button>
-
-
-                                <span>
-
-                                    ${color.cantidad}
-
-                                </span>
-
-
-                                <button
-                                    type="button"
-                                    class="carrito-color-mas"
-                                    onclick="
-                                        cambiarCantidadColorCarrito(
-                                            ${indice},
-                                            ${colorIndice},
-                                            1
-                                        )
-                                    "
-                                >
-
-                                    +
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }).join("");
-
+                        <button
+                            type="button"
+                            class="carrito-color-mas"
+                            aria-label="Aumentar cantidad del color ${formatearNombre(color.color)}"
+                            onclick="cambiarCantidadColorCarrito(${indice}, ${colorIndice}, 1)"
+                        >+</button>
+                    </div>
+                </div>
+            `).join("");
         }
 
 
         /* =================================
-           CONTENIDO
+           DISTRIBUCIÓN POR TALLAS
+        ================================= */
+
+        let tallasHTML = "";
+
+        if (Array.isArray(item.tallas) && item.tallas.length > 0) {
+            tallasHTML = item.tallas.map((talla, tallaIndice) => `
+                <div
+                    class="carrito-talla"
+                    data-talla-indice="${tallaIndice}"
+                >
+                    <div class="carrito-talla-info">
+                        <span class="carrito-talla-cuadrado">
+                            ${formatearNombre(talla.talla)}
+                        </span>
+                    </div>
+
+                    <div class="carrito-talla-cantidad-control">
+                        <button
+                            type="button"
+                            class="carrito-talla-menos"
+                            aria-label="Reducir cantidad de talla ${formatearNombre(talla.talla)}"
+                            onclick="cambiarCantidadTallaCarrito(${indice}, ${tallaIndice}, -1)"
+                        >−</button>
+
+                        <span class="carrito-talla-cantidad">
+                            ${Number(talla.cantidad) || 0}
+                        </span>
+
+                        <button
+                            type="button"
+                            class="carrito-talla-mas"
+                            aria-label="Aumentar cantidad de talla ${formatearNombre(talla.talla)}"
+                            onclick="cambiarCantidadTallaCarrito(${indice}, ${tallaIndice}, 1)"
+                        >+</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+
+        /* =================================
+           CONTENIDO DEL PRODUCTO
         ================================= */
 
         producto.innerHTML = `
-
-            <!-- ==========================
-                 IMAGEN
-            =========================== -->
-
             <div class="carrito-producto-imagen">
-
                 <img
                     src="${item.imagen}"
-                    alt="${item.nombre}"
+                    alt="${formatearNombre(item.nombre)}"
                 >
-
             </div>
-
-
-            <!-- ==========================
-                 INFORMACIÓN
-            =========================== -->
 
             <div class="carrito-producto-info">
-
-                <h2>
-                    ${item.nombre}
+                <h2 class="carrito-producto-nombre">
+                    ${formatearNombre(item.nombre)}
                 </h2>
 
-
-                <div class="carrito-producto-precio">
-
-                    $${item.precio.toFixed(2)}
-
-                    <span>
-                        / unidad
-                    </span>
-
+                <div class="carrito-producto-unitario">
+                    $${Number(item.precio).toFixed(2)}
+                    <span>/ unidad</span>
                 </div>
-
-
-                <!-- ======================
-                     COLORES
-                ======================= -->
 
                 ${
-                    item.colores &&
-                    item.colores.length > 0
-                    ?
-
-                    `
-
+                    Array.isArray(item.colores) && item.colores.length > 0
+                    ? `
                         <div class="carrito-producto-colores">
-
                             <div class="carrito-colores-titulo">
-
                                 Distribución por color
-
                             </div>
 
-
                             ${coloresHTML}
-
                         </div>
-
                     `
-
-                    :
-
-                    ""
-
+                    : ""
                 }
 
+                ${
+                    Array.isArray(item.tallas) && item.tallas.length > 0
+                    ? `
+                        <div class="carrito-producto-tallas">
+                            <div class="carrito-tallas-titulo">
+                                Distribución por talla
+                            </div>
+
+                            ${tallasHTML}
+                        </div>
+                    `
+                    : ""
+                }
             </div>
-
-
-            <!-- ==========================
-                 CANTIDAD GENERAL
-            =========================== -->
 
             <div class="carrito-producto-cantidad">
-
-                <span>
-                    Cantidad
+                <span class="carrito-producto-cantidad-label">
+                    Cantidad total
                 </span>
 
-
                 <div class="carrito-cantidad-control">
+                    <button
+                        type="button"
+                        aria-label="Reducir cantidad total"
+                        onclick="cambiarCantidadCarrito(${indice}, -1)"
+                    >−</button>
+
+                    <strong>${Number(item.cantidad)}</strong>
 
                     <button
                         type="button"
-                        onclick="
-                            cambiarCantidadCarrito(
-                                ${indice},
-                                -1
-                            )
-                        "
-                    >
-
-                        −
-
-                    </button>
-
-
-                    <strong>
-
-                        ${item.cantidad}
-
-                    </strong>
-
-
-                    <button
-                        type="button"
-                        onclick="
-                            cambiarCantidadCarrito(
-                                ${indice},
-                                1
-                            )
-                        "
-                    >
-
-                        +
-
-                    </button>
-
+                        aria-label="Aumentar cantidad total"
+                        onclick="cambiarCantidadCarrito(${indice}, 1)"
+                    >+</button>
                 </div>
-
             </div>
-
-
-            <!-- ==========================
-                 SUBTOTAL
-            =========================== -->
 
             <div class="carrito-producto-subtotal">
-
                 $${subtotal.toFixed(2)}
-
             </div>
 
-
-            <!-- ==========================
-                 ELIMINAR
-            =========================== -->
-
             <button
+                type="button"
                 class="carrito-producto-eliminar"
                 onclick="eliminarProducto(${indice})"
                 title="Eliminar producto"
+                aria-label="Eliminar ${formatearNombre(item.nombre)}"
             >
-
                 <i class="fa-solid fa-trash"></i>
-
             </button>
-
         `;
 
-
         listaCarrito.appendChild(producto);
-
     });
 
 
     /* =====================================
-       ACTUALIZAR BOTONES DE COLORES
+       ACTUALIZAR BOTONES
     ===================================== */
 
     actualizarBotonesColoresCarrito();
-
+    actualizarBotonesTallasCarrito();
 
     /* =====================================
        ACTUALIZAR TOTAL
     ===================================== */
 
     calcularTotal();
-
 }
 
 
@@ -422,74 +304,30 @@ function mostrarCarrito() {
    CAMBIAR CANTIDAD GENERAL
 ========================================= */
 
-function cambiarCantidadCarrito(
-    indice,
-    cambio
-) {
-
-    const carrito =
-        obtenerCarrito();
-
-
-    const item =
-        carrito[indice];
-
+function cambiarCantidadCarrito(indice, cambio) {
+    const carrito = obtenerCarrito();
+    const item = carrito[indice];
 
     if (!item) {
         return;
     }
 
-
-    const nuevaCantidad =
-        item.cantidad + cambio;
-
-
-    /* =====================================
-       MÍNIMO: 1
-    ===================================== */
+    const nuevaCantidad = Number(item.cantidad) + cambio;
 
     if (nuevaCantidad < 1) {
-
         return;
-
     }
 
+    item.cantidad = nuevaCantidad;
 
-    /* =====================================
-       CAMBIAR CANTIDAD
-    ===================================== */
+    /* Ajustar distribución de colores */
+    ajustarColoresCarrito(item);
 
-    item.cantidad =
-        nuevaCantidad;
-
-
-    /* =====================================
-       AJUSTAR COLORES
-    ===================================== */
-
-    if (
-        item.colores &&
-        item.colores.length > 0
-    ) {
-
-        ajustarColoresCarrito(item);
-
-    }
-
-
-    /* =====================================
-       GUARDAR
-    ===================================== */
+    /* Ajustar distribución de tallas */
+    ajustarTallasCarrito(item);
 
     guardarCarrito(carrito);
-
-
-    /* =====================================
-       ACTUALIZAR
-    ===================================== */
-
     mostrarCarrito();
-
 }
 
 
@@ -502,99 +340,38 @@ function cambiarCantidadColorCarrito(
     indiceColor,
     cambio
 ) {
+    const carrito = obtenerCarrito();
+    const item = carrito[indiceProducto];
 
-    const carrito =
-        obtenerCarrito();
-
-
-    const item =
-        carrito[indiceProducto];
-
-
-    if (!item) {
+    if (!item || !Array.isArray(item.colores)) {
         return;
     }
 
+    const color = item.colores[indiceColor];
 
-    if (
-        !item.colores ||
-        !item.colores[indiceColor]
-    ) {
-
+    if (!color) {
         return;
-
     }
 
-
-    const color =
-        item.colores[indiceColor];
-
-
-    const nuevaCantidad =
-        color.cantidad + cambio;
-
-
-    /* =====================================
-       MÍNIMO: 0
-    ===================================== */
+    const nuevaCantidad = Number(color.cantidad) + cambio;
 
     if (nuevaCantidad < 0) {
-
         return;
-
     }
 
+    const totalColores = item.colores.reduce(
+        (total, colorItem) => total + (Number(colorItem.cantidad) || 0),
+        0
+    );
 
-    /* =====================================
-       TOTAL ACTUAL DE COLORES
-    ===================================== */
-
-    let totalColores = 0;
-
-
-    item.colores.forEach(colorItem => {
-
-        totalColores +=
-            colorItem.cantidad;
-
-    });
-
-
-    /* =====================================
-       NO SUPERAR CANTIDAD TOTAL
-    ===================================== */
-
-    if (
-        cambio > 0 &&
-        totalColores >= item.cantidad
-    ) {
-
+    if (cambio > 0 && totalColores >= Number(item.cantidad)) {
         return;
-
     }
 
-
-    /* =====================================
-       GUARDAR NUEVA CANTIDAD
-    ===================================== */
-
-    color.cantidad =
-        nuevaCantidad;
-
-
-    /* =====================================
-       GUARDAR
-    ===================================== */
+    color.cantidad = nuevaCantidad;
 
     guardarCarrito(carrito);
-
-
-    /* =====================================
-       ACTUALIZAR
-    ===================================== */
-
     mostrarCarrito();
-
 }
 
 
@@ -603,93 +380,34 @@ function cambiarCantidadColorCarrito(
 ========================================= */
 
 function ajustarColoresCarrito(item) {
-
-    if (
-        !item.colores ||
-        item.colores.length === 0
-    ) {
-
+    if (!Array.isArray(item.colores) || item.colores.length === 0) {
         return;
-
     }
 
+    let totalColores = item.colores.reduce(
+        (total, color) => total + (Number(color.cantidad) || 0),
+        0
+    );
 
-    /* =====================================
-       CALCULAR TOTAL
-    ===================================== */
+    let exceso = totalColores - Number(item.cantidad);
 
-    let totalColores = 0;
-
-
-    item.colores.forEach(color => {
-
-        totalColores +=
-            color.cantidad;
-
-    });
-
-
-    /* =====================================
-       SI NO HAY EXCESO
-    ===================================== */
-
-    if (
-        totalColores <= item.cantidad
-    ) {
-
+    if (exceso <= 0) {
         return;
-
     }
 
+    for (let i = item.colores.length - 1; i >= 0 && exceso > 0; i--) {
+        const color = item.colores[i];
+        const cantidadActual = Number(color.cantidad) || 0;
 
-    /* =====================================
-       CALCULAR EXCESO
-    ===================================== */
-
-    let exceso =
-        totalColores -
-        item.cantidad;
-
-
-    /* =====================================
-       REDUCIR DESDE EL ÚLTIMO COLOR
-    ===================================== */
-
-    for (
-        let i = item.colores.length - 1;
-
-        i >= 0 && exceso > 0;
-
-        i--
-    ) {
-
-        const color =
-            item.colores[i];
-
-
-        if (color.cantidad <= 0) {
-
+        if (cantidadActual <= 0) {
             continue;
-
         }
 
+        const reducir = Math.min(cantidadActual, exceso);
 
-        const reducir =
-            Math.min(
-                color.cantidad,
-                exceso
-            );
-
-
-        color.cantidad -=
-            reducir;
-
-
-        exceso -=
-            reducir;
-
+        color.cantidad = cantidadActual - reducir;
+        exceso -= reducir;
     }
-
 }
 
 
@@ -698,72 +416,142 @@ function ajustarColoresCarrito(item) {
 ========================================= */
 
 function actualizarBotonesColoresCarrito() {
+    const carrito = obtenerCarrito();
 
-    const carrito =
-        obtenerCarrito();
+    document.querySelectorAll(".carrito-producto").forEach((elemento, indice) => {
+        const item = carrito[indice];
 
+        if (!item || !Array.isArray(item.colores)) {
+            return;
+        }
 
-    const productos =
-        document.querySelectorAll(
-            ".carrito-producto"
+        const totalColores = item.colores.reduce(
+            (total, color) => total + (Number(color.cantidad) || 0),
+            0
         );
 
-
-    productos.forEach((elemento, indice) => {
-
-        const item =
-            carrito[indice];
-
-
-        if (!item) {
-            return;
-        }
-
-
-        if (
-            !item.colores ||
-            item.colores.length === 0
-        ) {
-
-            return;
-
-        }
-
-
-        /* ==============================
-           TOTAL DE COLORES
-        ============================== */
-
-        let totalColores = 0;
-
-
-        item.colores.forEach(color => {
-
-            totalColores +=
-                color.cantidad;
-
+        elemento.querySelectorAll(".carrito-color-mas").forEach(boton => {
+            boton.disabled = totalColores >= Number(item.cantidad);
         });
 
-
-        /* ==============================
-           BOTONES +
-        ============================== */
-
-        const botonesMas =
-            elemento.querySelectorAll(
-                ".carrito-color-mas"
-            );
-
-
-        botonesMas.forEach(boton => {
-
-            boton.disabled =
-                totalColores >= item.cantidad;
-
+        elemento.querySelectorAll(".carrito-color-menos").forEach((boton, colorIndice) => {
+            const color = item.colores[colorIndice];
+            boton.disabled = !color || Number(color.cantidad) <= 0;
         });
-
     });
+}
 
+
+/* =========================================
+   CAMBIAR CANTIDAD DE UNA TALLA
+========================================= */
+
+function cambiarCantidadTallaCarrito(
+    indiceProducto,
+    indiceTalla,
+    cambio
+) {
+    const carrito = obtenerCarrito();
+    const item = carrito[indiceProducto];
+
+    if (!item || !Array.isArray(item.tallas)) {
+        return;
+    }
+
+    const talla = item.tallas[indiceTalla];
+
+    if (!talla) {
+        return;
+    }
+
+    const nuevaCantidad = Number(talla.cantidad) + cambio;
+
+    if (nuevaCantidad < 0) {
+        return;
+    }
+
+    const totalTallas = item.tallas.reduce(
+        (total, tallaItem) => total + (Number(tallaItem.cantidad) || 0),
+        0
+    );
+
+    /* No permitir que las tallas superen la cantidad general */
+    if (cambio > 0 && totalTallas >= Number(item.cantidad)) {
+        return;
+    }
+
+    talla.cantidad = nuevaCantidad;
+
+    guardarCarrito(carrito);
+    mostrarCarrito();
+}
+
+
+/* =========================================
+   AJUSTAR TALLAS
+========================================= */
+
+function ajustarTallasCarrito(item) {
+    if (!Array.isArray(item.tallas) || item.tallas.length === 0) {
+        return;
+    }
+
+    const totalTallas = item.tallas.reduce(
+        (total, talla) => total + (Number(talla.cantidad) || 0),
+        0
+    );
+
+    let exceso = totalTallas - Number(item.cantidad);
+
+    if (exceso <= 0) {
+        return;
+    }
+
+    /* Reducir desde la última talla, si hay exceso */
+    for (let i = item.tallas.length - 1; i >= 0 && exceso > 0; i--) {
+        const talla = item.tallas[i];
+        const cantidadActual = Number(talla.cantidad) || 0;
+
+        if (cantidadActual <= 0) {
+            continue;
+        }
+
+        const reducir = Math.min(cantidadActual, exceso);
+
+        talla.cantidad = cantidadActual - reducir;
+        exceso -= reducir;
+    }
+}
+
+
+/* =========================================
+   ACTUALIZAR BOTONES DE TALLAS
+========================================= */
+
+function actualizarBotonesTallasCarrito() {
+    const carrito = obtenerCarrito();
+
+    document.querySelectorAll(".carrito-producto").forEach((elemento, indice) => {
+        const item = carrito[indice];
+
+        if (!item || !Array.isArray(item.tallas)) {
+            return;
+        }
+
+        const totalTallas = item.tallas.reduce(
+            (total, talla) => total + (Number(talla.cantidad) || 0),
+            0
+        );
+
+        elemento.querySelectorAll(".carrito-talla-mas").forEach(boton => {
+            boton.disabled = totalTallas >= Number(item.cantidad);
+        });
+
+        elemento.querySelectorAll(".carrito-talla-menos").forEach((boton, tallaIndice) => {
+            const talla = item.tallas[tallaIndice];
+            boton.disabled = !talla || Number(talla.cantidad) <= 0;
+        });
+    });
 }
 
 
@@ -772,29 +560,18 @@ function actualizarBotonesColoresCarrito() {
 ========================================= */
 
 function calcularTotal() {
+    const carrito = obtenerCarrito();
 
-    const carrito =
-        obtenerCarrito();
+    const total = carrito.reduce(
+        (suma, item) => suma + (Number(item.precio) * Number(item.cantidad)),
+        0
+    );
 
-
-    let total = 0;
-
-
-    carrito.forEach(item => {
-
-        total +=
-            item.precio *
-            item.cantidad;
-
-    });
-
-
-    totalCarrito.textContent =
-        "$" + total.toFixed(2);
-
+    if (totalCarrito) {
+        totalCarrito.textContent = "$" + total.toFixed(2);
+    }
 
     return total;
-
 }
 
 
@@ -803,22 +580,12 @@ function calcularTotal() {
 ========================================= */
 
 function eliminarProducto(indice) {
+    const carrito = obtenerCarrito();
 
-    const carrito =
-        obtenerCarrito();
-
-
-    carrito.splice(
-        indice,
-        1
-    );
-
+    carrito.splice(indice, 1);
 
     guardarCarrito(carrito);
-
-
     mostrarCarrito();
-
 }
 
 
@@ -827,129 +594,69 @@ function eliminarProducto(indice) {
 ========================================= */
 
 function enviarPedidoWhatsApp() {
-
-    const carrito =
-        obtenerCarrito();
-
-
-    /* =====================================
-       CARRITO VACÍO
-    ===================================== */
+    const carrito = obtenerCarrito();
 
     if (carrito.length === 0) {
-
-        alert(
-            "Tu carrito está vacío."
-        );
-
+        alert("Tu carrito está vacío.");
         return;
-
     }
 
-
-    /* =====================================
-       CREAR MENSAJE
-    ===================================== */
-
-    let mensaje =
-        "Hola, deseo realizar el siguiente pedido:\n\n";
-
+    let mensaje = "Hola, deseo realizar el siguiente pedido:\n\n";
 
     carrito.forEach(item => {
+        const subtotal = Number(item.precio) * Number(item.cantidad);
 
-        const subtotal =
-            item.precio *
-            item.cantidad;
-
-
-        mensaje +=
-            "Producto: " +
-            item.nombre +
-            "\n";
-
-
-        mensaje +=
-            "Cantidad: " +
-            item.cantidad +
-            "\n";
-
+        mensaje += "Producto: " + item.nombre + "\n";
+        mensaje += "Cantidad total: " + item.cantidad + "\n";
 
         /* ==============================
            COLORES
         ============================== */
 
-        if (
-            item.colores &&
-            item.colores.length > 0
-        ) {
-
-            mensaje +=
-                "Colores:\n";
-
+        if (Array.isArray(item.colores) && item.colores.length > 0) {
+            mensaje += "Distribución por color:\n";
 
             item.colores.forEach(color => {
-
-                mensaje +=
-                    "- " +
-                    color.color.replace("_", " ") +
+                mensaje += "- " +
+                    formatearNombre(color.color) +
                     ": " +
-                    color.cantidad +
+                    (Number(color.cantidad) || 0) +
                     "\n";
-
             });
-
         }
 
+        /* ==============================
+           TALLAS
+        ============================== */
 
-        mensaje +=
-            "Precio: $" +
-            subtotal.toFixed(2) +
-            "\n\n";
+        if (Array.isArray(item.tallas) && item.tallas.length > 0) {
+            mensaje += "Distribución por talla:\n";
 
+            item.tallas.forEach(talla => {
+                mensaje += "- Talla " +
+                    formatearNombre(talla.talla) +
+                    ": " +
+                    (Number(talla.cantidad) || 0) +
+                    "\n";
+            });
+        }
+
+        mensaje += "Subtotal: $" + subtotal.toFixed(2) + "\n\n";
     });
 
+    const total = calcularTotal();
 
-    /* =====================================
-       TOTAL
-    ===================================== */
+    mensaje += "TOTAL DEL PEDIDO: $" + total.toFixed(2);
 
-    const total =
-        calcularTotal();
+    /* Mantener el número configurado en tu código actual */
+    const numero = "593985065665";
 
-
-    mensaje +=
-        "TOTAL: $" +
-        total.toFixed(2);
-
-
-    /* =====================================
-       NÚMERO WHATSAPP
-    ===================================== */
-
-    const numero =
-        "593985065665";
-
-
-    /* =====================================
-       URL
-    ===================================== */
-
-    const url =
-        "https://wa.me/" +
+    const url = "https://wa.me/" +
         numero +
         "?text=" +
         encodeURIComponent(mensaje);
 
-
-    /* =====================================
-       ABRIR WHATSAPP
-    ===================================== */
-
-    window.open(
-        url,
-        "_blank"
-    );
-
+    window.open(url, "_blank");
 }
 
 
@@ -958,12 +665,7 @@ function enviarPedidoWhatsApp() {
 ========================================= */
 
 if (botonWhatsApp) {
-
-    botonWhatsApp.addEventListener(
-        "click",
-        enviarPedidoWhatsApp
-    );
-
+    botonWhatsApp.addEventListener("click", enviarPedidoWhatsApp);
 }
 
 
