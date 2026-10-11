@@ -402,3 +402,142 @@
     .carrito-total { align-items: flex-start; }
     .carrito-resumen .boton-carrito { width: 100%; }
 }
+
+/* =========================================
+   AJUSTES VISUALES — TALLAS COMO COLORES
+========================================= */
+
+/* Mantiene el bloque de tallas con la misma distribución que los colores */
+.carrito-producto-tallas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+    min-width: 0;
+}
+
+.carrito-tallas-titulo {
+    display: block;
+    margin: 0 0 3px;
+    color: var(--gris-oscuro);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.carrito-talla {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    color: var(--gris);
+    font-size: 14px;
+}
+
+.carrito-talla-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* Cuadrado oscuro para el número de talla */
+.carrito-talla-cuadrado {
+    width: 26px;
+    min-width: 26px;
+    height: 26px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--negro-secundario);
+    color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+/* Controles de cantidad de cada talla */
+.carrito-talla-cantidad {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    flex-shrink: 0;
+    color: var(--blanco);
+    font-size: 14px;
+}
+
+.carrito-talla-cantidad button {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--negro-secundario);
+    color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+    box-shadow: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.carrito-talla-cantidad button:hover:not(:disabled) {
+    background: var(--naranja);
+    color: var(--negro);
+    border-color: var(--naranja);
+}
+
+.carrito-talla-cantidad button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.carrito-talla-cantidad span {
+    display: inline-block;
+    min-width: 18px;
+    color: var(--blanco);
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (max-width: 650px) {
+    .carrito-producto-tallas {
+        grid-column: 2;
+        width: 100%;
+    }
+
+    .carrito-talla {
+        gap: 8px;
+    }
+
+    .carrito-talla-cantidad {
+        gap: 5px;
+    }
+
+    .carrito-talla-cantidad button {
+        width: 26px;
+        min-width: 26px;
+        height: 26px;
+        min-height: 26px;
+    }
+}
