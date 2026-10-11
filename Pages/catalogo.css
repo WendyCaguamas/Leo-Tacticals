@@ -1,616 +1,1280 @@
 /* =========================================
-   ESSENTIALS — CATÁLOGO
-   Archivo: pages/catalogo.css
+   CONTENEDOR DE PRODUCTOS
 ========================================= */
 
-:root {
-    --negro: #0b0b0b;
-    --negro-secundario: #171717;
-    --negro-tarjeta: #151515;
-    --blanco: #ffffff;
-    --gris: #bdbdbd;
-    --gris-oscuro: #888888;
-    --borde: #303030;
-    --naranja: #ffb300;
-    --naranja-claro: #ffc44d;
+const contenedorProductos =
+    document.getElementById("productos-container");
+
+
+/* =========================================
+   MOSTRAR PRODUCTOS
+========================================= */
+
+function mostrarProductos(listaProductos) {
+
+    if (!contenedorProductos) return;
+
+    contenedorProductos.innerHTML = "";
+
+    listaProductos.forEach(producto => {
+
+        const tarjeta = document.createElement("article");
+
+        tarjeta.classList.add("producto-catalogo");
+
+        tarjeta.onclick = (evento) => {
+
+            if (evento.target.closest(".flecha")) return;
+
+            abrirProducto(producto.id);
+
+        };
+
+        tarjeta.innerHTML = `
+
+            <div class="producto-imagenes">
+
+                <img
+                    src="${producto.imagenes[0]}"
+                    alt="${producto.nombre}"
+                    class="imagen-producto"
+                    data-indice="0"
+                >
+
+                ${
+                    producto.colores && producto.colores.length > 0
+                    ? `
+                        <div class="colores-producto">
+
+                            ${producto.colores.map(color => {
+
+                                const coloresCSS = {
+                                    verde: "#43a047",
+                                    verde_oliva: "#636b2f",
+                                    azul: "#1976d2",
+                                    rojo: "#e53935",
+                                    blanco: "#ffffff",
+                                    negro: "#111111",
+                                    gris: "#757575",
+                                    marron: "#795548",
+                                    amarillo: "#facc15",
+                                    naranja: "#f97316",
+                                    morado: "#7e22ce",
+                                    rosa: "#ffc0cb"
+                                };
+
+                                return `
+                                    <span
+                                        class="color-producto"
+                                        title="${color}"
+                                        style="background-color: ${coloresCSS[color] || color};"
+                                    ></span>
+                                `;
+
+                            }).join("")}
+
+                        </div>
+                    `
+                    : ""
+                }
+
+                <button
+                    class="flecha flecha-izquierda"
+                    onclick="cambiarImagen(this, -1)"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button
+                    class="flecha flecha-derecha"
+                    onclick="cambiarImagen(this, 1)"
+                >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div
+                    class="imagenes-producto-data"
+                    data-imagenes='${JSON.stringify(producto.imagenes)}'
+                ></div>
+
+            </div>
+
+            <div class="producto-datos">
+
+                <h2>${producto.nombre}</h2>
+
+                <div class="producto-precio">
+                    $${producto.precio.toFixed(2)}
+                </div>
+
+            </div>
+
+        `;
+
+        contenedorProductos.appendChild(tarjeta);
+
+    });
+
 }
 
-/* Estructura general */
-.catalogo-pagina {
-    width: 100%;
-    min-height: 600px;
-    padding: 45px 5%;
-    background: var(--negro);
-    color: var(--blanco);
-    box-sizing: border-box;
-}
 
-.catalogo-contenedor {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+/* =========================================
+   FILTRO DE CATEGORÍAS
+========================================= */
 
-.catalogo-encabezado {
-    margin-bottom: 30px;
-}
+const botonesCategorias =
+    document.querySelectorAll(".categoria");
 
-.catalogo-encabezado h1,
-.catalogo-titulo {
-    margin: 0 0 10px;
-    color: var(--blanco);
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: .5px;
-}
+botonesCategorias.forEach(boton => {
 
-.catalogo-encabezado p {
-    margin: 0;
-    color: var(--gris);
-    font-size: 15px;
-}
+    boton.addEventListener("click", (evento) => {
 
-/* Filtros y productos */
-.catalogo-layout {
-    display: grid;
-    grid-template-columns: 230px minmax(0, 1fr);
-    align-items: start;
-    gap: 30px;
-}
+        evento.preventDefault();
 
-.filtros,
-.filtros-catalogo {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding: 20px;
-    background: var(--negro-tarjeta);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    box-sizing: border-box;
-}
+        const categoria = boton.dataset.categoria;
 
-.filtro-grupo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+        botonesCategorias.forEach(botonCategoria => {
+            botonCategoria.classList.remove("activa");
+        });
 
-.filtro-grupo h3,
-.filtro-titulo {
-    margin: 0;
-    color: var(--blanco);
-    font-size: 14px;
-    font-weight: 700;
-}
+        boton.classList.add("activa");
 
-.filtro-grupo label {
-    color: var(--gris);
-    font-size: 13px;
-}
+        if (categoria === "todos") {
+            mostrarProductos(productos);
+            return;
+        }
 
-.filtro-grupo select,
-.filtro-grupo input[type="number"],
-.filtro-grupo input[type="text"] {
-    width: 100%;
-    min-height: 38px;
-    padding: 8px 10px;
-    background: #101010;
-    color: var(--blanco);
-    border: 1px solid var(--borde);
-    border-radius: 5px;
-    outline: none;
-    box-sizing: border-box;
-}
+        const productosFiltrados = productos.filter(producto =>
+            producto.categoria === categoria
+        );
 
-.filtro-grupo input[type="range"] {
-    width: 100%;
-    accent-color: var(--naranja);
-    cursor: pointer;
-}
+        mostrarProductos(productosFiltrados);
 
-#precio-maximo {
-    color: var(--naranja);
-    font-weight: 700;
-}
+    });
 
-.catalogo-contenido {
-    min-width: 0;
-}
+});
 
-.catalogo-barra,
-.catalogo-resultados-barra {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 20px;
-}
 
-.catalogo-barra p,
-.catalogo-resultados-barra p {
-    margin: 0;
-    color: var(--gris);
-    font-size: 14px;
-}
+/* =========================================
+   CAMBIAR IMAGEN DEL CATÁLOGO
+========================================= */
 
-/* Rejilla de productos */
-#productos-container,
-.productos-container,
-.productos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-}
+function cambiarImagen(boton, direccion) {
 
-.producto-card {
-    min-width: 0;
-    overflow: hidden;
-    background: var(--negro-tarjeta);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color .2s ease, transform .2s ease;
-}
+    const contenedor =
+        boton.closest(".producto-imagenes");
 
-.producto-card:hover {
-    border-color: var(--naranja);
-    transform: translateY(-3px);
-}
+    const imagenActual =
+        contenedor.querySelector(".imagen-producto");
 
-.producto-imagenes {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    background: #ffffff;
-    isolation: isolate;
-}
+    const datos =
+        contenedor.querySelector(".imagenes-producto-data");
 
-.producto-imagenes img {
-    position: relative;
-    z-index: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+    const imagenes =
+        JSON.parse(datos.dataset.imagenes);
 
-.imagen-producto,
-.producto-card > img {
-    display: block;
-    width: 100%;
-    height: 300px;
-    object-fit: contain;
-    background: #ffffff;
-}
+    if (contenedor.dataset.animando === "true") return;
 
-/* Variantes visibles sobre la fotografía */
-.variantes-producto {
-    position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 7px;
-    max-width: calc(100% - 20px);
-    pointer-events: none;
-}
+    if (imagenes.length <= 1) return;
 
-.colores-producto,
-.tallas-producto {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 5px;
-}
+    contenedor.dataset.animando = "true";
 
-.color-producto,
-.colores-producto .color-producto {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    border: 1px solid rgba(0, 0, 0, .35);
-    border-radius: 50%;
-    box-sizing: border-box;
-}
+    let indice = parseInt(imagenActual.dataset.indice || "0");
 
-.talla-catalogo {
-    min-width: 30px;
-    height: 30px;
-    padding: 0 5px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #171717;
-    color: #ffffff;
-    border: 1px solid #555555;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
-    box-sizing: border-box;
-}
+    let nuevoIndice = indice + direccion;
 
-.tallas-producto:empty,
-.colores-producto:empty {
-    display: none;
-}
-
-.flecha {
-    position: absolute;
-    top: 50%;
-    z-index: 6;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, .72);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, .3);
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.flecha:hover {
-    background: var(--naranja);
-    color: #111111;
-}
-
-.flecha-izquierda { left: 8px; }
-.flecha-derecha { right: 8px; }
-
-.producto-info,
-.producto-card-info {
-    padding: 15px;
-}
-
-.producto-nombre,
-.producto-card h3 {
-    margin: 0 0 8px;
-    color: var(--blanco);
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.producto-precio,
-.producto-card .precio {
-    color: var(--naranja);
-    font-size: 17px;
-    font-weight: 800;
-}
-
-.producto-detalles {
-    color: var(--gris);
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-/* Panel / modal de producto */
-#producto-panel,
-.producto-panel {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    background: rgba(0, 0, 0, .78);
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-#producto-panel.activo,
-.producto-panel.activo,
-#producto-panel.abierto,
-.producto-panel.abierto {
-    display: flex;
-}
-
-.producto-panel-contenido,
-.panel-producto-contenido {
-    position: relative;
-    width: 100%;
-    max-width: 950px;
-    max-height: calc(100vh - 48px);
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 28px;
-    padding: 28px;
-    background: #151515;
-    color: var(--blanco);
-    border: 1px solid var(--borde);
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-#panel-imagen,
-.panel-imagen {
-    width: 100%;
-    height: 420px;
-    object-fit: contain;
-    background: #ffffff;
-    border-radius: 6px;
-}
-
-.producto-panel-info,
-.panel-producto-info {
-    min-width: 0;
-}
-
-.producto-panel-info h2,
-.panel-producto-info h2 {
-    margin: 0 0 12px;
-    color: var(--blanco);
-    font-size: 26px;
-}
-
-.producto-panel-info .precio,
-.panel-producto-info .precio {
-    color: var(--naranja);
-    font-size: 23px;
-    font-weight: 800;
-}
-
-.producto-seleccion-colores,
-.producto-seleccion-tallas {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
-    margin-top: 12px;
-}
-
-.opcion-color,
-.opcion-talla {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    width: 100%;
-    min-height: 38px;
-    box-sizing: border-box;
-}
-
-.opcion-color-nombre,
-.opcion-talla-nombre {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
-    min-width: 0;
-}
-
-.talla-producto {
-    width: 38px;
-    min-width: 38px;
-    height: 38px;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #252525;
-    color: #ffffff;
-    border: 1px solid #505050;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    box-sizing: border-box;
-    flex-shrink: 0;
-}
-
-.cantidad-color,
-.cantidad-talla {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    flex-shrink: 0;
-}
-
-.cantidad-color button,
-.cantidad-talla button {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 34px;
-    min-width: 34px;
-    height: 34px;
-    min-height: 34px;
-    margin: 0;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #252525;
-    color: #ffffff;
-    border: 1px solid #505050;
-    border-radius: 6px;
-    box-shadow: none;
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1;
-    text-align: center;
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
-}
-
-.cantidad-color button:hover:not(:disabled),
-.cantidad-talla button:hover:not(:disabled) {
-    background: var(--naranja);
-    color: #111111;
-    border-color: var(--naranja);
-}
-
-.cantidad-color button:disabled,
-.cantidad-talla button:disabled {
-    background: #1a1a1a;
-    color: #666666;
-    border-color: #333333;
-    opacity: .55;
-    cursor: not-allowed;
-}
-
-.cantidad-color span,
-.cantidad-talla span {
-    display: inline-block;
-    min-width: 22px;
-    margin: 0;
-    padding: 0;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.2;
-    text-align: center;
-}
-
-/* Botones generales del panel */
-.producto-panel-info button,
-.panel-producto-info button,
-#producto-panel button {
-    font-family: inherit;
-}
-
-.boton-agregar-carrito,
-.boton-comprar-ahora,
-#agregar-carrito,
-#comprar-ahora {
-    min-height: 44px;
-    padding: 0 18px;
-    background: var(--naranja);
-    color: #111111;
-    border: 0;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.boton-agregar-carrito:hover,
-.boton-comprar-ahora:hover,
-#agregar-carrito:hover,
-#comprar-ahora:hover {
-    background: var(--naranja-claro);
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-    #productos-container,
-    .productos-container,
-    .productos-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 800px) {
-    .catalogo-layout {
-        grid-template-columns: 1fr;
+    if (nuevoIndice < 0) {
+        nuevoIndice = imagenes.length - 1;
     }
 
-    .filtros,
-    .filtros-catalogo {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    if (nuevoIndice >= imagenes.length) {
+        nuevoIndice = 0;
     }
 
-    .producto-panel-contenido,
-    .panel-producto-contenido {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 20px;
-    }
+    const imagenNueva = document.createElement("img");
 
-    #panel-imagen,
-    .panel-imagen {
-        height: 300px;
-    }
+    imagenNueva.src = imagenes[nuevoIndice];
+    imagenNueva.alt = imagenActual.alt;
+
+    imagenNueva.classList.add("imagen-producto");
+
+    imagenNueva.dataset.indice = nuevoIndice;
+
+    imagenNueva.style.transform =
+        direccion === 1
+        ? "translateX(100%)"
+        : "translateX(-100%)";
+
+    contenedor.appendChild(imagenNueva);
+
+    imagenNueva.offsetWidth;
+
+    requestAnimationFrame(() => {
+
+        imagenActual.style.transform =
+            direccion === 1
+            ? "translateX(-100%)"
+            : "translateX(100%)";
+
+        imagenNueva.style.transform = "translateX(0)";
+
+    });
+
+    setTimeout(() => {
+
+        imagenActual.remove();
+
+        contenedor.dataset.animando = "false";
+
+    }, 350);
+
 }
 
-@media (max-width: 520px) {
-    .catalogo-pagina {
-        padding: 30px 4%;
+
+/* =========================================
+   ABRIR PANEL DEL PRODUCTO
+========================================= */
+
+function abrirProducto(id) {
+
+    const producto = productos.find(
+        producto => producto.id === id
+    );
+
+    if (!producto) return;
+
+    const panel = document.getElementById("producto-panel");
+
+    const contenido =
+        document.getElementById("producto-panel-contenido");
+
+    if (!panel || !contenido) return;
+
+
+    /* =====================================
+       SELECTOR DE COLORES
+    ====================================== */
+
+    let selectorColores = "";
+
+    if (producto.colores && producto.colores.length > 0) {
+
+        const coloresCSS = {
+            verde: "#43a047",
+            verde_oliva: "#636b2f",
+            azul: "#1976d2",
+            rojo: "#e53935",
+            blanco: "#ffffff",
+            negro: "#111111",
+            gris: "#757575",
+            marron: "#795548",
+            amarillo: "#facc15",
+            naranja: "#f97316",
+            morado: "#7e22ce",
+            rosa: "#ffc0cb"
+        };
+
+        selectorColores = `
+
+            <div class="producto-seleccion">
+
+                <div class="producto-seleccion-titulo">
+                    Distribución por color
+                </div>
+
+                <div
+                    class="producto-seleccion-colores"
+                    id="selector-colores"
+                >
+
+                    ${producto.colores.map(color => `
+
+                        <div
+                            class="opcion-color"
+                            data-color="${color}"
+                        >
+
+                            <div class="opcion-color-nombre">
+
+                                <span
+                                    class="color-producto"
+                                    style="background-color: ${coloresCSS[color] || color};"
+                                ></span>
+
+                                <span class="nombre-color">
+                                    ${color.replace("_", " ")}
+                                </span>
+
+                            </div>
+
+                            <div class="cantidad-color">
+
+                                <button
+                                    type="button"
+                                    class="boton-color-menos"
+                                    onclick="cambiarCantidadColor('${color}', -1)"
+                                >−</button>
+
+                                <span id="cantidad-color-${color}">0</span>
+
+                                <button
+                                    type="button"
+                                    class="boton-color-mas"
+                                    onclick="cambiarCantidadColor('${color}', 1)"
+                                >+</button>
+
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+        `;
+
     }
 
-    .catalogo-encabezado h1,
-    .catalogo-titulo {
-        font-size: 27px;
+
+    /* =====================================
+       SELECTOR DE TALLAS
+    ====================================== */
+
+    let selectorTallas = "";
+
+    if (producto.tallas && producto.tallas.length > 0) {
+
+        selectorTallas = `
+
+            <div class="producto-seleccion">
+
+                <div class="producto-seleccion-titulo">
+                    Distribución por talla
+                </div>
+
+                <div
+                    class="producto-seleccion-tallas"
+                    id="selector-tallas"
+                >
+
+                    ${producto.tallas.map(talla => `
+
+                        <div
+                            class="opcion-talla"
+                            data-talla="${talla}"
+                        >
+
+                            <div class="opcion-talla-nombre">
+
+                                <span class="talla-producto">
+                                    ${talla}
+                                </span>
+
+                            </div>
+
+                            <div class="cantidad-talla">
+
+                                <button
+                                    type="button"
+                                    class="boton-talla-menos"
+                                    onclick="cambiarCantidadTalla('${talla}', -1)"
+                                >−</button>
+
+                                <span id="cantidad-talla-${talla}">0</span>
+
+                                <button
+                                    type="button"
+                                    class="boton-talla-mas"
+                                    onclick="cambiarCantidadTalla('${talla}', 1)"
+                                >+</button>
+
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+        `;
+
     }
 
-    #productos-container,
-    .productos-container,
-    .productos-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-    }
 
-    .producto-imagenes,
-    .imagen-producto,
-    .producto-card > img {
-        height: 210px;
-    }
+    /* =====================================
+       CONTENIDO DEL PANEL
+    ====================================== */
 
-    .producto-info,
-    .producto-card-info {
-        padding: 10px;
-    }
+    contenido.innerHTML = `
 
-    .producto-nombre,
-    .producto-card h3 {
-        font-size: 13px;
-    }
+        <div class="producto-panel-imagenes">
 
-    .producto-precio,
-    .producto-card .precio {
-        font-size: 15px;
-    }
+            <img
+                src="${producto.imagenes[0]}"
+                alt="${producto.nombre}"
+                id="imagen-panel"
+                data-indice="0"
+            >
 
-    .filtros,
-    .filtros-catalogo {
-        grid-template-columns: 1fr;
-    }
+            ${
+                producto.imagenes.length > 1
+                ? `
+                    <button
+                        class="panel-flecha panel-flecha-izquierda"
+                        onclick="cambiarImagenPanel(-1)"
+                    >
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
 
-    #producto-panel,
-    .producto-panel {
-        padding: 10px;
-    }
+                    <button
+                        class="panel-flecha panel-flecha-derecha"
+                        onclick="cambiarImagenPanel(1)"
+                    >
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                `
+                : ""
+            }
 
-    .producto-panel-contenido,
-    .panel-producto-contenido {
-        max-height: calc(100vh - 20px);
-        padding: 15px;
-    }
+        </div>
 
-    .producto-seleccion-tallas .opcion-talla,
-    .producto-seleccion-colores .opcion-color {
-        gap: 10px;
-    }
+        <div class="producto-panel-datos">
 
-    .producto-seleccion-tallas .cantidad-talla,
-    .producto-seleccion-colores .cantidad-color {
-        gap: 6px;
-    }
+            <h1>${producto.nombre}</h1>
 
-    .producto-seleccion-tallas .cantidad-talla button,
-    .producto-seleccion-colores .cantidad-color button {
-        width: 32px;
-        min-width: 32px;
-        height: 32px;
-        min-height: 32px;
-    }
+            <p class="producto-panel-descripcion">
+                ${producto.detalles}
+            </p>
+
+            <div class="producto-panel-precio">
+                $${producto.precio.toFixed(2)}
+            </div>
+
+            <div class="producto-seleccion">
+
+                <div class="producto-seleccion-titulo">
+                    Cantidad
+                </div>
+
+                <div class="producto-cantidad-contenedor">
+
+                    <span class="producto-cantidad-label">
+                        Unidades
+                    </span>
+
+                    <div class="producto-cantidad">
+
+                        <button
+                            type="button"
+                            onclick="cambiarCantidad(-1)"
+                        >−</button>
+
+                        <span id="cantidad-producto">1</span>
+
+                        <button
+                            type="button"
+                            id="boton-cantidad-mas"
+                            onclick="cambiarCantidad(1)"
+                        >+</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            ${selectorColores}
+
+            ${selectorTallas}
+
+            <div class="producto-panel-botones">
+
+                <button
+                    type="button"
+                    class="boton-carrito"
+                    onclick="agregarAlCarrito(${producto.id})"
+                >
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Agregar al carrito
+                </button>
+
+                <button
+                    type="button"
+                    class="boton-comprar"
+                    onclick="comprarAhora(${producto.id})"
+                >
+                    Comprar ahora
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    panel.dataset.productoId = producto.id;
+
+    panel.classList.add("abierto");
+
+    document.body.style.overflow = "hidden";
+
+    actualizarBotonesColores();
+    actualizarBotonesTallas();
+
 }
+
+
+/* =========================================
+   CERRAR PANEL
+========================================= */
+
+function cerrarProducto() {
+
+    const panel = document.getElementById("producto-panel");
+
+    if (!panel) return;
+
+    panel.classList.remove("abierto");
+
+    document.body.style.overflow = "";
+
+}
+
+const botonAtras =
+    document.getElementById("producto-panel-atras");
+
+if (botonAtras) {
+    botonAtras.addEventListener("click", cerrarProducto);
+}
+
+
+/* =========================================
+   CAMBIAR IMAGEN DEL PANEL
+========================================= */
+
+function cambiarImagenPanel(direccion) {
+
+    const panel = document.getElementById("producto-panel");
+
+    if (!panel) return;
+
+    const id = parseInt(panel.dataset.productoId);
+
+    const producto = productos.find(
+        producto => producto.id === id
+    );
+
+    if (!producto) return;
+
+    const imagen = document.getElementById("imagen-panel");
+
+    if (!imagen) return;
+
+    let indice = parseInt(imagen.dataset.indice || "0");
+
+    indice += direccion;
+
+    if (indice < 0) {
+        indice = producto.imagenes.length - 1;
+    }
+
+    if (indice >= producto.imagenes.length) {
+        indice = 0;
+    }
+
+    imagen.src = producto.imagenes[indice];
+
+    imagen.dataset.indice = indice;
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD TOTAL
+========================================= */
+
+function cambiarCantidad(cambio) {
+
+    const elemento =
+        document.getElementById("cantidad-producto");
+
+    if (!elemento) return;
+
+    let cantidad = parseInt(elemento.textContent);
+
+    const nuevaCantidad = cantidad + cambio;
+
+    if (nuevaCantidad < 1) return;
+
+    elemento.textContent = nuevaCantidad;
+
+    if (nuevaCantidad < cantidad) {
+
+        ajustarColores(nuevaCantidad);
+        ajustarTallas(nuevaCantidad);
+
+    }
+
+    actualizarBotonesColores();
+    actualizarBotonesTallas();
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD DE UN COLOR
+========================================= */
+
+function cambiarCantidadColor(color, cambio) {
+
+    const cantidadElemento =
+        document.getElementById("cantidad-producto");
+
+    const elemento =
+        document.getElementById(`cantidad-color-${color}`);
+
+    if (!cantidadElemento || !elemento) return;
+
+    const cantidadTotal = parseInt(cantidadElemento.textContent);
+
+    let cantidadColor = parseInt(elemento.textContent);
+
+    const nuevaCantidad = cantidadColor + cambio;
+
+    if (nuevaCantidad < 0) return;
+
+    const totalAsignado = obtenerTotalColores();
+
+    if (cambio > 0 && totalAsignado >= cantidadTotal) return;
+
+    elemento.textContent = nuevaCantidad;
+
+    actualizarBotonesColores();
+
+}
+
+
+/* =========================================
+   OBTENER TOTAL DE COLORES
+========================================= */
+
+function obtenerTotalColores() {
+
+    const elementos =
+        document.querySelectorAll(".cantidad-color span");
+
+    let total = 0;
+
+    elementos.forEach(elemento => {
+        total += parseInt(elemento.textContent) || 0;
+    });
+
+    return total;
+
+}
+
+
+/* =========================================
+   ACTUALIZAR BOTONES DE COLORES
+========================================= */
+
+function actualizarBotonesColores() {
+
+    const cantidadElemento =
+        document.getElementById("cantidad-producto");
+
+    if (!cantidadElemento) return;
+
+    const cantidadTotal = parseInt(cantidadElemento.textContent);
+
+    const totalAsignado = obtenerTotalColores();
+
+    document.querySelectorAll(".boton-color-mas").forEach(boton => {
+        boton.disabled = totalAsignado >= cantidadTotal;
+    });
+
+}
+
+
+/* =========================================
+   AJUSTAR COLORES
+========================================= */
+
+function ajustarColores(cantidadTotal) {
+
+    const elementos =
+        document.querySelectorAll(".cantidad-color span");
+
+    let totalAsignado = obtenerTotalColores();
+
+    if (totalAsignado <= cantidadTotal) {
+        actualizarBotonesColores();
+        return;
+    }
+
+    let exceso = totalAsignado - cantidadTotal;
+
+    for (let i = elementos.length - 1; i >= 0 && exceso > 0; i--) {
+
+        let cantidad = parseInt(elementos[i].textContent);
+
+        if (cantidad <= 0) continue;
+
+        const reducir = Math.min(cantidad, exceso);
+
+        cantidad -= reducir;
+        exceso -= reducir;
+
+        elementos[i].textContent = cantidad;
+
+    }
+
+    actualizarBotonesColores();
+
+}
+
+
+/* =========================================
+   CAMBIAR CANTIDAD DE UNA TALLA
+========================================= */
+
+function cambiarCantidadTalla(talla, cambio) {
+
+    const cantidadElemento =
+        document.getElementById("cantidad-producto");
+
+    const elemento =
+        document.getElementById(`cantidad-talla-${talla}`);
+
+    if (!cantidadElemento || !elemento) return;
+
+    const cantidadTotal = parseInt(cantidadElemento.textContent);
+
+    let cantidadTalla = parseInt(elemento.textContent);
+
+    const nuevaCantidad = cantidadTalla + cambio;
+
+    if (nuevaCantidad < 0) return;
+
+    const totalAsignado = obtenerTotalTallas();
+
+    if (cambio > 0 && totalAsignado >= cantidadTotal) return;
+
+    elemento.textContent = nuevaCantidad;
+
+    actualizarBotonesTallas();
+
+}
+
+
+/* =========================================
+   OBTENER TOTAL DE TALLAS
+========================================= */
+
+function obtenerTotalTallas() {
+
+    const elementos =
+        document.querySelectorAll(".cantidad-talla span");
+
+    let total = 0;
+
+    elementos.forEach(elemento => {
+        total += parseInt(elemento.textContent) || 0;
+    });
+
+    return total;
+
+}
+
+
+/* =========================================
+   ACTUALIZAR BOTONES DE TALLAS
+========================================= */
+
+function actualizarBotonesTallas() {
+
+    const cantidadElemento =
+        document.getElementById("cantidad-producto");
+
+    if (!cantidadElemento) return;
+
+    const cantidadTotal = parseInt(cantidadElemento.textContent);
+
+    const totalAsignado = obtenerTotalTallas();
+
+    document.querySelectorAll(".boton-talla-mas").forEach(boton => {
+        boton.disabled = totalAsignado >= cantidadTotal;
+    });
+
+}
+
+
+/* =========================================
+   AJUSTAR TALLAS
+========================================= */
+
+function ajustarTallas(cantidadTotal) {
+
+    const elementos =
+        document.querySelectorAll(".cantidad-talla span");
+
+    let totalAsignado = obtenerTotalTallas();
+
+    if (totalAsignado <= cantidadTotal) {
+        actualizarBotonesTallas();
+        return;
+    }
+
+    let exceso = totalAsignado - cantidadTotal;
+
+    for (let i = elementos.length - 1; i >= 0 && exceso > 0; i--) {
+
+        let cantidad = parseInt(elementos[i].textContent);
+
+        if (cantidad <= 0) continue;
+
+        const reducir = Math.min(cantidad, exceso);
+
+        cantidad -= reducir;
+        exceso -= reducir;
+
+        elementos[i].textContent = cantidad;
+
+    }
+
+    actualizarBotonesTallas();
+
+}
+
+
+/* =========================================
+   OBTENER CARRITO
+========================================= */
+
+function obtenerCarrito() {
+
+    const carritoGuardado = localStorage.getItem("carrito");
+
+    if (!carritoGuardado) return [];
+
+    try {
+        return JSON.parse(carritoGuardado);
+    } catch (error) {
+        console.error("Error al leer el carrito:", error);
+        return [];
+    }
+
+}
+
+
+/* =========================================
+   GUARDAR CARRITO
+========================================= */
+
+function guardarCarrito(carrito) {
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+}
+
+
+/* =========================================
+   CREAR CLAVE DE DISTRIBUCIÓN DE COLORES
+========================================= */
+
+function crearClaveColores(distribucionColores) {
+
+    if (!distribucionColores || distribucionColores.length === 0) {
+        return "";
+    }
+
+    return [...distribucionColores]
+        .sort((a, b) => a.color.localeCompare(b.color))
+        .map(item => `${item.color}:${item.cantidad}`)
+        .join("|");
+
+}
+
+
+/* =========================================
+   CREAR CLAVE DE DISTRIBUCIÓN DE TALLAS
+========================================= */
+
+function crearClaveTallas(distribucionTallas) {
+
+    if (!distribucionTallas || distribucionTallas.length === 0) {
+        return "";
+    }
+
+    return [...distribucionTallas]
+        .sort((a, b) => Number(a.talla) - Number(b.talla))
+        .map(item => `${item.talla}:${item.cantidad}`)
+        .join("|");
+
+}
+
+
+/* =========================================
+   OBTENER DATOS DEL PRODUCTO ACTUAL
+========================================= */
+
+function obtenerDatosProductoActual(id) {
+
+    const producto = productos.find(
+        producto => producto.id === id
+    );
+
+    if (!producto) return null;
+
+    const elementoCantidad =
+        document.getElementById("cantidad-producto");
+
+    if (!elementoCantidad) return null;
+
+    const cantidad = parseInt(elementoCantidad.textContent);
+
+
+    /* =====================================
+       DISTRIBUCIÓN DE COLORES
+    ====================================== */
+
+    let distribucionColores = [];
+
+    if (producto.colores && producto.colores.length > 0) {
+
+        const totalColores = obtenerTotalColores();
+
+        if (totalColores !== cantidad) {
+
+            alert("Asigna todas las unidades a un color antes de continuar.");
+
+            return null;
+
+        }
+
+        document.querySelectorAll(".opcion-color").forEach(opcion => {
+
+            const color = opcion.dataset.color;
+
+            const cantidadElemento =
+                opcion.querySelector(".cantidad-color span");
+
+            const cantidadColor =
+                parseInt(cantidadElemento.textContent) || 0;
+
+            if (cantidadColor > 0) {
+                distribucionColores.push({
+                    color: color,
+                    cantidad: cantidadColor
+                });
+            }
+
+        });
+
+    }
+
+
+    /* =====================================
+       DISTRIBUCIÓN DE TALLAS
+    ====================================== */
+
+    let distribucionTallas = [];
+
+    if (producto.tallas && producto.tallas.length > 0) {
+
+        const totalTallas = obtenerTotalTallas();
+
+        if (totalTallas !== cantidad) {
+
+            alert("Asigna todas las unidades a una talla antes de continuar.");
+
+            return null;
+
+        }
+
+        document.querySelectorAll(".opcion-talla").forEach(opcion => {
+
+            const talla = opcion.dataset.talla;
+
+            const cantidadElemento =
+                opcion.querySelector(".cantidad-talla span");
+
+            const cantidadTalla =
+                parseInt(cantidadElemento.textContent) || 0;
+
+            if (cantidadTalla > 0) {
+                distribucionTallas.push({
+                    talla: talla,
+                    cantidad: cantidadTalla
+                });
+            }
+
+        });
+
+    }
+
+
+    return {
+        producto,
+        cantidad,
+        distribucionColores,
+        distribucionTallas
+    };
+
+}
+
+
+/* =========================================
+   GUARDAR PRODUCTO EN CARRITO
+========================================= */
+
+function guardarProductoEnCarrito(datos) {
+
+    if (!datos) return false;
+
+    const producto = datos.producto;
+    const cantidad = datos.cantidad;
+
+    const distribucionColores = datos.distribucionColores || [];
+    const distribucionTallas = datos.distribucionTallas || [];
+
+    const carrito = obtenerCarrito();
+
+    const claveColores = crearClaveColores(distribucionColores);
+    const claveTallas = crearClaveTallas(distribucionTallas);
+
+
+    /* =====================================
+       BUSCAR PRODUCTO IGUAL
+    ====================================== */
+
+    const productoExistente = carrito.find(item => {
+
+        if (item.productoId !== producto.id) return false;
+
+        const coloresExistentes =
+            crearClaveColores(item.colores || []);
+
+        const tallasExistentes =
+            crearClaveTallas(item.tallas || []);
+
+        return (
+            coloresExistentes === claveColores &&
+            tallasExistentes === claveTallas
+        );
+
+    });
+
+
+    /* =====================================
+       SI YA EXISTE
+    ====================================== */
+
+    if (productoExistente) {
+
+        productoExistente.cantidad += cantidad;
+
+        distribucionColores.forEach(nuevoColor => {
+
+            const colorExistente =
+                (productoExistente.colores || []).find(
+                    color => color.color === nuevoColor.color
+                );
+
+            if (colorExistente) {
+
+                colorExistente.cantidad += nuevoColor.cantidad;
+
+            } else {
+
+                productoExistente.colores.push({
+                    color: nuevoColor.color,
+                    cantidad: nuevoColor.cantidad
+                });
+
+            }
+
+        });
+
+        distribucionTallas.forEach(nuevaTalla => {
+
+            const tallaExistente =
+                (productoExistente.tallas || []).find(
+                    talla => String(talla.talla) === String(nuevaTalla.talla)
+                );
+
+            if (tallaExistente) {
+
+                tallaExistente.cantidad += nuevaTalla.cantidad;
+
+            } else {
+
+                if (!productoExistente.tallas) {
+                    productoExistente.tallas = [];
+                }
+
+                productoExistente.tallas.push({
+                    talla: nuevaTalla.talla,
+                    cantidad: nuevaTalla.cantidad
+                });
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================
+       PRODUCTO NUEVO
+    ====================================== */
+
+    else {
+
+        carrito.push({
+
+            productoId: producto.id,
+
+            nombre: producto.nombre,
+
+            precio: producto.precio,
+
+            imagen: producto.imagenes[0],
+
+            cantidad: cantidad,
+
+            colores: distribucionColores,
+
+            tallas: distribucionTallas
+
+        });
+
+    }
+
+
+    /* =====================================
+       GUARDAR
+    ====================================== */
+
+    guardarCarrito(carrito);
+
+    console.log("Carrito actualizado:", carrito);
+
+    return true;
+
+}
+
+
+/* =========================================
+   POPUP DE PRODUCTO AGREGADO
+========================================= */
+
+function mostrarPopupAgregado(nombre, cantidad) {
+
+    const popupAnterior = document.getElementById("popup-carrito");
+
+    if (popupAnterior) popupAnterior.remove();
+
+    const popup = document.createElement("div");
+
+    popup.id = "popup-carrito";
+    popup.className = "popup-carrito";
+
+    popup.innerHTML = `
+
+        <div class="popup-carrito-contenido">
+
+            <div class="popup-carrito-icono">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="popup-carrito-texto">
+
+                <h2>¡Agregado al carrito!</h2>
+
+                <p>${nombre}</p>
+
+                <span>
+                    ${cantidad}
+                    ${cantidad === 1 ? "unidad" : "unidades"}
+                    ${cantidad === 1 ? "agregada" : "agregadas"}
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(popup);
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            popup.classList.add("visible");
+        });
+    });
+
+    setTimeout(() => {
+
+        popup.classList.remove("visible");
+
+        setTimeout(() => {
+            if (popup.parentNode) popup.remove();
+        }, 400);
+
+    }, 2500);
+
+}
+
+
+/* =========================================
+   AGREGAR AL CARRITO
+========================================= */
+
+function agregarAlCarrito(id) {
+
+    const datos = obtenerDatosProductoActual(id);
+
+    if (!datos) return;
+
+    const guardado = guardarProductoEnCarrito(datos);
+
+    if (!guardado) return;
+
+    mostrarPopupAgregado(
+        datos.producto.nombre,
+        datos.cantidad
+    );
+
+}
+
+
+/* =========================================
+   COMPRAR AHORA
+========================================= */
+
+function comprarAhora(id) {
+
+    const datos = obtenerDatosProductoActual(id);
+
+    if (!datos) return;
+
+    const guardado = guardarProductoEnCarrito(datos);
+
+    if (!guardado) return;
+
+    window.location.href = "carrito.html";
+
+}
+
+
+/* =========================================
+   MOSTRAR PRODUCTOS AL CARGAR
+========================================= */
+
+mostrarProductos(productos);
