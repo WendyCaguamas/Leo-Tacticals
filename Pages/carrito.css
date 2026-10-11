@@ -541,3 +541,57 @@
         min-height: 26px;
     }
 }
+
+/* =========================================
+   CONTROLES DE TALLAS EN EL CARRITO
+========================================= */
+
+.carrito-talla-cantidad-control {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.carrito-talla-cantidad-control button {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 30px;
+    height: 30px;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--negro-secundario);
+    color: var(--blanco);
+
+    border: 1px solid var(--borde);
+    border-radius: 5px;
+
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.carrito-talla-cantidad-control button:hover:not(:disabled) {
+    background: var(--naranja);
+    color: var(--negro);
+}
+
+.carrito-talla-cantidad-control button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.carrito-talla-cantidad-control .carrito-talla-cantidad {
+    min-width: 18px;
+    color: var(--blanco);
+    font-size: 14px;
+    text-align: center;
+}
+
