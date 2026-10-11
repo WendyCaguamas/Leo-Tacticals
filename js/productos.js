@@ -645,7 +645,7 @@ const productos = [
         ]
     },{
         id: 57,
-        nombre: "Botas Tácticas",
+        nombre: "Botas Tácticas Sahara",
         categoria: "equipamento",
         precio: 40.00,
         tallas: ["39", "40", "41", "42", "43", "44"],
@@ -655,7 +655,7 @@ const productos = [
         ]
     },{
         id: 58,
-        nombre: "Botas Tácticas Sahara",
+        nombre: "Botas Tácticas Qatar",
         categoria: "equipamento",
         precio: 40.00,
         tallas: ["39", "40", "41", "42", "43", "44"],
