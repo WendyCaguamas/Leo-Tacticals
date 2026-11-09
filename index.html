@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,134 +28,95 @@
     >
 
 </head>
+
 <body>
 
     <!-- =================================
          BARRA DE NAVEGACIÓN
     ================================== -->
 
-<header>
-    <!-- Logo de la marca -->
-    <div class="logo">
+    <header>
 
-        <a href="/">
-            <img
-                src="img/banner.png"
-                alt="Leo Tacticals"
-            >
-        </a>
-    </div>
+        <!-- Logo de la marca -->
+        <div class="logo">
 
-    <!-- Navegación -->
+            <a href="/">
+                <img
+                    src="img/banner.png"
+                    alt="Leo Tacticals"
+                >
+            </a>
+
+        </div>
+
+        <!-- Navegación -->
         <nav>
+
             <a href="../index.html">
                 <i class="fa-solid fa-house"></i>
-                <span>
-                    Inicio
-                </span>
+                <span>Inicio</span>
             </a>
 
             <a href="Pages/catalogo.html">
-
                 <i class="fa-solid fa-box"></i>
-                <span>
-                    Catálogo
-                </span>
-
+                <span>Catálogo</span>
             </a>
 
-
             <a href="Pages/carrito.html">
-
                 <i class="fa-solid fa-cart-shopping"></i>
-
-                <span>
-                    Carrito
-                </span>
-
+                <span>Carrito</span>
             </a>
 
         </nav>
 
-</header>
+    </header>
 
 
     <!-- =================================
-         INICIO / HERO
+         CONTENIDO PRINCIPAL
     ================================== -->
 
     <main>
 
         <!-- =================================
-     INICIO / HERO - CARRUSEL
-================================== -->
+             INICIO / HERO - CARRUSEL
+        ================================== -->
 
-<section class="hero" id="inicio">
+        <section class="hero" id="inicio">
 
-    <div class="hero-carrusel">
+            <!-- Imágenes del carrusel -->
+            <div class="hero-carrusel">
 
-        <!-- BANNER 1 -->
-        <div class="hero-slide activo">
-            <img src="img/banner1.jpg" alt="Leo Tacticals - Banner 1">
-        </div>
+                <!-- BANNER 1 -->
+                <div class="hero-slide activo">
+                    <img
+                        src="img/banner1.jpg"
+                        alt="Leo Tacticals - Banner 1"
+                    >
+                </div>
 
-        <!-- BANNER 2 -->
-        <div class="hero-slide">
-            <img src="img/banner2.jpg" alt="Leo Tacticals - Banner 2">
-        </div>
+                <!-- BANNER 2 -->
+                <div class="hero-slide">
+                    <img
+                        src="img/banner2.jpg"
+                        alt="Leo Tacticals - Banner 2"
+                    >
+                </div>
 
-        <!-- BANNER 3 -->
-        <div class="hero-slide">
-            <img src="img/banner3.jpg" alt="Leo Tacticals - Banner 3">
-        </div>
+                <!-- BANNER 3 -->
+                <div class="hero-slide">
+                    <img
+                        src="img/banner3.jpg"
+                        alt="Leo Tacticals - Banner 3"
+                    >
+                </div>
 
-    </div>
+            </div>
 
-    <!-- Contenido central -->
-    <div class="hero-content">
 
-        <img
-            src="img/logo.png"
-            alt="Leo Tacticals"
-            class="hero-logo"
-        >
-
-        <p>
-            Profesionales equipando a profesionales.
-        </p>
-
-        <a href="Pages/catalogo.html" class="hero-button">
-            VER CATÁLOGO
-        </a>
-
-    </div>
-
-    <!-- Flecha anterior -->
-    <button class="hero-flecha hero-anterior" aria-label="Banner anterior">
-        <i class="fa-solid fa-chevron-left"></i>
-    </button>
-
-    <!-- Flecha siguiente -->
-    <button class="hero-flecha hero-siguiente" aria-label="Banner siguiente">
-        <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <!-- Indicadores -->
-    <div class="hero-indicadores">
-
-        <button class="hero-indicador activo" aria-label="Ir al banner 1"></button>
-
-        <button class="hero-indicador" aria-label="Ir al banner 2"></button>
-
-        <button class="hero-indicador" aria-label="Ir al banner 3"></button>
-
-    </div>
-
-</section>
-
+            <!-- Contenido central -->
             <div class="hero-content">
 
-                <!-- Logo central -->
                 <img
                     src="img/logo.png"
                     alt="Leo Tacticals"
@@ -171,8 +133,51 @@
 
             </div>
 
-        </section>
 
+            <!-- Flecha anterior -->
+            <button
+                type="button"
+                class="hero-flecha hero-anterior"
+                aria-label="Banner anterior"
+            >
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+
+            <!-- Flecha siguiente -->
+            <button
+                type="button"
+                class="hero-flecha hero-siguiente"
+                aria-label="Banner siguiente"
+            >
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+
+            <!-- Indicadores -->
+            <div class="hero-indicadores">
+
+                <button
+                    type="button"
+                    class="hero-indicador activo"
+                    aria-label="Ir al banner 1"
+                ></button>
+
+                <button
+                    type="button"
+                    class="hero-indicador"
+                    aria-label="Ir al banner 2"
+                ></button>
+
+                <button
+                    type="button"
+                    class="hero-indicador"
+                    aria-label="Ir al banner 3"
+                ></button>
+
+            </div>
+
+        </section>
 
 
         <!-- =================================
@@ -180,7 +185,6 @@
         ================================== -->
 
         <section class="catalogo" id="catalogo">
-
 
             <div class="titulo-seccion">
 
@@ -194,119 +198,98 @@
 
             </div>
 
-<div class="productos" id="productos-destacados">
-</div>
-
+            <div class="productos" id="productos-destacados">
+            </div>
 
         </section>
 
-<!-- =================================
-     CONTACTO
-================================== -->
 
-<section class="contacto" id="contacto">
+        <!-- =================================
+             CONTACTO
+        ================================== -->
 
-
-    <!-- =================================
-         LADO IZQUIERDO — CONTACTO
-    ================================== -->
-
-    <div class="contacto-info">
-
-        <h2>
-            CONTÁCTANOS
-        </h2>
-
-        <p>
-            ¿Tienes alguna pregunta? Escríbenos.
-        </p>
+        <section class="contacto" id="contacto">
 
 
-        <!-- Redes sociales -->
+            <!-- LADO IZQUIERDO — CONTACTO -->
 
-        <div class="redes-sociales">
+            <div class="contacto-info">
 
+                <h2>
+                    CONTÁCTANOS
+                </h2>
 
-            <!-- Instagram -->
-
-            <a
-                href="https://www.instagram.com/leo_tacticals/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <i class="fa-brands fa-instagram"></i>
-
-                <span>
-                    Instagram
-                </span>
-
-            </a>
+                <p>
+                    ¿Tienes alguna pregunta? Escríbenos.
+                </p>
 
 
-            <!-- Facebook -->
+                <!-- Redes sociales -->
 
-            <a
-                href="https://www.facebook.com/people/leo-tacticals/61591499021786/?ref=PROFILE_EDIT_xav_ig_profile_page_web#"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+                <div class="redes-sociales">
 
-                <i class="fa-brands fa-facebook-f"></i>
-
-                <span>
-                    Facebook
-                </span>
-
-            </a>
+                    <!-- Instagram -->
+                    <a
+                        href="https://www.instagram.com/leo_tacticals/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
 
 
-            <!-- WhatsApp -->
-
-            <a
-                href="https://wa.me/593985065665?text=Deseo%20Conocer%20mas%20sobre%20sus%20productos"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <i class="fa-brands fa-whatsapp"></i>
-
-                <span>
-                    WhatsApp
-                </span>
-
-            </a>
+                    <!-- Facebook -->
+                    <a
+                        href="https://www.facebook.com/people/leo-tacticals/61591499021786/?ref=PROFILE_EDIT_xav_ig_profile_page_web#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
 
 
-        </div>
+                    <!-- WhatsApp -->
+                    <a
+                        href="https://wa.me/593985065665?text=Deseo%20Conocer%20mas%20sobre%20sus%20productos"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
 
-    </div>
+                </div>
 
-
-
-    <!-- =================================
-         LADO DERECHO — MAPA
-    ================================== -->
-
-    <div class="contacto-mapa">
-
-
-        <h2>
-            Visita Nuestro Local en Loja
-        </h2>
+            </div>
 
 
-        <!-- Google Maps -->
+            <!-- LADO DERECHO — MAPA -->
 
-        <iframe
-<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3980.0489212948737!2d-79.20983222502474!3d-4.010362695963397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDAnMzcuMyJTIDc5wrAxMicyNi4xIlc!5e0!3m2!1ses!2sec!4v1787172179461!5m2!1ses!2sec" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        </iframe>
+            <div class="contacto-mapa">
 
+                <h2>
+                    Visita Nuestro Local en Loja
+                </h2>
 
-    </div>
+                <!-- Google Maps -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3980.0489212948737!2d-79.20983222502474!3d-4.010362695963397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDAnMzcuMyJTIDc5wrAxMicyNi4xIlc!5e0!3m2!1ses!2sec!4v1787172179461!5m2!1ses!2sec"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    title="Ubicación de Leo Tacticals en Loja"
+                ></iframe>
 
+            </div>
 
-</section>
+        </section>
+
+    </main>
 
 
     <!-- =================================
@@ -321,9 +304,13 @@
 
     </footer>
 
-        <script src="js/productos.js"></script>
-<script src="js/index.js"></script>
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script src="js/productos.js"></script>
+    <script src="js/index.js"></script>
 
 </body>
-
 </html>
