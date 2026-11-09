@@ -1157,10 +1157,17 @@ function comprarAhora(id) {
 }
 
 /* =========================================
+   MOSTRAR PRODUCTOS AL CARGAR
+========================================= */
+
+mostrarProductos(productos);
+
+
+/* =========================================
    ABRIR PRODUCTO DESDE INDEX
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function abrirProductoDesdeIndex() {
 
     const parametros =
         new URLSearchParams(window.location.search);
@@ -1171,16 +1178,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!productoId) return;
 
     const producto = productos.find(
-        producto => String(producto.id) === productoId
+        producto => String(producto.id) === String(productoId)
     );
 
-    if (!producto) return;
+    if (!producto) {
+        console.error("No se encontró el producto:", productoId);
+        return;
+    }
 
     abrirProducto(producto.id);
 
-});
+}
+
+
 /* =========================================
-   MOSTRAR PRODUCTOS AL CARGAR
+   VERIFICAR CARGA DE LA PÁGINA
 ========================================= */
 
-mostrarProductos(productos);
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        abrirProductoDesdeIndex
+    );
+
+} else {
+
+    abrirProductoDesdeIndex();
+
+}
+
