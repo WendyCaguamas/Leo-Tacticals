@@ -1,3 +1,4 @@
+
 /* =========================================
    PRODUCTOS DESTACADOS
 ========================================= */
@@ -7,10 +8,35 @@ const contenedorDestacados =
 
 
 /* =========================================
+   COLORES CSS
+========================================= */
+
+const coloresCSS = {
+
+    verde: "#43a047",
+    verde_oliva: "#636b2f",
+    azul: "#1976d2",
+    rojo: "#e53935",
+    blanco: "#ffffff",
+    negro: "#111111",
+    gris: "#757575",
+    marron: "#795548",
+    amarillo: "#facc15",
+    naranja: "#f97316",
+    morado: "#7e22ce",
+    rosa: "#ffc0cb"
+
+};
+
+
+/* =========================================
    VERIFICAR CONTENEDOR
 ========================================= */
 
 if (contenedorDestacados) {
+
+    contenedorDestacados.innerHTML = "";
+
 
     /* =====================================
        TOMAR LOS PRIMEROS 3 PRODUCTOS
@@ -39,23 +65,79 @@ if (contenedorDestacados) {
            ABRIR PRODUCTO
         ================================== */
 
-        tarjeta.onclick = () => {
+        tarjeta.onclick = evento => {
 
-            /*
-               Usamos la misma función
-               del catálogo.
-            */
+            if (
+                evento.target.closest(".flecha") ||
+                evento.target.closest(".variantes-producto")
+            ) {
+                return;
+            }
 
             abrirProducto(producto.id);
 
         };
 
 
-        tarjeta.innerHTML = `
+        /* =================================
+           SELECTOR DE COLORES
+        ================================== */
 
-            <!-- =============================
-                 IMAGEN
-            ============================== -->
+        const selectorColores =
+            producto.colores?.length
+            ? `
+
+                <div class="colores-producto">
+
+                    ${producto.colores.map(color => `
+
+                        <span
+                            class="color-producto"
+                            title="${color.replace("_", " ")}"
+                            style="
+                                background-color:
+                                ${coloresCSS[color] || color};
+                            "
+                        ></span>
+
+                    `).join("")}
+
+                </div>
+
+            `
+            : "";
+
+
+        /* =================================
+           SELECTOR DE TALLAS
+        ================================== */
+
+        const selectorTallas =
+            producto.tallas?.length
+            ? `
+
+                <div class="tallas-producto">
+
+                    ${producto.tallas.map(talla => `
+
+                        <span
+                            class="talla-catalogo"
+                            title="Talla ${talla}"
+                        >${talla}</span>
+
+                    `).join("")}
+
+                </div>
+
+            `
+            : "";
+
+
+        /* =================================
+           CONTENIDO DE LA TARJETA
+        ================================== */
+
+        tarjeta.innerHTML = `
 
             <div class="producto-imagenes">
 
@@ -67,49 +149,15 @@ if (contenedorDestacados) {
                 >
 
 
-                <!-- =========================
-                     COLORES
-                ========================== -->
-
                 ${
-                    producto.colores
+                    selectorColores || selectorTallas
                     ? `
 
-                        <div class="colores-producto">
+                        <div class="variantes-producto">
 
-                            ${producto.colores.map(color => {
+                            ${selectorColores}
 
-                                const coloresCSS = {
-
-                                    verde: "#43a047",
-                                    verde_oliva: "#636b2f",
-                                    azul: "#1976d2",
-                                    rojo: "#e53935",
-                                    blanco: "#ffffff",
-                                    negro: "#111111",
-                                    gris: "#757575",
-                                    marron: "#795548",
-                                    amarillo: "#facc15",
-                                    naranja: "#f97316",
-                                    morado: "#7e22ce"
-
-                                };
-
-
-                                return `
-
-                                    <span
-                                        class="color-producto"
-                                        title="${color}"
-                                        style="
-                                            background-color:
-                                            ${coloresCSS[color] || color};
-                                        "
-                                    ></span>
-
-                                `;
-
-                            }).join("")}
+                            ${selectorTallas}
 
                         </div>
 
@@ -118,17 +166,18 @@ if (contenedorDestacados) {
                 }
 
 
-                <!-- =========================
-                     FLECHA IZQUIERDA
-                ========================== -->
-
                 ${
                     producto.imagenes.length > 1
                     ? `
 
                         <button
+                            type="button"
                             class="flecha flecha-izquierda"
-                            onclick="event.stopPropagation(); cambiarImagen(this, -1)"
+                            onclick="
+                                event.stopPropagation();
+                                cambiarImagen(this, -1);
+                            "
+                            aria-label="Imagen anterior"
                         >
 
                             <i class="fa-solid fa-chevron-left"></i>
@@ -136,13 +185,14 @@ if (contenedorDestacados) {
                         </button>
 
 
-                        <!-- =================
-                             FLECHA DERECHA
-                        ================== -->
-
                         <button
+                            type="button"
                             class="flecha flecha-derecha"
-                            onclick="event.stopPropagation(); cambiarImagen(this, 1)"
+                            onclick="
+                                event.stopPropagation();
+                                cambiarImagen(this, 1);
+                            "
+                            aria-label="Imagen siguiente"
                         >
 
                             <i class="fa-solid fa-chevron-right"></i>
@@ -154,33 +204,19 @@ if (contenedorDestacados) {
                 }
 
 
-                <!-- =========================
-                     DATOS DE IMÁGENES
-                ========================== -->
-
                 <div
                     class="imagenes-producto-data"
                     data-imagenes='${JSON.stringify(producto.imagenes)}'
-                >
-                </div>
+                ></div>
 
             </div>
 
-
-            <!-- =============================
-                 INFORMACIÓN
-            ============================== -->
 
             <div class="producto-datos">
 
                 <h2>
                     ${producto.nombre}
                 </h2>
-
-
-                <p>
-                    ${producto.detalles}
-                </p>
 
 
                 <div class="producto-precio">
