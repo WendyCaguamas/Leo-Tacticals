@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -23,40 +24,20 @@
 
     <title>Carrito — Leo Tacticals</title>
 
-
-    <!-- =================================
-         CSS GENERAL
-    ================================== -->
-
     <link
         rel="stylesheet"
         href="../style.css"
     >
-
-
-    <!-- =================================
-         CSS DEL CATÁLOGO
-    ================================== -->
 
     <link
         rel="stylesheet"
         href="catalogo.css"
     >
 
-
-    <!-- =================================
-         CSS DEL CARRITO
-    ================================== -->
-
     <link
         rel="stylesheet"
         href="carrito.css"
     >
-
-
-    <!-- =================================
-         FONT AWESOME
-    ================================== -->
 
     <link
         rel="stylesheet"
@@ -68,17 +49,7 @@
 
 <body>
 
-
-    <!-- =================================
-         BARRA DE NAVEGACIÓN
-    ================================== -->
-
     <header>
-
-
-        <!-- =================================
-             LOGO
-        ================================== -->
 
         <div class="logo">
 
@@ -93,10 +64,6 @@
 
         </div>
 
-
-        <!-- =================================
-             NAVEGACIÓN
-        ================================== -->
 
         <nav>
 
@@ -137,38 +104,17 @@
     </header>
 
 
-
-    <!-- =================================
-         CONTENIDO PRINCIPAL
-    ================================== -->
-
     <main>
-
-
-        <!-- =================================
-             PÁGINA DEL CARRITO
-        ================================== -->
 
         <section class="carrito-pagina">
 
-
-            <!-- =================================
-                 CONTENEDOR PRINCIPAL
-            ================================== -->
-
             <div class="carrito-contenedor">
-
-
-                <!-- =================================
-                     TÍTULO
-                ================================== -->
 
                 <div class="carrito-titulo">
 
                     <h1>
                         CARRITO
                     </h1>
-
 
                     <p>
                         Revisa los productos que deseas comprar.
@@ -177,37 +123,15 @@
                 </div>
 
 
-
-                <!-- =================================
-                     LISTA DEL CARRITO
-                ================================== -->
-
                 <div
                     class="carrito-lista"
                     id="carrito-lista"
                 >
 
-                    <!--
-
-                        carrito.js generará
-                        los productos aquí.
-
-                    -->
-
                 </div>
 
 
-
-                <!-- =================================
-                     RESUMEN DEL CARRITO
-                ================================== -->
-
                 <div class="carrito-resumen">
-
-
-                    <!-- =================================
-                         TOTAL
-                    ================================== -->
 
                     <div class="carrito-total">
 
@@ -215,20 +139,38 @@
                             TOTAL
                         </span>
 
-
                         <strong id="carrito-total">
-
                             $0.00
-
                         </strong>
 
                     </div>
 
 
+                    <!-- COSTO DE ENVÍO -->
 
-                    <!-- =================================
-                         BOTÓN WHATSAPP
-                    ================================== -->
+                    <div class="carrito-envio">
+
+                        <span>
+                            <i class="fa-solid fa-truck"></i>
+                            Envío
+                        </span>
+
+                        <strong id="carrito-envio">
+                            $0.00
+                        </strong>
+
+                    </div>
+
+
+                    <!-- MENSAJE DE ENVÍO GRATIS -->
+
+                    <p
+                        id="mensaje-envio"
+                        class="mensaje-envio"
+                    >
+                        Agrega productos para conocer el costo de envío.
+                    </p>
+
 
                     <button
                         class="boton-carrito"
@@ -237,27 +179,18 @@
 
                         <i class="fa-brands fa-whatsapp"></i>
 
-
                         Enviar pedido por WhatsApp
 
                     </button>
 
-
                 </div>
-
 
             </div>
 
         </section>
 
-
     </main>
 
-
-
-    <!-- =================================
-         FOOTER
-    ================================== -->
 
     <footer>
 
@@ -268,16 +201,11 @@
     </footer>
 
 
-
-    <!-- =================================
-         JAVASCRIPT
-    ================================== -->
-
     <script src="../js/productos.js"></script>
 
     <script src="../js/carrito.js"></script>
 
-
 </body>
 
 </html>
+```
