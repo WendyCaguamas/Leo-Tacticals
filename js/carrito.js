@@ -1,18 +1,21 @@
-
 /* =========================================
    CARRITO DE COMPRAS
    Leo Tacticals
 ========================================= */
 
+/* =========================================
+   CONFIGURACIÓN
+========================================= */
+
+const COSTO_ENVIO = 5.00;
+const ENVIO_GRATIS_DESDE = 50.00;
 
 /* =========================================
    OBTENER ELEMENTOS DEL HTML
 ========================================= */
 
 const listaCarrito = document.getElementById("carrito-lista");
-
 const totalCarrito = document.getElementById("carrito-total");
-
 const botonWhatsApp = document.getElementById("boton-whatsapp");
 
 
@@ -292,6 +295,7 @@ function mostrarCarrito() {
     actualizarBotonesColoresCarrito();
     actualizarBotonesTallasCarrito();
 
+
     /* =====================================
        ACTUALIZAR TOTAL
     ===================================== */
@@ -556,22 +560,38 @@ function actualizarBotonesTallasCarrito() {
 
 
 /* =========================================
-   CALCULAR TOTAL
+   CALCULAR TOTAL Y ENVÍO
 ========================================= */
 
 function calcularTotal() {
     const carrito = obtenerCarrito();
 
-    const total = carrito.reduce(
+    /* Calcular subtotal de productos */
+    const subtotal = carrito.reduce(
         (suma, item) => suma + (Number(item.precio) * Number(item.cantidad)),
         0
     );
 
+    /* Determinar costo de envío */
+    const costoEnvio = subtotal >= ENVIO_GRATIS_DESDE
+        ? 0
+        : carrito.length > 0
+            ? COSTO_ENVIO
+            : 0;
+
+    /* Calcular total final */
+    const total = subtotal + costoEnvio;
+
+    /* Actualizar total en HTML */
     if (totalCarrito) {
         totalCarrito.textContent = "$" + total.toFixed(2);
     }
 
-    return total;
+    return {
+        subtotal,
+        costoEnvio,
+        total
+    };
 }
 
 
@@ -644,9 +664,24 @@ function enviarPedidoWhatsApp() {
         mensaje += "Subtotal: $" + subtotal.toFixed(2) + "\n\n";
     });
 
-    const total = calcularTotal();
+    /* ==============================
+       RESUMEN DEL PEDIDO
+    ============================== */
 
-    mensaje += "TOTAL DEL PEDIDO: $" + total.toFixed(2);
+    const resumen = calcularTotal();
+
+    mensaje += "--------------------------\n";
+    mensaje += "Subtotal de productos: $" + resumen.subtotal.toFixed(2) + "\n";
+
+    if (resumen.costoEnvio === 0 && resumen.subtotal >= ENVIO_GRATIS_DESDE) {
+        mensaje += "Envío: GRATIS\n";
+    } else {
+        mensaje += "Envío: $" + resumen.costoEnvio.toFixed(2) + "\n";
+    }
+
+    mensaje += "--------------------------\n";
+    mensaje += "TOTAL DEL PEDIDO: $" + resumen.total.toFixed(2);
+
 
     /* Mantener el número configurado en tu código actual */
     const numero = "593985065665";
