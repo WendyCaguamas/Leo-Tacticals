@@ -73,8 +73,8 @@ tarjeta.onclick = evento => {
         return;
     }
 
-    window.location.href =
-        `catalogo.html?producto=${encodeURIComponent(producto.id)}`;
+window.location.href =
+    `Pages/catalogo.html?producto=${producto.id}`;
 
 };
 
