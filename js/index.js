@@ -37,7 +37,6 @@ if (contenedorDestacados) {
 
     contenedorDestacados.innerHTML = "";
 
-
     /* =====================================
        TOMAR LOS PRIMEROS 3 PRODUCTOS
     ====================================== */
@@ -55,7 +54,6 @@ if (contenedorDestacados) {
         const tarjeta =
             document.createElement("article");
 
-
         tarjeta.classList.add(
             "producto-catalogo"
         );
@@ -64,19 +62,21 @@ if (contenedorDestacados) {
         /* =================================
            ABRIR PRODUCTO
         ================================== */
-tarjeta.onclick = evento => {
 
-    if (
-        evento.target.closest(".flecha") ||
-        evento.target.closest(".variantes-producto")
-    ) {
-        return;
-    }
+        tarjeta.onclick = evento => {
 
-window.location.href =
-    `Pages/catalogo.html?producto=${producto.id}`;
+            if (
+                evento.target.closest(".flecha") ||
+                evento.target.closest(".variantes-producto")
+            ) {
+                return;
+            }
 
-};
+            window.location.href =
+                `Pages/catalogo.html?producto=${producto.id}`;
+
+        };
+
 
         /* =================================
            SELECTOR DE COLORES
@@ -147,7 +147,6 @@ window.location.href =
                     data-indice="0"
                 >
 
-
                 ${
                     selectorColores || selectorTallas
                     ? `
@@ -163,7 +162,6 @@ window.location.href =
                     `
                     : ""
                 }
-
 
                 ${
                     producto.imagenes.length > 1
@@ -183,7 +181,6 @@ window.location.href =
 
                         </button>
 
-
                         <button
                             type="button"
                             class="flecha flecha-derecha"
@@ -202,7 +199,6 @@ window.location.href =
                     : ""
                 }
 
-
                 <div
                     class="imagenes-producto-data"
                     data-imagenes='${JSON.stringify(producto.imagenes)}'
@@ -210,13 +206,11 @@ window.location.href =
 
             </div>
 
-
             <div class="producto-datos">
 
                 <h2>
                     ${producto.nombre}
                 </h2>
-
 
                 <div class="producto-precio">
 
@@ -240,24 +234,47 @@ window.location.href =
     });
 
 }
+
+
 /* =================================
    CARRUSEL DE BANNERS
 ================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function iniciarCarruselBanners() {
 
-    const slides = document.querySelectorAll(".hero-slide");
-    const indicadores = document.querySelectorAll(".hero-indicador");
+    const slides =
+        document.querySelectorAll(".hero-slide");
 
-    const botonAnterior = document.querySelector(".hero-anterior");
-    const botonSiguiente = document.querySelector(".hero-siguiente");
+    const indicadores =
+        document.querySelectorAll(".hero-indicador");
 
-    if (!slides.length || !botonAnterior || !botonSiguiente) {
+    const botonAnterior =
+        document.querySelector(".hero-anterior");
+
+    const botonSiguiente =
+        document.querySelector(".hero-siguiente");
+
+
+    /* VERIFICAR ELEMENTOS */
+
+    if (
+        !slides.length ||
+        !botonAnterior ||
+        !botonSiguiente
+    ) {
         return;
     }
 
+
+    /* VARIABLES */
+
     let bannerActual = 0;
     let intervalo;
+
+
+    /* =================================
+       MOSTRAR BANNER
+    ================================== */
 
     function mostrarBanner(indice) {
 
@@ -269,53 +286,138 @@ document.addEventListener("DOMContentLoaded", () => {
             indicador.classList.remove("activo");
         });
 
-        bannerActual = (indice + slides.length) % slides.length;
+
+        /* PERMITIR NAVEGACIÓN CIRCULAR */
+
+        bannerActual =
+            (indice + slides.length) % slides.length;
+
 
         slides[bannerActual].classList.add("activo");
 
+
         if (indicadores[bannerActual]) {
+
             indicadores[bannerActual].classList.add("activo");
+
         }
 
     }
 
+
+    /* =================================
+       SIGUIENTE BANNER
+    ================================== */
+
     function siguienteBanner() {
+
         mostrarBanner(bannerActual + 1);
+
     }
+
+
+    /* =================================
+       BANNER ANTERIOR
+    ================================== */
 
     function anteriorBanner() {
+
         mostrarBanner(bannerActual - 1);
+
     }
 
-    function iniciarCarrusel() {
-        detenerCarrusel();
 
-        intervalo = setInterval(siguienteBanner, 5000);
-    }
+    /* =================================
+       TEMPORIZADOR
+    ================================== */
 
     function detenerCarrusel() {
+
         clearInterval(intervalo);
+
     }
 
+
+    function iniciarReproduccion() {
+
+        detenerCarrusel();
+
+        intervalo = setInterval(() => {
+
+            siguienteBanner();
+
+        }, 5000);
+
+    }
+
+
+    /* =================================
+       BOTÓN SIGUIENTE
+    ================================== */
+
     botonSiguiente.addEventListener("click", () => {
+
         siguienteBanner();
-        iniciarCarrusel();
+
+        iniciarReproduccion();
+
     });
 
+
+    /* =================================
+       BOTÓN ANTERIOR
+    ================================== */
+
     botonAnterior.addEventListener("click", () => {
+
         anteriorBanner();
-        iniciarCarrusel();
+
+        iniciarReproduccion();
+
     });
+
+
+    /* =================================
+       INDICADORES INFERIORES
+    ================================== */
 
     indicadores.forEach((indicador, indice) => {
 
         indicador.addEventListener("click", () => {
+
             mostrarBanner(indice);
-            iniciarCarrusel();
+
+            iniciarReproduccion();
+
         });
 
     });
 
-    iniciarCarrusel();
 
-});
+    /* =================================
+       INICIAR AUTOMÁTICAMENTE
+    ================================== */
+
+    mostrarBanner(0);
+
+    iniciarReproduccion();
+
+}
+
+
+/* =========================================
+   INICIAR CUANDO EL HTML ESTÉ LISTO
+========================================= */
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        iniciarCarruselBanners
+    );
+
+} else {
+
+    iniciarCarruselBanners();
+
+}
