@@ -240,3 +240,82 @@ window.location.href =
     });
 
 }
+/* =================================
+   CARRUSEL DE BANNERS
+================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const slides = document.querySelectorAll(".hero-slide");
+    const indicadores = document.querySelectorAll(".hero-indicador");
+
+    const botonAnterior = document.querySelector(".hero-anterior");
+    const botonSiguiente = document.querySelector(".hero-siguiente");
+
+    if (!slides.length || !botonAnterior || !botonSiguiente) {
+        return;
+    }
+
+    let bannerActual = 0;
+    let intervalo;
+
+    function mostrarBanner(indice) {
+
+        slides.forEach(slide => {
+            slide.classList.remove("activo");
+        });
+
+        indicadores.forEach(indicador => {
+            indicador.classList.remove("activo");
+        });
+
+        bannerActual = (indice + slides.length) % slides.length;
+
+        slides[bannerActual].classList.add("activo");
+
+        if (indicadores[bannerActual]) {
+            indicadores[bannerActual].classList.add("activo");
+        }
+
+    }
+
+    function siguienteBanner() {
+        mostrarBanner(bannerActual + 1);
+    }
+
+    function anteriorBanner() {
+        mostrarBanner(bannerActual - 1);
+    }
+
+    function iniciarCarrusel() {
+        detenerCarrusel();
+
+        intervalo = setInterval(siguienteBanner, 5000);
+    }
+
+    function detenerCarrusel() {
+        clearInterval(intervalo);
+    }
+
+    botonSiguiente.addEventListener("click", () => {
+        siguienteBanner();
+        iniciarCarrusel();
+    });
+
+    botonAnterior.addEventListener("click", () => {
+        anteriorBanner();
+        iniciarCarrusel();
+    });
+
+    indicadores.forEach((indicador, indice) => {
+
+        indicador.addEventListener("click", () => {
+            mostrarBanner(indice);
+            iniciarCarrusel();
+        });
+
+    });
+
+    iniciarCarrusel();
+
+});
