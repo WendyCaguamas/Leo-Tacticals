@@ -4,18 +4,18 @@
 ========================================= */
 
 /* =========================================
-   CONFIGURACIÓN
-========================================= */
-
-const COSTO_ENVIO = 5.00;
-const ENVIO_GRATIS_DESDE = 50.00;
-
-/* =========================================
    OBTENER ELEMENTOS DEL HTML
 ========================================= */
 
 const listaCarrito = document.getElementById("carrito-lista");
 const totalCarrito = document.getElementById("carrito-total");
+
+const costoEnvioHTML = document.getElementById("carrito-envio");
+const mensajeEnvioHTML = document.getElementById("mensaje-envio");
+
+const COSTO_ENVIO = 5;
+const ENVIO_GRATIS_DESDE = 50;
+
 const botonWhatsApp = document.getElementById("boton-whatsapp");
 
 
@@ -73,10 +73,6 @@ function mostrarCarrito() {
 
     listaCarrito.innerHTML = "";
 
-    /* =====================================
-       CARRITO VACÍO
-    ===================================== */
-
     if (carrito.length === 0) {
         listaCarrito.innerHTML = `
             <div class="carrito-vacio">
@@ -94,14 +90,9 @@ function mostrarCarrito() {
             </div>
         `;
 
-        totalCarrito.textContent = "$0.00";
+        calcularTotal();
         return;
     }
-
-
-    /* =====================================
-       GENERAR PRODUCTOS
-    ===================================== */
 
     carrito.forEach((item, indice) => {
         const subtotal = Number(item.precio) * Number(item.cantidad);
@@ -109,10 +100,7 @@ function mostrarCarrito() {
         const producto = document.createElement("div");
         producto.classList.add("carrito-producto");
 
-
-        /* =================================
-           DISTRIBUCIÓN POR COLORES
-        ================================= */
+        /* DISTRIBUCIÓN POR COLORES */
 
         let coloresHTML = "";
 
@@ -153,10 +141,7 @@ function mostrarCarrito() {
             `).join("");
         }
 
-
-        /* =================================
-           DISTRIBUCIÓN POR TALLAS
-        ================================= */
+        /* DISTRIBUCIÓN POR TALLAS */
 
         let tallasHTML = "";
 
@@ -195,10 +180,7 @@ function mostrarCarrito() {
             `).join("");
         }
 
-
-        /* =================================
-           CONTENIDO DEL PRODUCTO
-        ================================= */
+        /* CONTENIDO DEL PRODUCTO */
 
         producto.innerHTML = `
             <div class="carrito-producto-imagen">
@@ -287,18 +269,8 @@ function mostrarCarrito() {
         listaCarrito.appendChild(producto);
     });
 
-
-    /* =====================================
-       ACTUALIZAR BOTONES
-    ===================================== */
-
     actualizarBotonesColoresCarrito();
     actualizarBotonesTallasCarrito();
-
-
-    /* =====================================
-       ACTUALIZAR TOTAL
-    ===================================== */
 
     calcularTotal();
 }
@@ -312,22 +284,15 @@ function cambiarCantidadCarrito(indice, cambio) {
     const carrito = obtenerCarrito();
     const item = carrito[indice];
 
-    if (!item) {
-        return;
-    }
+    if (!item) return;
 
     const nuevaCantidad = Number(item.cantidad) + cambio;
 
-    if (nuevaCantidad < 1) {
-        return;
-    }
+    if (nuevaCantidad < 1) return;
 
     item.cantidad = nuevaCantidad;
 
-    /* Ajustar distribución de colores */
     ajustarColoresCarrito(item);
-
-    /* Ajustar distribución de tallas */
     ajustarTallasCarrito(item);
 
     guardarCarrito(carrito);
@@ -339,38 +304,26 @@ function cambiarCantidadCarrito(indice, cambio) {
    CAMBIAR CANTIDAD DE UN COLOR
 ========================================= */
 
-function cambiarCantidadColorCarrito(
-    indiceProducto,
-    indiceColor,
-    cambio
-) {
+function cambiarCantidadColorCarrito(indiceProducto, indiceColor, cambio) {
     const carrito = obtenerCarrito();
     const item = carrito[indiceProducto];
 
-    if (!item || !Array.isArray(item.colores)) {
-        return;
-    }
+    if (!item || !Array.isArray(item.colores)) return;
 
     const color = item.colores[indiceColor];
 
-    if (!color) {
-        return;
-    }
+    if (!color) return;
 
     const nuevaCantidad = Number(color.cantidad) + cambio;
 
-    if (nuevaCantidad < 0) {
-        return;
-    }
+    if (nuevaCantidad < 0) return;
 
     const totalColores = item.colores.reduce(
         (total, colorItem) => total + (Number(colorItem.cantidad) || 0),
         0
     );
 
-    if (cambio > 0 && totalColores >= Number(item.cantidad)) {
-        return;
-    }
+    if (cambio > 0 && totalColores >= Number(item.cantidad)) return;
 
     color.cantidad = nuevaCantidad;
 
@@ -384,28 +337,22 @@ function cambiarCantidadColorCarrito(
 ========================================= */
 
 function ajustarColoresCarrito(item) {
-    if (!Array.isArray(item.colores) || item.colores.length === 0) {
-        return;
-    }
+    if (!Array.isArray(item.colores) || item.colores.length === 0) return;
 
-    let totalColores = item.colores.reduce(
+    const totalColores = item.colores.reduce(
         (total, color) => total + (Number(color.cantidad) || 0),
         0
     );
 
     let exceso = totalColores - Number(item.cantidad);
 
-    if (exceso <= 0) {
-        return;
-    }
+    if (exceso <= 0) return;
 
     for (let i = item.colores.length - 1; i >= 0 && exceso > 0; i--) {
         const color = item.colores[i];
         const cantidadActual = Number(color.cantidad) || 0;
 
-        if (cantidadActual <= 0) {
-            continue;
-        }
+        if (cantidadActual <= 0) continue;
 
         const reducir = Math.min(cantidadActual, exceso);
 
@@ -425,9 +372,7 @@ function actualizarBotonesColoresCarrito() {
     document.querySelectorAll(".carrito-producto").forEach((elemento, indice) => {
         const item = carrito[indice];
 
-        if (!item || !Array.isArray(item.colores)) {
-            return;
-        }
+        if (!item || !Array.isArray(item.colores)) return;
 
         const totalColores = item.colores.reduce(
             (total, color) => total + (Number(color.cantidad) || 0),
@@ -450,39 +395,26 @@ function actualizarBotonesColoresCarrito() {
    CAMBIAR CANTIDAD DE UNA TALLA
 ========================================= */
 
-function cambiarCantidadTallaCarrito(
-    indiceProducto,
-    indiceTalla,
-    cambio
-) {
+function cambiarCantidadTallaCarrito(indiceProducto, indiceTalla, cambio) {
     const carrito = obtenerCarrito();
     const item = carrito[indiceProducto];
 
-    if (!item || !Array.isArray(item.tallas)) {
-        return;
-    }
+    if (!item || !Array.isArray(item.tallas)) return;
 
     const talla = item.tallas[indiceTalla];
 
-    if (!talla) {
-        return;
-    }
+    if (!talla) return;
 
     const nuevaCantidad = Number(talla.cantidad) + cambio;
 
-    if (nuevaCantidad < 0) {
-        return;
-    }
+    if (nuevaCantidad < 0) return;
 
     const totalTallas = item.tallas.reduce(
         (total, tallaItem) => total + (Number(tallaItem.cantidad) || 0),
         0
     );
 
-    /* No permitir que las tallas superen la cantidad general */
-    if (cambio > 0 && totalTallas >= Number(item.cantidad)) {
-        return;
-    }
+    if (cambio > 0 && totalTallas >= Number(item.cantidad)) return;
 
     talla.cantidad = nuevaCantidad;
 
@@ -496,9 +428,7 @@ function cambiarCantidadTallaCarrito(
 ========================================= */
 
 function ajustarTallasCarrito(item) {
-    if (!Array.isArray(item.tallas) || item.tallas.length === 0) {
-        return;
-    }
+    if (!Array.isArray(item.tallas) || item.tallas.length === 0) return;
 
     const totalTallas = item.tallas.reduce(
         (total, talla) => total + (Number(talla.cantidad) || 0),
@@ -507,18 +437,13 @@ function ajustarTallasCarrito(item) {
 
     let exceso = totalTallas - Number(item.cantidad);
 
-    if (exceso <= 0) {
-        return;
-    }
+    if (exceso <= 0) return;
 
-    /* Reducir desde la última talla, si hay exceso */
     for (let i = item.tallas.length - 1; i >= 0 && exceso > 0; i--) {
         const talla = item.tallas[i];
         const cantidadActual = Number(talla.cantidad) || 0;
 
-        if (cantidadActual <= 0) {
-            continue;
-        }
+        if (cantidadActual <= 0) continue;
 
         const reducir = Math.min(cantidadActual, exceso);
 
@@ -538,9 +463,7 @@ function actualizarBotonesTallasCarrito() {
     document.querySelectorAll(".carrito-producto").forEach((elemento, indice) => {
         const item = carrito[indice];
 
-        if (!item || !Array.isArray(item.tallas)) {
-            return;
-        }
+        if (!item || !Array.isArray(item.tallas)) return;
 
         const totalTallas = item.tallas.reduce(
             (total, talla) => total + (Number(talla.cantidad) || 0),
@@ -566,31 +489,50 @@ function actualizarBotonesTallasCarrito() {
 function calcularTotal() {
     const carrito = obtenerCarrito();
 
-    /* Calcular subtotal de productos */
     const subtotal = carrito.reduce(
         (suma, item) => suma + (Number(item.precio) * Number(item.cantidad)),
         0
     );
 
-    /* Determinar costo de envío */
-    const costoEnvio = subtotal >= ENVIO_GRATIS_DESDE
-        ? 0
-        : carrito.length > 0
-            ? COSTO_ENVIO
-            : 0;
+    let costoEnvio = 0;
 
-    /* Calcular total final */
+    if (carrito.length > 0 && subtotal < ENVIO_GRATIS_DESDE) {
+        costoEnvio = COSTO_ENVIO;
+    }
+
     const total = subtotal + costoEnvio;
 
-    /* Actualizar total en HTML */
     if (totalCarrito) {
         totalCarrito.textContent = "$" + total.toFixed(2);
     }
 
+    if (costoEnvioHTML) {
+        costoEnvioHTML.textContent =
+            carrito.length > 0 && costoEnvio === 0
+                ? "GRATIS"
+                : "$" + costoEnvio.toFixed(2);
+    }
+
+    if (mensajeEnvioHTML) {
+        if (carrito.length === 0) {
+            mensajeEnvioHTML.textContent =
+                "Agrega productos para conocer el costo de envío.";
+        } else if (subtotal >= ENVIO_GRATIS_DESDE) {
+            mensajeEnvioHTML.textContent =
+                "¡Tu pedido tiene envío gratis!";
+        } else {
+            const faltante = ENVIO_GRATIS_DESDE - subtotal;
+
+            mensajeEnvioHTML.textContent =
+                "Agrega $" + faltante.toFixed(2) +
+                " más para obtener envío gratis.";
+        }
+    }
+
     return {
-        subtotal,
-        costoEnvio,
-        total
+        subtotal: subtotal,
+        costoEnvio: costoEnvio,
+        total: total
     };
 }
 
@@ -629,10 +571,6 @@ function enviarPedidoWhatsApp() {
         mensaje += "Producto: " + item.nombre + "\n";
         mensaje += "Cantidad total: " + item.cantidad + "\n";
 
-        /* ==============================
-           COLORES
-        ============================== */
-
         if (Array.isArray(item.colores) && item.colores.length > 0) {
             mensaje += "Distribución por color:\n";
 
@@ -644,10 +582,6 @@ function enviarPedidoWhatsApp() {
                     "\n";
             });
         }
-
-        /* ==============================
-           TALLAS
-        ============================== */
 
         if (Array.isArray(item.tallas) && item.tallas.length > 0) {
             mensaje += "Distribución por talla:\n";
@@ -664,26 +598,16 @@ function enviarPedidoWhatsApp() {
         mensaje += "Subtotal: $" + subtotal.toFixed(2) + "\n\n";
     });
 
-    /* ==============================
-       RESUMEN DEL PEDIDO
-    ============================== */
-
     const resumen = calcularTotal();
 
-    mensaje += "--------------------------\n";
-    mensaje += "Subtotal de productos: $" + resumen.subtotal.toFixed(2) + "\n";
+    mensaje += "Subtotal: $" + resumen.subtotal.toFixed(2) + "\n";
 
-    if (resumen.costoEnvio === 0 && resumen.subtotal >= ENVIO_GRATIS_DESDE) {
-        mensaje += "Envío: GRATIS\n";
-    } else {
-        mensaje += "Envío: $" + resumen.costoEnvio.toFixed(2) + "\n";
-    }
+    mensaje += resumen.costoEnvio === 0
+        ? "Envío: GRATIS\n"
+        : "Envío: $" + resumen.costoEnvio.toFixed(2) + "\n";
 
-    mensaje += "--------------------------\n";
     mensaje += "TOTAL DEL PEDIDO: $" + resumen.total.toFixed(2);
 
-
-    /* Mantener el número configurado en tu código actual */
     const numero = "593985065665";
 
     const url = "https://wa.me/" +
