@@ -65,19 +65,19 @@ if (contenedorDestacados) {
            ABRIR PRODUCTO
         ================================== */
 
-        tarjeta.onclick = evento => {
+tarjeta.onclick = evento => {
 
-            if (
-                evento.target.closest(".flecha") ||
-                evento.target.closest(".variantes-producto")
-            ) {
-                return;
-            }
+    if (
+        evento.target.closest(".flecha") ||
+        evento.target.closest(".variantes-producto")
+    ) {
+        return;
+    }
 
-            abrirProducto(producto.id);
+    window.location.href =
+        `catalogo.html?producto=${producto.id}`;
 
-        };
-
+};
 
         /* =================================
            SELECTOR DE COLORES
