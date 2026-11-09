@@ -64,7 +64,6 @@ if (contenedorDestacados) {
         /* =================================
            ABRIR PRODUCTO
         ================================== */
-
 tarjeta.onclick = evento => {
 
     if (
@@ -75,7 +74,7 @@ tarjeta.onclick = evento => {
     }
 
     window.location.href =
-        `catalogo.html?producto=${producto.id}`;
+        `catalogo.html?producto=${encodeURIComponent(producto.id)}`;
 
 };
 
