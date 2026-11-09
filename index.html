@@ -3,16 +3,9 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta
-        name="description"
-        content="Leo Tacticals — Equipamiento táctico profesional diseñado para ofrecer resistencia, funcionalidad y confianza en cada misión."
-    >
-
+    <meta name="description" content="Leo Tacticals — Equipamiento táctico profesional diseñado para ofrecer resistencia, funcionalidad y confianza en cada misión.">
     <link rel="icon" type="image/png" href="img/favicon.png">
-
     <title>Leo Tacticals</title>
 
     <!-- Nombre del sitio para Google -->
@@ -28,23 +21,19 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
 </head>
-
 <body>
-
 
     <!-- =================================
          BARRA DE NAVEGACIÓN
     ================================== -->
 
 <header>
-
     <!-- Logo de la marca -->
     <div class="logo">
 
@@ -54,28 +43,20 @@
                 alt="Leo Tacticals"
             >
         </a>
-
     </div>
-
 
     <!-- Navegación -->
         <nav>
-
             <a href="../index.html">
-
                 <i class="fa-solid fa-house"></i>
-
                 <span>
                     Inicio
                 </span>
-
             </a>
-
 
             <a href="Pages/catalogo.html">
 
                 <i class="fa-solid fa-box"></i>
-
                 <span>
                     Catálogo
                 </span>
@@ -104,7 +85,72 @@
 
     <main>
 
-        <section class="hero" id="inicio">
+        <!-- =================================
+     INICIO / HERO - CARRUSEL
+================================== -->
+
+<section class="hero" id="inicio">
+
+    <div class="hero-carrusel">
+
+        <!-- BANNER 1 -->
+        <div class="hero-slide activo">
+            <img src="img/banner1.jpg" alt="Leo Tacticals - Banner 1">
+        </div>
+
+        <!-- BANNER 2 -->
+        <div class="hero-slide">
+            <img src="img/banner2.jpg" alt="Leo Tacticals - Banner 2">
+        </div>
+
+        <!-- BANNER 3 -->
+        <div class="hero-slide">
+            <img src="img/banner3.jpg" alt="Leo Tacticals - Banner 3">
+        </div>
+
+    </div>
+
+    <!-- Contenido central -->
+    <div class="hero-content">
+
+        <img
+            src="img/logo.png"
+            alt="Leo Tacticals"
+            class="hero-logo"
+        >
+
+        <p>
+            Profesionales equipando a profesionales.
+        </p>
+
+        <a href="Pages/catalogo.html" class="hero-button">
+            VER CATÁLOGO
+        </a>
+
+    </div>
+
+    <!-- Flecha anterior -->
+    <button class="hero-flecha hero-anterior" aria-label="Banner anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <!-- Flecha siguiente -->
+    <button class="hero-flecha hero-siguiente" aria-label="Banner siguiente">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicadores -->
+    <div class="hero-indicadores">
+
+        <button class="hero-indicador activo" aria-label="Ir al banner 1"></button>
+
+        <button class="hero-indicador" aria-label="Ir al banner 2"></button>
+
+        <button class="hero-indicador" aria-label="Ir al banner 3"></button>
+
+    </div>
+
+</section>
 
             <div class="hero-content">
 
