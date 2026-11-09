@@ -1156,7 +1156,29 @@ function comprarAhora(id) {
 
 }
 
+/* =========================================
+   ABRIR PRODUCTO DESDE INDEX
+========================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    const parametros =
+        new URLSearchParams(window.location.search);
+
+    const productoId =
+        parametros.get("producto");
+
+    if (!productoId) return;
+
+    const producto = productos.find(
+        producto => String(producto.id) === productoId
+    );
+
+    if (!producto) return;
+
+    abrirProducto(producto.id);
+
+});
 /* =========================================
    MOSTRAR PRODUCTOS AL CARGAR
 ========================================= */
